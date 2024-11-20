@@ -29,7 +29,9 @@ define('FACTORY_LOGGER_145_VERSION', '1.4.5');
 define('FACTORY_LOGGER_145_DIR', dirname(__FILE__));
 define('FACTORY_LOGGER_145_URL', plugins_url('', __FILE__));
 
-load_plugin_textdomain('wbcr_factory_logger_145', false, dirname(plugin_basename(__FILE__)) . '/langs');
+add_action('admin_init', function(){
+	load_plugin_textdomain('wbcr_factory_logger_145', false, dirname(plugin_basename(__FILE__)) . '/langs');
+});
 
 require_once(FACTORY_LOGGER_145_DIR . '/includes/class-logger.php');
 

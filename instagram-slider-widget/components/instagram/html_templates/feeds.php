@@ -36,13 +36,13 @@
 					<tr>
 						<td class="wis-profile-name">
 							<a href="<?php echo $edit_link; ?>">
-								<?php echo $feed->title; ?>
+								<?php echo esc_html($feed->title); ?>
 							</a>
 						</td>
 						<td class="wis-profile-shortcode">
 							<input id="jr_insta_shortcode" onclick="this.setSelectionRange(0, this.value.length)"
 							       type="text" class="form-input wis-shortcode-input"
-							       value="[jr_instagram id=&quot;<?php echo $feed_id ?>&quot;]" readonly="readonly">
+							       value="[jr_instagram id=&quot;<?php echo esc_attr($feed_id) ?>&quot;]" readonly="readonly">
 						</td>
 						<td class="wis-profile-actions">
 							<a href="<?php echo $edit_link; ?>" class="btn btn-primary">

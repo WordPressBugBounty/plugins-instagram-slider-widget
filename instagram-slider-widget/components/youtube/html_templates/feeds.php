@@ -36,7 +36,7 @@
 					<tr>
 						<td class="wis-profile-name">
 							<a href="<?php echo $edit_link; ?>">
-								<?php echo $feed->title; ?>
+								<?php echo esc_html($feed->title); ?>
 							</a>
 						</td>
 						<td class="wis-profile-shortcode">

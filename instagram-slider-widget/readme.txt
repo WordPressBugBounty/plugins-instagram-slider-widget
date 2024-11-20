@@ -2,9 +2,9 @@
 Contributors: creativemotion
 Tags: instagram, instagram feed, instagram gallery, instagram photos, Instagram widget
 Requires at least: 5.6
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.2.5
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ If you don't use an account in the widget, go to the plugin settings and add an 
 10. Highlight
 
 == Changelog ==
+= 2.2.6 =
+* Fix security issues
+* Compatibility with Wordpress 6.7
 
 = 2.2.5 =
 * Fix security issues

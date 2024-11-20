@@ -19,7 +19,7 @@ $feeds    = $args['feeds'];
 			<?php foreach ( $feeds->feeds as $key => $feed ) {
 				$selected = $instance['feed_id'] == $feed->instance['id'] ? "selected='selected'" : "";
 				/* @var WIS_Instagram_Feed $feed */ ?>
-                <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $feed->title; ?></option>
+                <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo esc_html($feed->title); ?></option>
 			<?php } ?>
         </select>
     </p>
