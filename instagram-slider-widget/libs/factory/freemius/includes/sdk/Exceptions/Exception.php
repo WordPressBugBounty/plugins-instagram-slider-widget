@@ -1,12 +1,12 @@
 <?php
 
-namespace WBCR\Factory_Freemius_168\Sdk;
+namespace WBCR\Factory_Freemius_171\Sdk;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if( !class_exists('WBCR\Factory_Freemius_168\Sdk\Freemius_Exception') ) {
+if( !class_exists('WBCR\Factory_Freemius_171\Sdk\Freemius_Exception') ) {
 	/**
 	 * Thrown when an API call returns an exception.
 	 *

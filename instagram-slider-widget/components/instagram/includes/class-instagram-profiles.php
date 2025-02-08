@@ -83,9 +83,9 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 		if ( $is_business ) {
 			//Получаем аккаунты привязанные к фейсбуку
 			$args     = [
-					'access_token' => $token,
-					'fields'       => 'instagram_business_account',
-					'limit'        => 200,
+				'access_token' => $token,
+				'fields'       => 'instagram_business_account',
+				'limit'        => 200,
 			];
 			$url      = WFB_FACEBOOK_SELF_URL . 'me/accounts';
 			$response = wp_remote_get( esc_url_raw( add_query_arg( $args, $url ) ) );
@@ -96,8 +96,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 				$users = [];
 				foreach ( $pages['data'] as $key => $r ) {
 					$args     = [
-							'access_token' => $token,
-							'fields'       => 'instagram_business_account',
+						'access_token' => $token,
+						'fields'       => 'instagram_business_account',
 					];
 					$url      = WFB_FACEBOOK_SELF_URL . $r['id'];
 					$response = wp_remote_get( esc_url_raw( add_query_arg( $args, $url ) ) );
@@ -105,8 +105,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 						$ig_account = json_decode( wp_remote_retrieve_body( $response ), true );
 						if ( isset( $ig_account['instagram_business_account']['id'] ) ) {
 							$args     = [
-									'fields'       => 'username,id,followers_count,follows_count,media_count,name,profile_picture_url',
-									'access_token' => $token,
+								'fields'       => 'username,id,followers_count,follows_count,media_count,name,profile_picture_url',
+								'access_token' => $token,
 							];
 							$url      = add_query_arg( $args, WFB_FACEBOOK_SELF_URL . $ig_account['instagram_business_account']['id'] );
 							$response = wp_remote_get( esc_url_raw( $url ) );
@@ -148,8 +148,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 			}
 
 			$args = [
-					'fields'       => 'id,media_count,username',
-					'access_token' => $token,
+				'fields'       => 'id,media_count,username',
+				'access_token' => $token,
 			];
 
 			$url      = WIG_USERS_SELF_URL;
@@ -192,8 +192,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 	 */
 	public function refresh_token( $token ) {
 		$args = [
-				'grant_type'   => 'ig_refresh_token',
-				'access_token' => $token,
+			'grant_type'   => 'ig_refresh_token',
+			'access_token' => $token,
 		];
 
 		$url      = WIG_USERS_SELF_MEDIA_URL . 'refresh_access_token';
@@ -227,7 +227,7 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 							Choose Account:
 						</div>
 						<div class="wis_modal_content">
-							<?php echo $result[0] ?? ''; ?>
+							<?php echo esc_html( $result[0] ) ?? ''; ?>
 						</div>
 					</div>
 					<div id="wis_modal_overlay" class="wis_modal_overlay"></div>
@@ -247,29 +247,29 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 			//$_SERVER['REQUEST_URI'] = str_replace( '#_', '', esc_url_raw( remove_query_arg( 'token_error' ) ) );
 		}
 		$authorize_url_instagram = 'https://api.instagram.com/oauth/authorize?' . http_build_query( [
-						'client_id'     => WIS_INSTAGRAM_CLIENT_ID,
-						'redirect_uri'  => 'https://instagram.cm-wp.com/basic-api',
-						'scope'         => 'user_profile,user_media',
-						'response_type' => 'code',
-						'state'         => $this->getSocialUrl() . '&app_id=' . WIS_INSTAGRAM_CLIENT_ID,
-				] );
+				'client_id'     => WIS_INSTAGRAM_CLIENT_ID,
+				'redirect_uri'  => 'https://instagram.cm-wp.com/basic-api',
+				'scope'         => 'user_profile,user_media',
+				'response_type' => 'code',
+				'state'         => $this->getSocialUrl() . '&app_id=' . WIS_INSTAGRAM_CLIENT_ID,
+			] );
 
 		$authorize_url_business = 'https://instagram.cm-wp.com/api/?' . http_build_query( [
-						'app_id' => WIS_FACEBOOK_CLIENT_ID,
-						'state'  => $this->getSocialUrl() . '&type=business&app_id=' . WIS_FACEBOOK_CLIENT_ID,
-				] );
+				'app_id' => WIS_FACEBOOK_CLIENT_ID,
+				'state'  => $this->getSocialUrl() . '&type=business&app_id=' . WIS_FACEBOOK_CLIENT_ID,
+			] );
 
 		$accounts          = WIS_Plugin::app()->getPopulateOption( WIG_PROFILES_OPTION, [] );
 		$accounts_business = WIS_Plugin::app()->getPopulateOption( WIG_BUSINESS_PROFILES_OPTION, [] );
 
 		$data   = [
-				'is_premium'              => WIS_Plugin::app()->is_premium(),
-				'authorize_url_instagram' => $authorize_url_instagram,
-				'authorize_url_business'  => $authorize_url_business,
-				'accounts'                => $accounts,
-				'accounts_business'       => $accounts_business,
-				'social'                  => $this->social,
-				'errors'                  => $errors ?? [],
+			'is_premium'              => WIS_Plugin::app()->is_premium(),
+			'authorize_url_instagram' => $authorize_url_instagram,
+			'authorize_url_business'  => $authorize_url_business,
+			'accounts'                => $accounts,
+			'accounts_business'       => $accounts_business,
+			'social'                  => $this->social,
+			'errors'                  => $errors ?? [],
 		];
 		$result = $this->page->render( WIG_COMPONENT_VIEWS_DIR . '/accounts', $data );
 

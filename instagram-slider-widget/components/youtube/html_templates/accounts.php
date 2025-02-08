@@ -1,5 +1,13 @@
 <?php
 /**
+ *  Represents a data structure or configuration related to social media integrations
+ *  or links associated with an application or user. This variable may store details
+ *  such as URLs, platform names, user handles, or other relevant information required
+ *  for social connectivity.
+ *
+ *  It is assumed that the variable's specific contents and structure are determined
+ *  elsewhere in the application or by a related context where it is used.
+ *
  * @var array $args
  * @var \YoutubeFeed\Api\Channel\YoutubeChannelItem[] $accounts
  * @var bool $is_premium
@@ -10,28 +18,28 @@ $social = $args['social'];
 
 $count_accounts = ! empty( $accounts ) ? count( $accounts ) : 0;
 ?>
-<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+<form method="post">
 	<?php wp_nonce_field( 'wis_yt_token', 'csrf_check' ); ?>
 	<div class="wis-youtube-form-row">
 		<div class="wyt-add-form">
 			<input type="text" name="wyt_api_key" id="wyt_api_key" class="" style="width: 550px;"
 			       value="<?php echo esc_attr( WIS_Plugin::app()->getOption( WYT_API_KEY_OPTION_NAME, '' ) ); ?>"
-			       placeholder="<?php esc_html_e( 'Youtube api key.', 'instagram-slider-widget' ) ?>">
+			       placeholder="<?php _e( 'Youtube api key.', 'instagram-slider-widget' ) ?>">
 		</div>
 		<div class="wyt-add-form">
 			<input type="submit" class="wyt-btn-Youtube-account"
-			       value="<?php esc_html_e( 'Save', 'instagram-slider-widget' ) ?>">
+			       value="<?php _e( 'Save', 'instagram-slider-widget' ) ?>">
 		</div>
 		<div class="" style="display: inline-block;">
-			<a href="<?php echo admin_url(); ?>?page=manual-wisw"
-			   target="_blank"><?php esc_html_e( 'How to get YouTube API key', 'instagram-slider-widget' ); ?></a>
+			<a href="<?php echo esc_url( admin_url() ); ?>?page=manual-wisw"
+			   target="_blank"><?php _e( 'How to get YouTube API key', 'instagram-slider-widget' ); ?></a>
 		</div>
 	</div>
 
 	<?php
 	if ( $count_accounts >= 1 && ! $is_premium ) : ?>
 		<div class="wyt-add-form">
-			<span class="instagram-account-pro"><?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
+			<span class="instagram-account-pro"><?php echo sprintf( e__( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
 		</div>
 	<?php else: ?>
 		<div class="wis-youtube-form-row" style="margin-top: 15px;">
@@ -50,14 +58,14 @@ $count_accounts = ! empty( $accounts ) ? count( $accounts ) : 0;
 <?php
 if ( ! empty( $accounts ) ) :
 	?>
-	<div class="wis-social-group"><?php echo __( 'Connected channels', 'instagram-slider-widget' ); ?></div>
+	<div class="wis-social-group"><?php _e( 'Connected channels', 'instagram-slider-widget' ); ?></div>
 	<table class="widefat wis-table">
 		<thead>
 		<tr>
-			<th class="wis-profile-picture"><?php echo __( 'Image', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-id"><?php echo __( 'ID', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-name"><?php echo __( 'Name', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-actions"><?php echo __( 'Action', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-picture"><?php _e( 'Image', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-id"><?php _e( 'ID', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-name"><?php _e( 'Name', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-actions"><?php _e( 'Action', 'instagram-slider-widget' ); ?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -67,19 +75,18 @@ if ( ! empty( $accounts ) ) :
 			?>
 			<tr>
 				<td class="wis-profile-picture">
-					<img src="<?php echo $account->snippet->thumbnails->default->url ?>"
-					     width="30" alt=""/>
+					<img src="<?php echo esc_url( $account->snippet->thumbnails->default->url ) ?>" width="30" alt=""/>
 				</td>
-				<td class="wis-profile-id"><?php echo $channelId; ?></td>
+				<td class="wis-profile-id"><?php echo esc_html( $channelId ); ?></td>
 				<td class="wis-profile-name">
-					<a href="https://youtube.com/channel/<?php echo $channelId ?>"><?php echo $account->snippet->title; ?></a>
+					<a href="https://youtube.com/channel/<?php echo esc_attr( $channelId ) ?>"><?php echo esc_html( $account->snippet->title ); ?></a>
 				</td>
 				<td class="wis-profile-actions">
-					<a href="<?php echo $delete_link; ?>" class="btn btn-danger wyt-close-button">
-						<span class="dashicons dashicons-trash"></span><?php echo __( 'Delete', 'instagram-slider-widget' ); ?>
+					<a href="<?php echo esc_url( $delete_link ); ?>" class="btn btn-danger wyt-close-button">
+						<span class="dashicons dashicons-trash"></span><?php _e( 'Delete', 'instagram-slider-widget' ); ?>
 					</a>
 					<span class="spinner"
-					      id="wis-delete-spinner-<?php echo $channelId; ?>"></span>
+					      id="wis-delete-spinner-<?php echo esc_attr( $channelId ); ?>"></span>
 				</td>
 			</tr>
 			<?php
@@ -95,7 +102,7 @@ if ( ! empty( $accounts ) ) :
 		<?php _e( 'Add Youtube channel', 'instagram-slider-widget' ); ?>
 	</div>
 	<div class="wis_modal_content">
-		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+		<form method="post">
 			<?php wp_nonce_field( 'wis_yt_link', 'csrf_check' ); ?>
 			<div class="wis-youtube-form-row">
 				<div class="wyt-add-form" style="width: 100%;">

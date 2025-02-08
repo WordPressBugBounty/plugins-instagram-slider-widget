@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_Logger_145;
+namespace WBCR\Factory_Logger_150;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,8 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * $this->debug('Some message used for debug purposed. Could be stack trace.');
  * ```
  *
- * @author        Artem Prihodko <webtemyk@yandex.ru>
- * @copyright (c) 2020, Webcraftic
+ * @author  Alex Kovalev <alex.kovalevv@gmail.com> <Telegram:@alex_kovalevv>
+ * @copyright (c) 17.01.2020, CreativeMotion
  * @version       1.0
  */
 class Logger {
@@ -48,7 +48,7 @@ class Logger {
 	const LEVEL_DEBUG = 'debug';
 
 	/**
-	 * @var \Wbcr_Factory478_Plugin Plugin class.
+	 * @var \Wbcr_Factory481_Plugin Plugin class.
 	 */
 	public $plugin;
 
@@ -92,7 +92,7 @@ class Logger {
 	/**
 	 * Logger constructor.
 	 *
-	 * @param \Wbcr_Factory478_Plugin $plugin
+	 * @param \Wbcr_Factory481_Plugin $plugin
 	 * @param array $settings
 	 */
 	public function __construct( $plugin, $settings = [] ) {
@@ -161,20 +161,21 @@ class Logger {
 	}
 
 	/**
-	 * Get base directory, location of logs.
+	 * Retrieves the base directory path for the plugin logs, creating the necessary folder structure and protection files if they do not exist.
 	 *
-	 * @return null|string NULL in case of failure, string on success.
+	 * @return string|null The path to the base logs directory, or null if it cannot be determined.
 	 */
-	public function get_base_dir() {
-		$plugin_slug = $this->plugin->plugin_slug;
+	public function get_base_dir(): ?string {
+		$plugin_slug = $this->plugin->getPluginName();
+		$upload_dir  = wp_upload_dir();
+		$upload_base = $upload_dir['basedir'];
 
-		if ( empty( $this->dir ) ) {
-			$base_path = wp_normalize_path( trailingslashit( WP_CONTENT_DIR ) . "logs/{$plugin_slug}/" );
-		} else {
-			$base_path = wp_normalize_path( trailingslashit( $this->dir ) . "{$plugin_slug}/" );
-		}
+		$base_path = ! empty( $this->dir ) ?
+			wp_normalize_path( trailingslashit( $this->dir ) )
+			: wp_normalize_path( trailingslashit( $upload_base ) );
 
-		/*
+		$base_path .= "{$plugin_slug}-logs/";
+
 		$folders = glob( $base_path . 'logs-*' );
 		if ( ! empty( $folders ) ) {
 			$exploded_path        = explode( '/', trim( $folders[0] ) );
@@ -190,9 +191,7 @@ class Logger {
 		}
 
 		$path = $base_path . $selected_logs_folder . '/';
-		*/
 
-		$path = $base_path;
 		if ( ! file_exists( $path ) ) {
 			@mkdir( $path, 0755, true );
 		}
@@ -216,9 +215,9 @@ class Logger {
 	}
 
 	/**
-	 * Get all available log paths.
+	 * Retrieve all log files from the base directory.
 	 *
-	 * @return array|bool
+	 * @return array|false
 	 */
 	public function get_all() {
 		$base_dir = $this->get_base_dir();
@@ -238,7 +237,7 @@ class Logger {
 	 * @return int
 	 * @see size_format() for formatting.
 	 */
-	public function get_total_size() {
+	public function get_total_size(): int {
 		$logs  = $this->get_all();
 		$bytes = 0;
 
@@ -258,7 +257,7 @@ class Logger {
 	 *
 	 * @return bool
 	 */
-	public function clean_up() {
+	public function clean_up(): bool {
 
 		$base_dir = $this->get_base_dir();
 
@@ -294,7 +293,7 @@ class Logger {
 	 *
 	 * @return bool
 	 */
-	public function flush() {
+	public function flush(): bool {
 
 		$messages = $this->_logs;
 
@@ -330,23 +329,23 @@ class Logger {
 	 *
 	 * @return string
 	 */
-	public function get_format( $level, $message ) {
+	public function get_format( $level, $message ): string {
 
 		// Example: 17-03-2021 13:44:23 [site.com][info] Message
 		$template = '%s [%s][%s] %s';
 		$date     = date_i18n( 'd-m-Y H:i:s' );
 
-		$ip = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
+		$ip = $_SERVER['SERVER_NAME'] ?? '';
 
 		return sprintf( $template, $date, $ip, $level, $message );
 	}
 
 	/**
-	 * Get latest file content.
+	 * Retrieve the content from the specified file.
 	 *
-	 * @return bool|string
+	 * @return string|null
 	 */
-	public function get_content() {
+	public function get_content(): ?string {
 		if ( ! file_exists( $this->get_dir() ) ) {
 			return null;
 		}
@@ -355,12 +354,12 @@ class Logger {
 	}
 
 	/**
-	 * Get Export object.
+	 * Generate and return an export of log data.
 	 *
-	 * @return bool|Log_Export
+	 * @return Log_Export
 	 */
 	public function get_export() {
-		return new Log_Export( $this, "{$this->plugin->plugin_slug}_log_export-{datetime}.zip" );
+		return new Log_Export( $this, "{$this->plugin->getPluginName()}_log_export-{datetime}.zip" );
 	}
 
 	/**
@@ -371,7 +370,7 @@ class Logger {
 	 *
 	 * @return bool
 	 */
-	public function add( $level, $message ) {
+	public function add( $level, $message ): bool {
 
 		$this->_logs[] = $this->get_format( $level, $message );
 
@@ -422,6 +421,7 @@ class Logger {
 	 * Writes information to log about memory.
 	 *
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 *
 	 * @since  1.3.6
 	 */
 	public function memory_usage() {
@@ -433,23 +433,31 @@ class Logger {
 	}
 
 	/**
-	 * Prettify log content.
+	 * Formats and enhances the log content with HTML structure for better readability.
 	 *
-	 * Helps to convert log file content into easy-to-read HTML.
-	 *
-	 * Usage example:
-	 *
-	 * @return bool|mixed|string
+	 * @return string|null The prettified content with HTML formatting or null if no content exists.
 	 */
-	public function prettify() {
+	public function prettify(): ?string {
 		$content = $this->get_content();
 
-		if(!empty($content)) {
-			$replace = "<div class='wbcr-log-row wbcr_logger_level_$4'><strong>$1 $2</strong> [$3]<div class='wbcr_logger_level'>$4</div>$5</div>";
+		if ( ! empty( $content ) ) {
+			$messages = explode( "-------------------------------", $content );
+			$replace  = "<div class='wbcr-log-row wbcr_logger_level_$4'><strong>$1 $2</strong> [$3]<div class='wbcr_logger_level'>$4</div>$5</div>";
 
-			$content = str_replace( [ "\n", "\r<br>" ], [ "<br>", "\r\n" ], $content );
-			$content = preg_replace( "/^(\S+)\s*(\S+)\s*\[(.+)\]\s*\[(.+)\]\s*(.*)$/m", $replace, $content );
+			$formatted_messages = array_map( function ( $message ) use ( $replace ) {
+				$message = trim( $message );
+				if ( $message === '' ) {
+					return '';
+				}
+
+				$message = str_replace( [ "\n", "\r<br>" ], [ "<br>", "\r\n" ], $message );
+
+				return preg_replace( "/^(\S+)\s*(\S+)\s*\[(.+)\]\s*\[(.+)\]\s*(.*)$/m", $replace, $message );
+			}, $messages );
+
+			$content = implode( "<hr>", array_filter( $formatted_messages ) );
 		}
+
 		return $content;
 	}
 }

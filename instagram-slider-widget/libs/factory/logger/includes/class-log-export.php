@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_Logger_145;
+namespace WBCR\Factory_Logger_150;
 
 /**
  * Prepares export files, ZIPs them and allows to download the package.
@@ -42,6 +42,7 @@ class Log_Export {
 	 */
 	public function __construct( $logger, $archive_name = null ) {
 		$this->logger = $logger;
+
 		if ( $archive_name !== null ) {
 			$this->_archive_name = $archive_name;
 		}
@@ -221,7 +222,8 @@ class Log_Export {
 			@unlink( $zip_save_path );
 		}
 
-		$archive_name = str_replace( '{datetime}', date( 'c' ), $this->_archive_name );
+		$archive_name = str_replace( 'plugin', $this->logger->plugin->getPluginName(), $this->_archive_name );
+		$archive_name = str_replace( '{datetime}', date( 'c' ), $archive_name );
 
 		// Set-up headers to download export file
 		header( 'Content-Description: File Transfer' );

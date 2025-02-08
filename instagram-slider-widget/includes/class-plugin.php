@@ -13,11 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright (c) 2019 Webraftic Ltd
  * @version       1.0
  */
-class WIS_Plugin extends \Wbcr_Factory478_Plugin {
+class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 
 	/**
 	 * @see self::app()
-	 * @var \Wbcr_Factory478_Plugin
+	 * @var \Wbcr_Factory481_Plugin
 	 */
 	private static $app;
 
@@ -35,7 +35,7 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 	 * Используется для получения настроек плагина, информации о плагине, для доступа к вспомогательным
 	 * классам.
 	 *
-	 * @return \Wbcr_Factory478_Plugin
+	 * @return \Wbcr_Factory481_Plugin
 	 */
 	public static function app() {
 		return self::$app;
@@ -107,8 +107,6 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 	 * Регистрирует классы страниц в плагине
 	 */
 	private function register_pages() {
-		require_once WIS_PLUGIN_DIR . '/admin/class-page.php';
-
 		self::app()->registerPage( 'WIS_FeedsPage', WIS_PLUGIN_DIR . '/admin/pages/feeds.php' );
 		self::app()->registerPage( 'WIS_ProfilesPage', WIS_PLUGIN_DIR . '/admin/pages/profiles.php' );
 		self::app()->registerPage( 'WIS_LicensePage', WIS_PLUGIN_DIR . '/admin/pages/license.php' );
@@ -127,9 +125,9 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 */
 	public function plugins_loaded() {
-		if ( is_admin() ) {
-			$this->register_pages();
-		}
+		//if ( is_admin() ) {
+		//$this->register_pages();
+		//}
 	}
 
 	/**
@@ -137,6 +135,11 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 	 */
 	private function admin_scripts() {
 		add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ] );
+
+		require_once WIS_PLUGIN_DIR . '/admin/class-page.php';
+		add_action( 'init', function () {
+			$this->register_pages();
+		}, 30 );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_assets' ] );
 		add_action( 'admin_notices', [ $this, 'new_api_admin_notice' ] );
@@ -195,6 +198,7 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 	 * @return bool
 	 */
 	public function is_premium() {
+
 		if ( $this->premium->is_active() && $this->premium->is_activate() //&& is_plugin_active( "{$this->premium->get_setting('slug')}/{$this->premium->get_setting('slug')}.php" )
 		) {
 			return true;
@@ -213,8 +217,8 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 		$result   = [];
 		foreach ( $settings as $key => $widget ) {
 			$result[] = [
-					'title' => $widget['title'],
-					'id'    => $key,
+				'title' => $widget['title'],
+				'id'    => $key,
 			];
 		}
 
@@ -242,7 +246,7 @@ class WIS_Plugin extends \Wbcr_Factory478_Plugin {
 					The plugin has moved to the new Instagram Basic Display API.<br>
 					To make your widgets work again, reconnect your instagram accounts in the plugin settings.
 					<a href="https://cm-wp.com/important-update-social-slider-widget/" class="">Read more about the
-						changes</a>
+					                                                                            changes</a>
 				</p>
 			</div>
 			<?php

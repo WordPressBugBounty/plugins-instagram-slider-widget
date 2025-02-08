@@ -68,7 +68,7 @@ class WIS_Facebook_Feed extends WIS_Feed {
 
 		$this->defaults = [
 			'id'                 => null,
-			'title'              => __( 'Facebook feed', 'instagram-slider-widget' ),
+			'title'              => 'Facebook feed',
 			'show_feed_header'   => 0,
 			'template'           => 'masonry',
 			'account'            => '',

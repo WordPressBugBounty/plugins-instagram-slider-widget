@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_Templates_131\Pages;
+namespace WBCR\Factory_Templates_135\Pages;
 
 /**
  * Step
@@ -10,7 +10,7 @@ namespace WBCR\Factory_Templates_131\Pages;
  */
 class Step_Form extends Step {
 
-	public function __construct(\WBCR\Factory_Templates_131\Pages\Setup $page)
+	public function __construct(\WBCR\Factory_Templates_135\Pages\Setup $page)
 	{
 		parent::__construct($page);
 	}
@@ -33,12 +33,12 @@ class Step_Form extends Step {
 	protected function instance_form($options)
 	{
 
-		$form = new \Wbcr_FactoryForms478_Form([
+		$form = new \Wbcr_FactoryForms481_Form([
 			'scope' => rtrim($this->plugin->getPrefix(), '_'),
 			'name' => $this->page->getResultId() . "-options-" . $this->get_id()
 		], $this->plugin);
 
-		$form->setProvider(new \Wbcr_FactoryForms478_OptionsValueProvider($this->plugin));
+		$form->setProvider(new \Wbcr_FactoryForms481_OptionsValueProvider($this->plugin));
 
 		$form_options = [];
 
@@ -83,20 +83,20 @@ class Step_Form extends Step {
 		return $form;
 	}
 
-	protected function render_form(\Wbcr_FactoryForms478_Form $form)
+	protected function render_form(\Wbcr_FactoryForms481_Form $form)
 	{
 		?>
-		<form method="post" id="w-factory-templates-131__setup-form-<?php echo $this->get_id() ?>" class="w-factory-templates-131__setup-form form-horizontal">
+		<form method="post" id="w-factory-templates-135__setup-form-<?php echo $this->get_id() ?>" class="w-factory-templates-135__setup-form form-horizontal">
 			<?php $form->html(); ?>
-			<div class="w-factory-templates-131__form-buttons">
-				<!--<input type="submit" name="skip_button_<?php /*echo $this->get_id() */ ?>" class="button-primary button button-large w-factory-templates-131__skip-button" value="<?php /*_e('Skip', 'wbcr_factory_templates_131') */ ?>">-->
-				<input type="submit" name="continue_button_<?php echo $this->get_id() ?>" class="button-primary button button-large w-factory-templates-131__continue-button" value="<?php _e('Continue', 'wbcr_factory_templates_131') ?>">
+			<div class="w-factory-templates-135__form-buttons">
+				<!--<input type="submit" name="skip_button_<?php /*echo $this->get_id() */ ?>" class="button-primary button button-large w-factory-templates-135__skip-button" value="<?php /*_e('Skip', 'wbcr_factory_templates_135') */ ?>">-->
+				<input type="submit" name="continue_button_<?php echo $this->get_id() ?>" class="button-primary button button-large w-factory-templates-135__continue-button" value="<?php _e('Continue', 'wbcr_factory_templates_135') ?>">
 			</div>
 		</form>
 		<?php
 	}
 
-	protected function set_form_handler(\Wbcr_FactoryForms478_Form $form)
+	protected function set_form_handler(\Wbcr_FactoryForms481_Form $form)
 	{
 		if( isset($_POST['continue_button_' . $this->get_id()]) ) {
 			$form->save();
@@ -123,8 +123,8 @@ class Step_Form extends Step {
 		$form = $this->instance_form($this->get_form_options());
 		?>
 		<div id="WBCR" class="wrap">
-			<div class="wbcr-factory-templates-131-impressive-page-template factory-bootstrap-480 factory-fontawesome-000">
-				<div class="w-factory-templates-131-setup__inner-wrap">
+			<div class="wbcr-factory-templates-135-impressive-page-template factory-bootstrap-483 factory-fontawesome-000">
+				<div class="w-factory-templates-135-setup__inner-wrap">
 					<h3><?php echo $this->get_title(); ?></h3>
 					<p style="text-align: left;"><?php echo $this->get_form_description(); ?></p>
 				</div>

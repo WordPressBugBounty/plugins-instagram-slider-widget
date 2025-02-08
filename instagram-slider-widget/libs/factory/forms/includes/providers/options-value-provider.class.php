@@ -13,7 +13,7 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryForms478_OptionsValueProvider') ) {
+	if( !class_exists('Wbcr_FactoryForms481_OptionsValueProvider') ) {
 
 		/**
 		 * Factory Options Value Provider
@@ -22,7 +22,7 @@
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_FactoryForms478_OptionsValueProvider implements Wbcr_IFactoryForms478_ValueProvider {
+		class Wbcr_FactoryForms481_OptionsValueProvider implements Wbcr_IFactoryForms481_ValueProvider {
 
 			/**
 			 * A prefix that will be added to all option names.
@@ -45,7 +45,7 @@
 			/**
 			 * Creates a new instance of an options value provider.
 			 */
-			public function __construct(Wbcr_Factory478_Plugin $plugin)
+			public function __construct(Wbcr_Factory481_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 			}

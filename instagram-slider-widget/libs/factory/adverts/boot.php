@@ -1,6 +1,6 @@
 <?php
 
-use WBCR\Factory_Adverts_156\Base;
+use WBCR\Factory_Adverts_160\Base;
 
 /**
  * Factory Adverts
@@ -16,35 +16,37 @@ use WBCR\Factory_Adverts_156\Base;
  */
 
 // Exit if accessed directly
-if( !defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if( defined('FACTORY_ADVERTS_156_LOADED') || (defined('FACTORY_ADVERTS_BLOCK') && FACTORY_ADVERTS_BLOCK) ) {
+if ( defined( 'FACTORY_ADVERTS_160_LOADED' ) || ( defined( 'FACTORY_ADVERTS_BLOCK' ) && FACTORY_ADVERTS_BLOCK ) ) {
 	return;
 }
 
 # Устанавливаем константу, что модуль уже загружен
-define('FACTORY_ADVERTS_156_LOADED', true);
+define( 'FACTORY_ADVERTS_160_LOADED', true );
 
 # Устанавливаем версию модуля
-define('FACTORY_ADVERTS_156_VERSION', '1.5.6');
+define( 'FACTORY_ADVERTS_160_VERSION', '1.6.0' );
 
-# Регистрируем тектовый домен, для интернализации интерфейса модуля
-load_plugin_textdomain('wbcr_factory_adverts_156', false, dirname(plugin_basename(__FILE__)) . '/langs');
+add_action( 'init', function () {
+	# Регистрируем тектовый домен, для интернализации интерфейса модуля
+	load_plugin_textdomain( 'wbcr_factory_adverts_160', false, dirname( plugin_basename( __FILE__ ) ) . '/langs' );
+} );
 
 # Устанавливаем директорию модуля
-define('FACTORY_ADVERTS_156_DIR', dirname(__FILE__));
+define( 'FACTORY_ADVERTS_160_DIR', dirname( __FILE__ ) );
 
 # Устанавливаем url модуля
-define('FACTORY_ADVERTS_156_URL', plugins_url('', __FILE__));
+define( 'FACTORY_ADVERTS_160_URL', plugins_url( '', __FILE__ ) );
 
-require_once(FACTORY_ADVERTS_156_DIR . '/includes/class-rest-request.php');
-require_once(FACTORY_ADVERTS_156_DIR . '/includes/class-base.php');
+require_once( FACTORY_ADVERTS_160_DIR . '/includes/class-rest-request.php' );
+require_once( FACTORY_ADVERTS_160_DIR . '/includes/class-base.php' );
 
 /**
- * @param Wbcr_Factory478_Plugin $plugin
+ * @param Wbcr_Factory481_Plugin $plugin
  */
-add_action('wbcr_factory_adverts_156_plugin_created', function ($plugin) {
-	$plugin->set_adverts_manager("WBCR\Factory_Adverts_156\Base");
-});
+add_action( 'wbcr_factory_adverts_160_plugin_created', function ( $plugin ) {
+	$plugin->set_adverts_manager( "WBCR\Factory_Adverts_160\Base" );
+} );

@@ -46,11 +46,11 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 
 				$connected_profiles                     = WIS_Plugin::app()->getOption( $this->profiles_option_name, [] );
 				$connected_profiles[ $account['name'] ] = [
-						'name'   => $account['name'],
-						'avatar' => $account['picture']['data']['url'],
-						'id'     => $account['id'],
-						'token'  => $account['access_token'],
-						'is_me'  => $account['is_me'],
+					'name'   => $account['name'],
+					'avatar' => $account['picture']['data']['url'],
+					'id'     => $account['id'],
+					'token'  => $account['access_token'],
+					'is_me'  => $account['is_me'],
 				];
 				WIS_Plugin::app()->updateOption( $this->profiles_option_name, $connected_profiles );
 
@@ -69,9 +69,9 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 		$html = '';
 		if ( $access_token ) {
 			$args = [
-					'access_token' => $access_token,
-					'fields'       => 'name,picture,access_token',
-					'limit'        => 200,
+				'access_token' => $access_token,
+				'fields'       => 'name,picture,access_token',
+				'limit'        => 200,
 			];
 
 			$connected_profiles = [];
@@ -87,9 +87,9 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 			}
 
 			foreach ( $connected_profiles as $profile ) {
-				$html .= "<div class='wis-row wis-row-style' id='wis-facebook-row' data-account='" . json_encode( $profile ) . "'>";
-				$html .= "<div class='wis-col-1 wis-col1-style'><img src='{$profile['picture']['data']['url']}' width='50' alt='{$profile['name']}'></div>";
-				$html .= "<div class='wis-col-2 wis-col2-style'>{$profile['name']}</div>";
+				$html .= "<div class='wis-row wis-row-style' id='wis-facebook-row' data-account='" . esc_attr( json_encode( $profile ) ) . "'>";
+				$html .= "<div class='wis-col-1 wis-col1-style'><img src='" . esc_url( $profile['picture']['data']['url'] ) . "' width='50' alt='" . esc_attr( $profile['name'] ) . "'></div>";
+				$html .= "<div class='wis-col-2 wis-col2-style'>" . esc_html( $profile['name'] ) . "</div>";
 				$html .= "</div>";
 			}
 		}
@@ -117,7 +117,7 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 							Choose Account:
 						</div>
 						<div class="wis_modal_content">
-							<?php echo $choose_account_html; ?>
+							<?php echo esc_html( $choose_account_html ); ?>
 						</div>
 					</div>
 					<div id="wis_modal_overlay" class="wis_modal_overlay"></div>
@@ -130,13 +130,13 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 		$accounts = WIS_Plugin::app()->getPopulateOption( WIS_FACEBOOK_ACCOUNT_PROFILES_OPTION_NAME, [] );
 
 		$data = [
-				'is_premium'    => WIS_Plugin::app()->is_premium(),
-				'authorize_url' => "https://instagram.cm-wp.com/facebook?" . http_build_query( [
-								"app_id" => WIS_FACEBOOK_CLIENT_ID,
-								"state"  => $this->getSocialUrl(),
-						] ),
-				'accounts'      => $accounts,
-				'social'        => $this->social,
+			'is_premium'    => WIS_Plugin::app()->is_premium(),
+			'authorize_url' => "https://instagram.cm-wp.com/facebook?" . http_build_query( [
+					"app_id" => WIS_FACEBOOK_CLIENT_ID,
+					"state"  => $this->getSocialUrl(),
+				] ),
+			'accounts'      => $accounts,
+			'social'        => $this->social,
 		];
 
 		$result = $this->page->render( WFB_COMPONENT_VIEWS_DIR . '/accounts', $data );

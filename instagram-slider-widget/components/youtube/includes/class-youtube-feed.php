@@ -60,13 +60,13 @@ class WIS_Youtube_Feed extends WIS_Feed {
 		] );
 
 		$this->linkto = apply_filters( 'wis/youtube/options/link_to', [
-			"yt_link"    => __( 'Youtube link', 'instagram-slider-widget' ),
-			"custom_url" => __( 'Custom URL', 'instagram-slider-widget' ),
-			"none"       => __( 'None', 'instagram-slider-widget' ),
+			"yt_link"    => 'Youtube link',
+			"custom_url" => 'Custom URL',
+			"none"       => 'None',
 		] );
 
 		$this->defaults = [
-			'title'            => __( 'Youtube feed', 'instagram-slider-widget' ),
+			'title'            => 'Youtube feed',
 			'search'           => '',
 			'refresh_hour'     => 5,
 			'blocked_words'    => '',

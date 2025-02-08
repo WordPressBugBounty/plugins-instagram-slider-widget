@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ISWUpdate010800 extends Wbcr_Factory478_Update{
+class ISWUpdate010800 extends Wbcr_Factory481_Update{
 
 	public function install() {
 		if(is_multisite()){

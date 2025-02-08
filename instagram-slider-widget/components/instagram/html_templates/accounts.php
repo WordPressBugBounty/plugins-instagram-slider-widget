@@ -17,8 +17,11 @@ $count_accounts = count( $accounts ) + count( $accounts_business );
 	<?php
 	if ( $count_accounts >= 1 && ! $is_premium ) : ?>
 		<span class="wis-btn-instagram-account-disabled btn-instagram-account-disabled">
-                                <?php _e( 'Add Account', 'instagram-slider-widget' ) ?></span>
-		<span class="instagram-account-pro"><?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
+           <?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
+        </span>
+		<span class="instagram-account-pro">
+            <?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?>
+        </span>
 	<?php else: ?>
 		<a class="wis-btn-instagram-account" target="_self" href="#" title="Add Account">
 			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
@@ -62,7 +65,7 @@ if ( count( $accounts ) ) :
 					       class="wis-text-token" readonly/>
 				</td>
 				<td class="wis-profile-actions">
-					<a href="<?php echo $delete_link; ?>" class="btn btn-danger wis-delete-account">
+					<a href="<?php echo esc_url($delete_link); ?>" class="btn btn-danger wis-delete-account">
 						<span class="dashicons dashicons-trash"></span><?php echo __( 'Delete', 'instagram-slider-widget' ); ?>
 					</a>
 					<?php
@@ -147,11 +150,11 @@ if ( count( $accounts_business ) ) :
 	<div class="wis_modal_content">
 
 		<div class='wis-row-style'>
-			<a href="<?php echo $authorize_url_instagram; ?>" class='wis-btn-instagram-account'>Personal
+			<a href="<?php echo esc_url($authorize_url_instagram); ?>" class='wis-btn-instagram-account'>Personal
 				account</a>
 		</div>
 		<div class='wis-row-style'>
-			<a href="<?php echo $authorize_url_business; ?>" class='wis-btn-facebook-account'>Business
+			<a href="<?php echo esc_url($authorize_url_business); ?>" class='wis-btn-facebook-account'>Business
 				account</a>
 		</div>
 	</div>

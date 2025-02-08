@@ -108,7 +108,7 @@ class WYT_Widget extends WP_Widget {
 
 		// Display the widget title
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . esc_html($title) . $args['after_title'];
 		}
 
 		do_action( 'wyoutube_feed', $instance );

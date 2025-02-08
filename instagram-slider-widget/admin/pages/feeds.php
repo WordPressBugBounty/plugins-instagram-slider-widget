@@ -65,12 +65,12 @@ class WIS_FeedsPage extends WIS_Page {
 		$this->menu_sub_title = __( 'Feeds', 'instagram-slider-widget' );
 		$this->menu_tab_title = __( 'Feeds', 'instagram-slider-widget' );
 
-		$this->capabilitiy    = 'manage_options';
+		$this->capabilitiy = 'manage_options';
 
 		parent::__construct( $plugin );
 
-		$this->plugin = $plugin;
-		$this->menu_icon      = '~/admin/assets/img/wis.png';
+		$this->plugin    = $plugin;
+		$this->menu_icon = '~/admin/assets/img/wis.png';
 	}
 
 	public function assets( $scripts, $styles ) {
@@ -94,9 +94,7 @@ class WIS_FeedsPage extends WIS_Page {
 	 * @inerhitDoc
 	 */
 	public function showPageContent() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Access denied' );
-		}
+		//$this->plugin->logger->info( 'fsdfsd' );
 
 		if ( isset( $_GET['action'] ) && isset( $_GET['social'] ) ) {
 			$social = sanitize_text_field( $_GET['social'] );

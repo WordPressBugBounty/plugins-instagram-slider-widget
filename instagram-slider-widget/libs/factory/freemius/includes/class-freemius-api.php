@@ -1,10 +1,10 @@
 <?php
 
-namespace WBCR\Factory_Freemius_168;
+namespace WBCR\Factory_Freemius_171;
 
-use WBCR\Factory_Freemius_168\Sdk\Freemius_Api_WordPress;
-use WBCR\Factory_Freemius_168\Sdk\Freemius_Exception;
-use Wbcr_Factory478_Plugin;
+use WBCR\Factory_Freemius_171\Sdk\Freemius_Api_WordPress;
+use WBCR\Factory_Freemius_171\Sdk\Freemius_Exception;
+use Wbcr_Factory481_Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -37,7 +37,7 @@ final class Api {
 	private $api;
 	
 	/**
-	 * @var Wbcr_Factory478_Plugin
+	 * @var Wbcr_Factory481_Plugin
 	 */
 	private $plugin;
 	
@@ -52,15 +52,15 @@ final class Api {
 	private static $clock_diff;
 	
 	/**
-	 * @param Wbcr_Factory478_Plugin $slug
+	 * @param Wbcr_Factory481_Plugin $slug
 	 * @param string $scope 'app', 'developer', 'user' or 'install'.
 	 * @param number $id Element's id.
 	 * @param string $public_key Public key.
 	 * @param bool|string $secret_key Element's secret key.
 	 * @param bool $is_sandbox
 	 */
-	private function __construct( Wbcr_Factory478_Plugin $plugin, $scope, $id, $public_key, $secret_key, $is_sandbox ) {
-		if ( ! class_exists( 'WBCR\Factory_Freemius_168\Sdk\Freemius_Api_WordPress' ) ) {
+	private function __construct( Wbcr_Factory481_Plugin $plugin, $scope, $id, $public_key, $secret_key, $is_sandbox ) {
+		if ( ! class_exists( 'WBCR\Factory_Freemius_171\Sdk\Freemius_Api_WordPress' ) ) {
 			require_once FREEMIUS__DIR_SDK . '/FreemiusWordPress.php';
 		}
 		
@@ -77,7 +77,7 @@ final class Api {
 	}
 	
 	/**
-	 * @param Wbcr_Factory478_Plugin $plugin
+	 * @param Wbcr_Factory481_Plugin $plugin
 	 * @param string $scope 'app', 'developer', 'user' or 'install'.
 	 * @param number $id Element's id.
 	 * @param string $public_key Public key.
@@ -86,7 +86,7 @@ final class Api {
 	 *
 	 * @return Api
 	 */
-	public static function instance( Wbcr_Factory478_Plugin $plugin, $scope, $id, $public_key, $is_sandbox, $secret_key = false ) {
+	public static function instance( Wbcr_Factory481_Plugin $plugin, $scope, $id, $public_key, $is_sandbox, $secret_key = false ) {
 		$identifier = md5( $plugin->getPluginName() . $scope . $id . $public_key . ( is_string( $secret_key ) ? $secret_key : '' ) . json_encode( $is_sandbox ) );
 		
 		if ( ! isset( self::$instances[ $identifier ] ) ) {

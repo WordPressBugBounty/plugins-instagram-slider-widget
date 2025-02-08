@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_478\Components;
+namespace WBCR\Factory_481\Components;
 
 /**
  * This file groups the settings for quick setup
@@ -23,7 +23,7 @@ class Install_Button {
 
 	protected $classes = [
 		'button',
-		'wfactory-478-process-button'
+		'wfactory-481-process-button'
 	];
 	protected $data = [];
 	protected $base_path;
@@ -38,7 +38,7 @@ class Install_Button {
 	 * @throws \Exception
 	 * @since  4.3.3
 	 */
-	public function __construct(\Wbcr_Factory478_Plugin $plugin, $type, $plugin_slug)
+	public function __construct(\Wbcr_Factory481_Plugin $plugin, $type, $plugin_slug)
 	{
 		if( empty($type) || !is_string($plugin_slug) ) {
 			throw new \Exception('Empty type or plugin_slug attribute.');
@@ -68,7 +68,7 @@ class Install_Button {
 
 		// Set default data
 		$this->add_data('storage', $this->type);
-		$this->add_data('i18n', \WBCR\Factory_Templates_131\Helpers::getEscapeJson($this->get_i18n()));
+		$this->add_data('i18n', \WBCR\Factory_Templates_135\Helpers::getEscapeJson($this->get_i18n()));
 		$this->add_data('wpnonce', wp_create_nonce('updates'));
 	}
 
@@ -426,13 +426,13 @@ class Install_Button {
 	protected function get_i18n()
 	{
 		return [
-			'activate' => __('Activate', 'wbcr_factory_478'),
-			'install' => __('Install', 'wbcr_factory_478'),
-			'deactivate' => __('Deactivate', 'wbcr_factory_478'),
-			'delete' => __('Delete', 'wbcr_factory_478'),
-			'loading' => __('Please wait...', 'wbcr_factory_478'),
-			'preparation' => __('Preparation...', 'wbcr_factory_478'),
-			'read' => __('Read more', 'wbcr_factory_478')
+			'activate' => __('Activate', 'wbcr_factory_481'),
+			'install' => __('Install', 'wbcr_factory_481'),
+			'deactivate' => __('Deactivate', 'wbcr_factory_481'),
+			'delete' => __('Delete', 'wbcr_factory_481'),
+			'loading' => __('Please wait...', 'wbcr_factory_481'),
+			'preparation' => __('Preparation...', 'wbcr_factory_481'),
+			'read' => __('Read more', 'wbcr_factory_481')
 		];
 	}
 

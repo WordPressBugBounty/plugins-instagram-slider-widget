@@ -8,7 +8,7 @@
 ?>
 <div class="wisw-social-content">
 	<div class="wisw-container-row">
-		<a href="<?php echo $this->getActionUrl( 'add', [ 'social' => $social ] ); ?>"
+		<a href="<?php echo esc_url($this->getActionUrl( 'add', [ 'social' => $social ] )); ?>"
 		   class="button action wis-add-feed-button"><?php _e( 'Add feed', 'instagram-slider-widget' ); ?></a>
 	</div>
 
@@ -35,7 +35,7 @@
 					?>
 					<tr>
 						<td class="wis-profile-name">
-							<a href="<?php echo $edit_link; ?>">
+							<a href="<?php echo esc_url($edit_link); ?>">
 								<?php echo esc_html($feed->title); ?>
 							</a>
 						</td>
@@ -45,10 +45,10 @@
 							       value="[jr_instagram id=&quot;<?php echo esc_attr($feed_id) ?>&quot;]" readonly="readonly">
 						</td>
 						<td class="wis-profile-actions">
-							<a href="<?php echo $edit_link; ?>" class="btn btn-primary">
+							<a href="<?php echo esc_url($edit_link); ?>" class="btn btn-primary">
 								<span class="dashicons dashicons-edit"></span>
 							</a>
-							<a href="<?php echo $delete_link; ?>" class="btn btn-danger">
+							<a href="<?php echo esc_url($delete_link); ?>" class="btn btn-danger">
 								<span class="dashicons dashicons-trash"></span>
 							</a>
 						</td>

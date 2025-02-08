@@ -1,6 +1,6 @@
 <?php
 
-use WBCR\Factory_Templates_131\ImpressiveLite;
+use WBCR\Factory_Templates_135\ImpressiveLite;
 
 /**
  * Class of plugin page. Must be registered in file admin/class-prefix-page.php
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WIS_Page_Logger extends Wbcr_FactoryLogger145_Lite {
+class WIS_Page_Logger extends Wbcr_FactoryLogger150_Lite {
 
 	/**
 	 * Name of the template to get content of. It will be based on plugins /admin/views/ dir.
@@ -163,22 +163,22 @@ class WIS_Page_Logger extends Wbcr_FactoryLogger145_Lite {
 			$page_url = $args[0];
 		}
 
-		$page_url = apply_filters( 'wbcr_factory_pages_478_implite_rating_widget_url', $page_url, $this->plugin->getPluginName(), $this->getResultId() );
+		$page_url = apply_filters( 'wbcr_factory_pages_481_implite_rating_widget_url', $page_url, $this->plugin->getPluginName(), $this->getResultId() );
 
 		?>
-        <div class="wbcr-factory-sidebar-widget">
-            <p>
-                <strong><?php _e( 'Do you want the plugin to improved and update?', 'wbcr_factory_templates_131' ); ?></strong>
-            </p>
-            <p><?php _e( 'Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_templates_131' ); ?></p>
-            <p><?php _e( 'And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_templates_131' ); ?></p>
-            <p>
-                <i class="wbcr-factory-icon-5stars"></i>
-                <a href="<?php echo $page_url; ?>" title="Go rate us" target="_blank">
-                    <strong><?php _e( 'Go rate us and push ideas', 'wbcr_factory_templates_131' ); ?></strong>
-                </a>
-            </p>
-        </div>
+		<div class="wbcr-factory-sidebar-widget">
+			<p>
+				<strong><?php _e( 'Do you want the plugin to improved and update?', 'wbcr_factory_templates_135' ); ?></strong>
+			</p>
+			<p><?php _e( 'Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_templates_135' ); ?></p>
+			<p><?php _e( 'And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_templates_135' ); ?></p>
+			<p>
+				<i class="wbcr-factory-icon-5stars"></i>
+				<a href="<?php echo esc_url( $page_url ); ?>" title="Go rate us" target="_blank">
+					<strong><?php _e( 'Go rate us and push ideas', 'wbcr_factory_templates_135' ); ?></strong>
+				</a>
+			</p>
+		</div>
 		<?php
 	}
 
@@ -194,24 +194,24 @@ class WIS_Page_Logger extends Wbcr_FactoryLogger145_Lite {
 		$hot_support_url  = $this->plugin->get_support()->get_contacts_url();
 
 		?>
-        <div id="wbcr-clr-support-widget" class="wbcr-factory-sidebar-widget">
-            <p><strong><?php _e( 'Having Issues?', 'wbcr_factory_templates_131' ); ?></strong></p>
-            <div class="wbcr-clr-support-widget-body">
-                <p>
-					<?php _e( 'We provide free support for this plugin. If you are pushed with a problem, just create a new ticket. We will definitely help you!', 'wbcr_factory_templates_131' ); ?>
-                </p>
-                <ul>
-                    <li><span class="dashicons dashicons-sos"></span>
-                        <a href="<?php echo $free_support_url; ?>" target="_blank"
-                           rel="noopener"><?php _e( 'Get starting free support', 'wbcr_factory_templates_131' ); ?></a>
-                    </li>
-                    <li style="margin-top: 15px;background: #fff4f1;padding: 10px;color: #a58074;">
-                        <span class="dashicons dashicons-warning"></span>
-						<?php printf( __( 'If you find a php error or a vulnerability in plugin, you can <a href="%s" target="_blank" rel="noopener">create ticket</a> in hot support that we responded instantly.', 'wbcr_factory_templates_131' ), $hot_support_url ); ?>
-                    </li>
-                </ul>
-            </div>
-        </div>
+		<div id="wbcr-clr-support-widget" class="wbcr-factory-sidebar-widget">
+			<p><strong><?php _e( 'Having Issues?', 'wbcr_factory_templates_135' ); ?></strong></p>
+			<div class="wbcr-clr-support-widget-body">
+				<p>
+					<?php _e( 'We provide free support for this plugin. If you are pushed with a problem, just create a new ticket. We will definitely help you!', 'wbcr_factory_templates_135' ); ?>
+				</p>
+				<ul>
+					<li><span class="dashicons dashicons-sos"></span>
+						<a href="<?php echo esc_url( $free_support_url ); ?>" target="_blank"
+						   rel="noopener"><?php _e( 'Get starting free support', 'wbcr_factory_templates_135' ); ?></a>
+					</li>
+					<li style="margin-top: 15px;background: #fff4f1;padding: 10px;color: #a58074;">
+						<span class="dashicons dashicons-warning"></span>
+						<?php printf( __( 'If you find a php error or a vulnerability in plugin, you can <a href="%s" target="_blank" rel="noopener">create ticket</a> in hot support that we responded instantly.', 'wbcr_factory_templates_135' ), $hot_support_url ); ?>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<?php
 	}
 
@@ -225,16 +225,14 @@ class WIS_Page_Logger extends Wbcr_FactoryLogger145_Lite {
 	}
 
 	public static function instruction( $title, $html ) {
-		$return = "<div class='form-group form-group-textbox'>
-					<label for='' class='col-sm-4 control-label'>{$title}</label>
+		return "<div class='form-group form-group-textbox'>
+					<label for='' class='col-sm-4 control-label'>" . esc_html( $title ) . "</label>
 					<div class='control-group col-sm-8'>
 						<div class='help-block'>
-							{$html}
+							" . esc_html( $html ) . "
 						</div>
 					</div>
 				</div>";
-
-		return $return;
 	}
 
 }

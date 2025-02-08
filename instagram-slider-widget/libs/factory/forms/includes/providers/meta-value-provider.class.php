@@ -14,7 +14,7 @@
 		exit;
 	}
 	
-	if( !class_exists('Wbcr_FactoryForms478_OptionsValueProvider') ) {
+	if( !class_exists('Wbcr_FactoryForms481_OptionsValueProvider') ) {
 		
 		/**
 		 * Factory Meta Value Provider
@@ -24,7 +24,7 @@
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_FactoryForms478_MetaValueProvider implements Wbcr_IFactoryForms478_ValueProvider {
+		class Wbcr_FactoryForms481_MetaValueProvider implements Wbcr_IFactoryForms481_ValueProvider {
 
 
 			public $scope;

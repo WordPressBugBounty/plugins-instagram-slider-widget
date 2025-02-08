@@ -4,7 +4,7 @@ Tags: instagram, instagram feed, instagram gallery, instagram photos, Instagram 
 Requires at least: 5.6
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.2.6
+Stable tag: 2.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,20 @@ If you don't use an account in the widget, go to the plugin settings and add an 
 10. Highlight
 
 == Changelog ==
+= 2.2.9 (08.02.2025) =
+Fixed security vulnerabilities and improved plugin compatibility.
+
+- Resolved potential security issues to enhance the safety of user data.
+- Verified and updated compatibility with WordPress 6.7.
+- Added minor fixes for improving plugin functionality and stability.
+
+This update ensures better performance and adheres to the latest WordPress standards.
+
+
+= 2.2.7 (09.12.2024) =
+* Fixed: Security issues
+* Fixed: _load_textdomain_just_in_time warning in debug mode
+
 = 2.2.6 =
 * Fix security issues
 * Compatibility with Wordpress 6.7

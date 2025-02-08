@@ -12,11 +12,13 @@ $social = $args['social'];
 	<?php
 	if ( count( $accounts ) && ! $is_premium ) : ?>
 		<span class="wis-btn-facebook-account btn-instagram-account-disabled">
-                                <?php _e( 'Add Account', 'instagram-slider-widget' ) ?></span>
-		<span class="instagram-account-pro"><?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
+			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
+		</span>
+		<span class="instagram-account-pro">
+			<?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?>
+		</span>
 	<?php else: ?>
-		<a class="wis-btn-facebook-account" target="_self" href="<?php echo $authorize_url; ?>"
-		   title="Add Account">
+		<a class="wis-btn-facebook-account" target="_self" href="<?php echo esc_url( $authorize_url ); ?>" title="Add Account">
 			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
 		</a>
 		<span style="float: none; margin-top: 0;" class="spinner" id="wis-spinner"> </span>
@@ -40,8 +42,8 @@ if ( ! empty( $accounts ) ) :
 		<?php
 		foreach ( $accounts as $key => $profile_info ) {
 			$delete_link = wp_nonce_url( $this->getActionUrl( 'delete', [
-					'social'  => $social,
-					'account' => $key,
+				'social'  => $social,
+				'account' => $key,
 			] ), 'wis_delete_profile', 'nonce' );
 
 			$image    = $profile_info['avatar'];
@@ -49,8 +51,7 @@ if ( ! empty( $accounts ) ) :
 			?>
 			<tr>
 				<td class="wis-profile-picture">
-					<img src="<?php echo esc_url( $image ); ?>"
-					     width="30" alt=""/>
+					<img src="<?php echo esc_url( $image ); ?>" width="30" alt=""/>
 				</td>
 				<td class="wis-profile-id"><?php echo esc_attr( $profile_info['id'] ); ?></td>
 				<td class="wis-profile-name">
@@ -63,7 +64,7 @@ if ( ! empty( $accounts ) ) :
 					       class="wis-text-token" readonly/>
 				</td>
 				<td class="wis-profile-actions">
-					<a href="<?php echo $delete_link; ?>" class="btn btn-danger wfb-delete-account">
+					<a href="<?php echo esc_url( $delete_link ); ?>" class="btn btn-danger wfb-delete-account">
 						<span class="dashicons dashicons-trash"></span><?php echo __( 'Delete', 'instagram-slider-widget' ); ?>
 					</a>
 					<span class="spinner"

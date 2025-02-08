@@ -151,7 +151,7 @@ class WIS_Instagram_Feed extends WIS_Feed {
 
 		$this->defaults = [
 			'id'                     => null,
-			'title'                  => __( 'Social Slider', 'instagram-slider-widget' ),
+			'title'                  => 'Social Slider',
 			'search_for'             => 'account',
 			'account'                => '',
 			'account_business'       => '',
