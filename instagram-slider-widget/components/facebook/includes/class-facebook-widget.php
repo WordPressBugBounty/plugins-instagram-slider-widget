@@ -53,7 +53,7 @@ class WFB_Widget extends WP_Widget {
 		parent::__construct( 'wfacebook_feed', __( 'Social Slider - Facebook', 'instagram-slider-widget' ), [
 			'show_instance_in_rest' => true,
 			'classname'             => 'wfacebook-feed',
-			'description'           => __( 'A widget that displays a Facebook posts ', 'instagram-slider-widget' ),
+			'description'           => __( 'A widget that displays Facebook posts', 'instagram-slider-widget' ),
 		] );
 
 		$this->plugin = WIS_Plugin::app();

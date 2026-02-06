@@ -137,6 +137,14 @@ class WIS_WidgetsPage extends WIS_Page {
 		$account          = $this->get_current_account();
 
 		if ( isset( $_GET['do'] ) && 'add_demo' === $_GET['do'] ) {
+			// Security: Verify nonce and user capability
+			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wis_add_demo' ) ) {
+				wp_die( esc_html__( 'Security check failed', 'instagram-slider-widget' ) );
+			}
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'instagram-slider-widget' ) );
+			}
+
 			if ( isset( $sidebars_widgets['jr-insta-shortcodes'] ) && ! empty( $account ) ) {
 				$next_id = $this->get_next_widget_id( $insta_widgets );
 
@@ -151,7 +159,7 @@ class WIS_WidgetsPage extends WIS_Page {
 				update_option( 'widget_jr_insta_slider', $insta_widgets );
 			}
 
-			$_SERVER['REQUEST_URI'] = esc_url(remove_query_arg( 'do' ));
+			$_SERVER['REQUEST_URI'] = esc_url(remove_query_arg( array( 'do', '_wpnonce' ) ));
 			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 

@@ -38,7 +38,7 @@ $type          = $args['type'] ?? '';
 			?>
 			<li class="<?php echo esc_attr( $type . $icons ); ?>">
 				<div id="jr-image-overlay" style="background: url(<?php echo esc_url( $image_url ); ?>) no-repeat center center; background-size: cover;">
-					<?php echo $image_output; ?>
+					<?php echo wp_kses_post( $image_output ); ?>
 				</div>
 				<?php if ( $args['description'] ) { ?>
 					<div class='jr-insta-wrap'>

@@ -115,13 +115,11 @@ class WIS_Page extends ImpressiveLite {
 	}
 
 	protected function isShowRightSidebar() {
-		return $this->show_right_sidebar && ! $this->plugin->is_premium();
+		return $this->show_right_sidebar;
 	}
 
 	public function showRightSidebar() {
-		if ( ! $this->plugin->is_premium() ) {
-			$this->plugin->get_adverts_manager()->render_placement( 'right_sidebar' );
-		}
+		$this->plugin->get_adverts_manager()->render_placement( 'right_sidebar' );
 	}
 
 	/**
@@ -191,7 +189,6 @@ class WIS_Page extends ImpressiveLite {
 
 		if ( 'bottom' == $position ) {
 			$widgets['rating_widget']  = $this->getRatingWidget( [] );
-			$widgets['support_widget'] = $this->getSupportWidget();
 		}
 
 		/**
@@ -222,50 +219,14 @@ class WIS_Page extends ImpressiveLite {
 
 		?>
 		<div class="wbcr-factory-sidebar-widget">
-			<p>
-				<strong><?php _e( 'Do you want the plugin to improved and update?', 'wbcr_factory_templates_135' ); ?></strong>
-			</p>
-			<p><?php _e( 'Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_templates_135' ); ?></p>
-			<p><?php _e( 'And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_templates_135' ); ?></p>
-			<p>
-				<i class="wbcr-factory-icon-5stars"></i>
-				<a href="<?php echo esc_url( $page_url ); ?>" title="Go rate us" target="_blank">
-					<strong><?php _e( 'Go rate us and push ideas', 'wbcr_factory_templates_135' ); ?></strong>
+			<strong><?php esc_html_e( 'Leave a review:', 'instagram-slider-widget' ); ?></strong>
+			<?php esc_html_e( 'Liking the plugin? A quick review would mean a lot and helps us make it even better.', 'instagram-slider-widget' ); ?>
+			<span>
+				<i class="dashicons dashicons-star-filled"></i>
+				<a class="wbcr-leave-review-link" href="<?php echo $page_url; ?>" title="Go rate us" target="_blank">
+					<?php esc_html_e( 'Leave a Review', 'instagram-slider-widget' ); ?>
 				</a>
-			</p>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Создает html разметку виджета поддержки
-	 *
-	 * @author @author Artem Prihodko <webtemyk@yandex.ru>
-	 */
-	public function showSupportWidget() {
-		$plugin_slug = $this->getPluginSlug();
-
-		$free_support_url = "https://wordpress.org/support/plugin/{$plugin_slug}";
-		$hot_support_url  = $this->plugin->get_support()->get_contacts_url();
-
-		?>
-		<div id="wbcr-clr-support-widget" class="wbcr-factory-sidebar-widget">
-			<p><strong><?php _e( 'Having Issues?', 'wbcr_factory_templates_135' ); ?></strong></p>
-			<div class="wbcr-clr-support-widget-body">
-				<p>
-					<?php _e( 'We provide free support for this plugin. If you are pushed with a problem, just create a new ticket. We will definitely help you!', 'wbcr_factory_templates_135' ); ?>
-				</p>
-				<ul>
-					<li><span class="dashicons dashicons-sos"></span>
-						<a href="<?php echo esc_url( $free_support_url ); ?>" target="_blank"
-						   rel="noopener"><?php _e( 'Get starting free support', 'wbcr_factory_templates_135' ); ?></a>
-					</li>
-					<li style="margin-top: 15px;background: #fff4f1;padding: 10px;color: #a58074;">
-						<span class="dashicons dashicons-warning"></span>
-						<?php printf( __( 'If you find a php error or a vulnerability in plugin, you can <a href="%s" target="_blank" rel="noopener">create ticket</a> in hot support that we responded instantly.', 'wbcr_factory_templates_135' ), $hot_support_url ); ?>
-					</li>
-				</ul>
-			</div>
+			</span>
 		</div>
 		<?php
 	}

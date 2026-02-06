@@ -83,9 +83,9 @@ class WIS_FeedsPage extends WIS_Page {
 		$this->scripts->localize( 'wis_feeds', [
 			'add_account_nonce'   => wp_create_nonce( 'addAccountByToken' ),
 			'wis_nonce'           => wp_create_nonce( 'addAccountByToken' ),
-			'remove_account'      => __( 'Are you sure want to delete this feed?', 'instagram-slider-widget' ),
+			'remove_account'      => __( 'Are you sure you want to delete this feed?', 'instagram-slider-widget' ),
 			'nonce'               => wp_create_nonce( 'wis_nonce' ),
-			'modal_close_confirm' => __( "You haven't finished adding the feed. Are you sure you want to close the window?", 'instagram-slider-widget' ),
+			'modal_close_confirm' => __( "Your feed hasn't been saved yet. If you close this window, your changes will be lost. Are you sure you want to close?", 'instagram-slider-widget' ),
 			'hide_show_fields'    => $this->get_hideShow_fields(),
 		] );
 	}
@@ -136,8 +136,8 @@ class WIS_FeedsPage extends WIS_Page {
 				'content'     => $this->facebook(),
 			],
 			'youtube'   => [
-				'title'       => __( 'Youtube feeds', 'instagram-slider-widget' ),
-				'description' => __( 'Manage Youtube feeds', 'instagram-slider-widget' ),
+				'title'       => __( 'YouTube feeds', 'instagram-slider-widget' ),
+				'description' => __( 'Manage YouTube feeds', 'instagram-slider-widget' ),
 				'content'     => $this->youtube(),
 			],
 		];
@@ -230,14 +230,12 @@ class WIS_FeedsPage extends WIS_Page {
 
 			if ( $feed_id ) {
 				$feeds->update_feed( $feed_id, $feed );
-				//$_SERVER['REQUEST_URI'] = esc_url(remove_query_arg( 'action' ));
-				//$_SERVER['REQUEST_URI'] = esc_url(remove_query_arg( 'feed' ));
 			} else {
 				$feeds->add_feed( $feed );
-				$_SERVER['REQUEST_URI'] = esc_url( remove_query_arg( 'action' ) );
 			}
 
-			//wp_redirect( $_SERVER['REQUEST_URI'] );
+			wp_redirect( admin_url( 'admin.php?page=feeds-wisw' ) );
+		exit;
 		}
 
 		// FORM

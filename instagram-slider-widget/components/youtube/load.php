@@ -18,3 +18,6 @@ require_once WYT_COMPONENT_DIR . '/includes/Api/load.php';
 require_once WYT_COMPONENT_DIR . "/includes/class-youtube-feed.php";
 require_once WYT_COMPONENT_DIR . "/includes/class-youtube-profiles.php";
 require_once WYT_COMPONENT_DIR . "/includes/class-youtube-widget.php";
+require_once WYT_COMPONENT_DIR . "/includes/class-youtube-pro.php";
+
+new WIS_Youtube_Pro();

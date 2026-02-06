@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Social Slider Feed
 * Plugin URI: https://cm-wp.com/instagram-slider-widget
-* Version: 2.3.1
+* Version: 2.3.2
 * Description: Shows Instagram, Facebook and YouTube responsive feeds in widgets, posts, pages, or anywhere else using shortcodes
 * Author: Themeisle
 * Author URI: https://themeisle.com
@@ -49,23 +49,6 @@ $plugin_info = [
 		],
 	],
 
-	// Настройка премиум плагина
-	'has_premium'        => true,
-	'license_settings'   => [
-		'has_updates'      => true,
-		'provider'         => 'freemius',
-		'slug'             => 'instagram-slider-widget-premium',
-		'plugin_id'        => '4272',
-		'public_key'       => 'pk_5152229a4aba03187267a8bc88874',
-		'price'            => 39,
-		'updates_settings' => [
-			'maybe_rollback'    => true, // Можно ли делать откат к предыдущей версии плагина?
-			'rollback_settings' => [
-				'prev_stable_version' => '0.0.0',
-			],
-		],
-	],
-
 	// Настройки рекламы от CreativeMotion
 	'render_adverts'     => true,
 	'adverts_settings'   => [
@@ -81,7 +64,6 @@ $plugin_info = [
 		[ 'libs/factory/bootstrap', 'factory_bootstrap_483', 'admin' ],
 		[ 'libs/factory/forms', 'factory_forms_481', 'admin' ],
 		[ 'libs/factory/pages', 'factory_pages_481', 'admin' ],
-		[ 'libs/factory/freemius', 'factory_freemius_171', 'all' ],
 		[ 'libs/factory/adverts', 'factory_adverts_160', 'admin' ],
 		[ 'libs/factory/templates', 'factory_templates_135', 'admin' ],
 		[ 'libs/factory/logger', 'factory_logger_150', 'all' ],
@@ -136,12 +118,37 @@ require_once WIS_PLUGIN_DIR . '/includes/class-profiles.php';
 require_once WIS_PLUGIN_DIR . '/includes/class-plugin.php';
 require_once WIS_PLUGIN_DIR . '/includes/class-wis-plugin-temp.php';
 
+/**
+ * Deactivate PRO plugin.
+ *
+ * @param WIS_Plugin $disable_admin_notice_obj
+ */
+function wisw_deactivate_pro_plugin( $disable_admin_notice_obj ) {
+	$pro_slug = 'instagram-slider-widget-premium/instagram-slider-widget-premium.php';
+
+	// If plugin isn't active, we stop immediately.
+	if ( ! is_plugin_active( $pro_slug ) ) {
+		return;
+	}
+
+	// Delete premium option
+	$disable_admin_notice_obj->deletePopulateOption( 'premium_package' );
+	
+	remove_action( 'plugins_loaded', 'wisw_premium_load', 20 );
+
+	// As register_deactivation_hook called, deactivate the pro plugin silently.
+	deactivate_plugins( $pro_slug, true );
+
+}
+
 try {
 
 	require_once WIS_PLUGIN_DIR . '/vendor/autoload.php';
-	new WIS_Plugin( __FILE__, array_merge( $plugin_info, [
+	$instagram_slider_widget = new WIS_Plugin( __FILE__, array_merge( $plugin_info, [
 		'plugin_version' => WIS_PLUGIN_VERSION,
 	] ) );
+
+	wisw_deactivate_pro_plugin( $instagram_slider_widget );
 } catch ( Exception $e ) {
 	// Plugin wasn't initialized due to an error
 	define( 'WIS_PLUGIN_THROW_ERROR', true );

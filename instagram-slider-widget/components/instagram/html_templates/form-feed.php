@@ -37,15 +37,9 @@ $search_for = $instance['search_for'] ?? '';
                                    class="form-label"><?php _e( 'Search Instagram for', 'instagram-slider-widget' ); ?></label>
                             <label class="form-radio form-inline">
                                 <input type="radio" id="search_for" name="search_for"
-                                       value="account" <?php checked( 'account', $search_for ); ?> />
+                                       value="account_business" <?php checked( 'account_business', empty($search_for) ? 'account_business' : $search_for ); ?> />
                                 <i class="form-icon"></i>
-								<?php _e( 'Account', 'instagram-slider-widget' ); ?>
-                            </label>
-                            <label class="form-radio form-inline">
-                                <input type="radio" id="search_for" name="search_for"
-                                       value="account_business" <?php checked( 'account_business', $search_for ); ?> />
-                                <i class="form-icon"></i>
-								<?php _e( 'Business account', 'instagram-slider-widget' ); ?>
+							<?php _e( 'Business account', 'instagram-slider-widget' ); ?>
                             </label>
                             <label class="form-radio form-inline">
                                 <input type="radio" class="" id="search_for" name="search_for"
@@ -61,34 +55,10 @@ $search_for = $instance['search_for'] ?? '';
                             </label>
 
                         </div>
-                        <div class="form-group" id="wis-feed-account"
-							<?php echo 'account' !== $search_for ? 'style="display:none;"' : ''; ?>>
-							<?php
-							if ( count( $accounts ) ) {
-								?>
-                                <label class="form-label"
-                                       for="account"><?php _e( 'Account', 'instagram-slider-widget' ); ?></label>
-                                <select id="account" class="form-select"
-                                        name="account"><?php
-									foreach ( $accounts as $acc ) {
-										$selected = $instance['account'] == $acc['username'] ? "selected='selected'" : "";
-										echo "<option value='" . esc_attr( $acc['username'] ) . "' {$selected}>" . esc_html( $acc['username'] ) . "</option>";
-									}
-									?>
-                                </select>
-								<?php
-							} else {
-								?>
-                                <label class="form-label"><?php _e( 'Account', 'instagram-slider-widget' ); ?></label>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=settings-wisw' ) ); ?>"><?php _e( 'Add account in settings', 'instagram-slider-widget' ); ?></a>
-								<?php
-							}
-							?>
-                        </div>
                         <div class="form-group" id="wis-feed-account_business"
 							<?php echo 'account_business' !== $search_for ? 'style="display:none;"' : ''; ?>>
 							<?php
-							if ( count( $accounts_business ) ) {
+							if ( ! empty( $accounts_business ) ) {
 								?>
                                 <label class="form-label"
                                        for="account_business"><?php _e( 'Business account', 'instagram-slider-widget' ); ?></label>
@@ -102,7 +72,9 @@ $search_for = $instance['search_for'] ?? '';
                                 </select>
 								<?php
 							} else {
-								echo "<a href='" . admin_url( 'admin.php?page=settings-wisw' ) . "'>" . __( 'Add account in settings', 'instagram-slider-widget' ) . "</a>";
+								?>
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=settings-wisw' ) ); ?>"><?php _e( 'Add Account in Settings', 'instagram-slider-widget' ); ?></a>
+								<?php
 							}
 							?>
                         </div>
@@ -139,7 +111,7 @@ $search_for = $instance['search_for'] ?? '';
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="form-label form-inline"
-                                       for="refresh_hour"><?php _e( 'Check for new images every:', 'instagram-slider-widget' ); ?></label>
+                                       for="refresh_hour"><?php _e( 'Check for new images every: (select interval)', 'instagram-slider-widget' ); ?></label>
                                 <div class="input-group">
                                     <input class="form-input" type="number" min="1" max="200" id="refresh_hour"
                                            name="refresh_hour"
@@ -159,7 +131,7 @@ $search_for = $instance['search_for'] ?? '';
                                        type="text" class="form-input"
                                        value="[jr_instagram id=&quot;<?php echo esc_attr( $feed_id ) ?>&quot;]"
                                        readonly="readonly" style="border:none; color:black; font-family:monospace;">
-                                <div class="jr-description"><?php _e( 'Use this shortcode in any page or post to display images with this configuration!', 'instagram-slider-widget' ) ?></div>
+                                <div class="jr-description"><?php _e( 'Use this shortcode to display images with this configuration', 'instagram-slider-widget' ) ?></div>
                             </div>
 						<?php endif; ?>
                     </div>
@@ -184,7 +156,7 @@ $search_for = $instance['search_for'] ?? '';
                             <div id="wis-field-images_number" class="form-group">
                                 <div class="input-group">
                                     <label class="form-label form-inline"
-                                           for="images_number"><?php _e( 'Count of images to show:', 'instagram-slider-widget' ); ?>
+                                           for="images_number"><?php _e( 'Number of images to display:', 'instagram-slider-widget' ); ?>
                                     </label>
                                     <div class="input-group">
                                         <input class="form-input" type="number" min="1" max="" id="images_number"
@@ -192,13 +164,6 @@ $search_for = $instance['search_for'] ?? '';
                                                value="<?php echo esc_attr( $instance['images_number'] ); ?>"/>
                                         <span class="input-group-addon"><?php _e( 'pcs', 'instagram-slider-widget' ); ?></span>
                                     </div>
-                                </div>
-                                <div class="jr-description">
-									<?php if ( ! $this->plugin->is_premium() ) {
-										_e( 'Maximum 20 images in free version.', 'instagram-slider-widget' );
-										echo " " . sprintf( __( "More in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), esc_url( $this->plugin->get_support()->get_pricing_url( true, "wis_widget_settings" ) ) );
-									}
-									?>
                                 </div>
 
                             </div>
@@ -241,13 +206,6 @@ $search_for = $instance['search_for'] ?? '';
 											echo "<option value='" . esc_attr( $key ) . "' {$selected}>" . esc_html( $option ) . "</option>\n";
 										}
 									}
-									if ( ! $this->plugin->is_premium() ) {
-										?>
-                                        <optgroup label="Available in PRO">
-                                            <option value='1' disabled="disabled">Pop Up</option>
-                                        </optgroup>
-										<?php
-									}
 									?>
                                 </select>
                             </div>
@@ -273,18 +231,12 @@ $search_for = $instance['search_for'] ?? '';
 								<?php echo 'account_business' !== $search_for ? 'style="display:none;"' : ''; ?>>
                                 <label class="form-switch" for="enable_stories">
                                     <input class="form-input" id="enable_stories" name="enable_stories" type="checkbox"
-                                           value="1" <?php echo $this->plugin->is_premium() ? checked( '1', $instance['enable_stories'] ) : ''; ?>
-										<?php echo ! $this->plugin->is_premium() ? 'disabled' : ''; ?>/>
+                                        value="1" <?php echo checked( '1', $instance['enable_stories'] ); ?>
+									/>
                                     <i class="form-icon"></i><?php _e( 'Show Stories', 'instagram-slider-widget' ); ?>
                                 </label>
                                 <div class="jr-description">
-									<?php if ( $this->plugin->is_premium() ) {
-										_e( 'Works only with business account.', 'instagram-slider-widget' );
-									} else {
-										_e( 'Available in PRO version.', 'instagram-slider-widget' );
-										echo " " . sprintf( __( "More in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), esc_url( $this->plugin->get_support()->get_pricing_url( true, "wis_widget_settings" ) ) );
-									}
-									?>
+									<?php _e( 'Works only with business account.', 'instagram-slider-widget' ); ?>
                                 </div>
                             </div>
                             <div id="wis-field-enable_ad" class="form-group">
@@ -333,17 +285,6 @@ $search_for = $instance['search_for'] ?? '';
 											$selected = ( $instance['template'] == $key ) ? "selected='selected'" : '';
 											echo "<option value='" . esc_attr( $key ) . "' {$selected}>" . esc_html( $slider ) . "</option>\n";
 										}
-									}
-									if ( ! $this->plugin->is_premium() ) {
-										?>
-                                        <optgroup label="Available in PRO">
-                                            <option value='slick_slider' disabled="disabled">Slick</option>
-                                            <option value='masonry' disabled="disabled">Masonry</option>
-                                            <option value='highlight' disabled="disabled">Highlight</option>
-                                            <option value='showcase' disabled="disabled">Shopifeed - Thumbnails</option>
-                                            <option value="masonry_lite" disabled="disabled">Masonry Lite</option>
-                                        </optgroup>
-										<?php
 									}
 									?>
                                 </select>
@@ -619,11 +560,9 @@ $search_for = $instance['search_for'] ?? '';
                 <div id="mob_tab_content_<?php echo esc_attr( $feed_id ) ?>" class="mob_settings"
                      style="display: none;">
                     <h3 style="width: 100%; text-align: center"><?php _e( 'Mobile settings', 'instagram-slider-widget' ); ?></h3>
-					<?php if ( defined( 'WISP_PLUGIN_ACTIVE' ) && $this->plugin->is_premium() ) :
-						echo apply_filters( 'wis/mob_settings', '', $this_feed, $instance, $sliders, $options_linkto, $feed_id );
-					else: ?>
-                        <h3 style="width: 100%; text-align: center"><?php _e( 'Mobile settings available only in premium version', 'instagram-slider-widget' ); ?></h3>
-					<?php endif; ?>
+                    <?php
+                    echo apply_filters( 'wis/mob_settings', '', $this_feed, $instance, $sliders, $options_linkto, $feed_id );
+					?>
                 </div>
 
             </div>

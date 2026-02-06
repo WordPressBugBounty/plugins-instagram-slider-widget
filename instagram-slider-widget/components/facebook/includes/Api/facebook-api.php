@@ -36,9 +36,8 @@ class WFB_Facebook_API {
 			$old_opts['search_string'] = $account->id;
 			$old_opts['cache_hours']   = $cache_hours;
 			$old_opts['nr_images']     = $nr_images;
-			$nr_images                 = ! \WIS_Plugin::app()->is_premium() && $nr_images > 20 ? 20 : $nr_images;
 
-			$fields = 'id,created_time,child_attachments,shares,sharedposts{message,full_picture,created_time},comments{comments_count},message,full_picture,picture,attachments{media_type,media,title,type,url}'; //,comments.summary(true)
+			$fields = 'id,created_time,child_attachments,shares,comments{comments_count},message,full_picture,picture,attachments{media_type,media,title,type,url}'; //,comments.summary(true)
 
 			if ( ! $account->is_me ) {
 				$fields .= ',likes.summary(true)';
@@ -50,10 +49,10 @@ class WFB_Facebook_API {
 				'limit'        => $nr_images,
 			];
 
-			$url      = WFB_FACEBOOK_SELF_URL . $account->id . '/feed';
-			$response = wp_remote_get( add_query_arg( $args, $url ) );
+			$url      = WFB_FACEBOOK_SELF_URL . $account->id . '/feed?' . http_build_query( $args, '', '&', PHP_QUERY_RFC3986 );
+			$response = wp_remote_get( $url );
 			if ( is_wp_error( $response ) ) {
-				return [ 'error' => __( 'Something went wrong', 'instagram-slider-widget' ) ];
+				return [ 'error' => __( 'Unable to connect to Facebook. Please check your account settings and try again.', 'instagram-slider-widget' ) ];
 			}
 			if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
 				try {
@@ -61,13 +60,13 @@ class WFB_Facebook_API {
 				} catch ( Exception $exception ) {
 					error_log( 'SSW ERROR: ' . $exception->getTraceAsString() );
 
-					return [ 'error' => __( 'API ERROR: Failed to parse data.', 'instagram-slider-widget' ) ];
+					return [ 'error' => __( 'Unable to retrieve data from the API. Please check your account connection and try again.', 'instagram-slider-widget' ) ];
 				}
 
 				update_option( $opt_name, $old_opts );
 				set_transient( $opt_name, $entry_data, $cache_hours * 60 * 60 );
 			} else {
-				return [ 'error' => __( 'Something went wrong. API error', 'instagram-slider-widget' ) ];
+				return [ 'error' => __( 'Unable to retrieve data from Facebook. Please verify your account connection or try again later.', 'instagram-slider-widget' ) ];
 			}
 		}
 

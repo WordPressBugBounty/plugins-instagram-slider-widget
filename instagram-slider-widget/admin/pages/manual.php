@@ -39,7 +39,7 @@ class Manual extends WIS_Page {
 		$this->id            = "manual";
 		$this->show_menu_tab = false;
 		$this->menu_target   = "feeds-" . $plugin->getPluginName();
-		$this->page_title    = __( 'How to get Youtube API key', 'instagram-slider-widget' );
+		$this->page_title    = __( 'How to get YouTube API key', 'instagram-slider-widget' );
 		$this->template_name = "manual";
 
 		parent::__construct( $plugin );

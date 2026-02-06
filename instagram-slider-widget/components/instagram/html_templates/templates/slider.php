@@ -36,7 +36,7 @@ $control_nav   = ( 'numberless' === $args['controls'] ) ? 'true' : 'false';
 			}
 			?>
 			<li style='border:0;'>
-				<div style='background: url(<?php echo esc_url( $image_url ); ?>) no-repeat center center; background-size: cover;'><?php echo $image_output; ?></div>
+				<div style='background: url(<?php echo esc_url( $image_url ); ?>) no-repeat center center; background-size: cover;'><?php echo wp_kses_post( $image_output ); ?></div>
 				<?php if ( $args['description'] ) { ?>
 					<div class='jr-insta-datacontainer' style=''>
 						<?php

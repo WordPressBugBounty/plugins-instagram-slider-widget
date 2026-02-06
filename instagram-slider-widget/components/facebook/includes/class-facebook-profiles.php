@@ -35,27 +35,26 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 		if ( isset( $_POST['account'] ) && ! empty( $_POST['account'] ) && isset( $_POST['_ajax_nonce'] ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 2 );
-			} else {
-				wp_verify_nonce( $_POST['_ajax_nonce'], 'addAccountByToken' );
-
-				$account = json_decode( stripslashes( $_POST['account'] ), true );
-
-				if ( ! WIS_Plugin::app()->is_premium() && $this->count_accounts() >= 1 ) {
-					wp_die( 'No premium' );
-				}
-
-				$connected_profiles                     = WIS_Plugin::app()->getOption( $this->profiles_option_name, [] );
-				$connected_profiles[ $account['name'] ] = [
-					'name'   => $account['name'],
-					'avatar' => $account['picture']['data']['url'],
-					'id'     => $account['id'],
-					'token'  => $account['access_token'],
-					'is_me'  => $account['is_me'],
-				];
-				WIS_Plugin::app()->updateOption( $this->profiles_option_name, $connected_profiles );
-
-				wp_die( 'Ok' );
 			}
+
+			// Security: Verify nonce properly
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'wfb_nonce' ) ) {
+				wp_die( -1 );
+			}
+
+			$account = json_decode( wp_unslash( $_POST['account'] ), true );
+
+			$connected_profiles                     = WIS_Plugin::app()->getOption( $this->profiles_option_name, [] );
+			$connected_profiles[ $account['name'] ] = [
+				'name'   => $account['name'],
+				'avatar' => $account['picture']['data']['url'],
+				'id'     => $account['id'],
+				'token'  => $account['access_token'],
+				'is_me'  => $account['is_me'],
+			];
+			WIS_Plugin::app()->updateOption( $this->profiles_option_name, $connected_profiles );
+
+			wp_die( 'Ok' );
 		}
 	}
 
@@ -109,7 +108,8 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 				$_SERVER['REQUEST_URI'] = str_replace( '#_', '', esc_url( remove_query_arg( 'token_error' ) ) );
 			} else {
 				if ( isset( $_GET['access_token'] ) ) {
-					$token                  = $_GET['access_token'];
+					// Security: Sanitize access token from URL
+					$token                  = sanitize_text_field( wp_unslash( $_GET['access_token'] ) );
 					$choose_account_html    = $this->update_profiles( $token );
 					$_SERVER['REQUEST_URI'] = esc_url( remove_query_arg( 'access_token' ) );
 					?>
@@ -131,7 +131,6 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 		$accounts = WIS_Plugin::app()->getPopulateOption( WIS_FACEBOOK_ACCOUNT_PROFILES_OPTION_NAME, [] );
 
 		$data = [
-			'is_premium'    => WIS_Plugin::app()->is_premium(),
 			'authorize_url' => "https://instagram.cm-wp.com/facebook?" . http_build_query( [
 					"app_id" => WIS_FACEBOOK_CLIENT_ID,
 					"state"  => $this->getSocialUrl(),

@@ -31,7 +31,7 @@ $enable_icons = $args['enable_icons'] ? "" : " no-isw-icons";
 			?>
 			<li class='<?php echo esc_attr( $data['type'] . $enable_icons ); ?>'>
 				<div style='background: url(<?php echo esc_url( $image_url ); ?>) no-repeat center center; background-size: cover;'>
-					<?php echo $image_output; ?>
+					<?php echo wp_kses_post( $image_output ); ?>
 				</div>
 			</li>
 		<?php } ?>

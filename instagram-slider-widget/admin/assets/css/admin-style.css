@@ -435,27 +435,6 @@ i.wis-shortcode-icon
 	font-size: 12px;
 }
 
-.wis-demo-shortcode span.wis_demo_pro:after
-{
-	display: inline-block;
-	position: relative;
-	content: 'PRO';
-	background: #ff5722;
-	border-radius: 4px;
-	color: #fff;
-	font-size: 10px;
-	line-height: 1;
-	font-style: normal;
-	padding: 4px 6px;
-	margin-left: 4px;
-	vertical-align: top;
-	top: 0;
-	left: 0;
-	right: auto;
-	z-index: 11;
-	cursor: pointer;
-}
-
 .wis-social-group
 {
 	font-size: 18px;

@@ -64,7 +64,7 @@ class WYT_Widget extends WP_Widget {
 		$this->feeds  = new WIS_Feeds( $this->social );
 
 		$this->defaults = [
-			'title'   => __( 'Youtube feed', 'instagram-slider-widget' ),
+			'title'   => __( 'YouTube feed', 'instagram-slider-widget' ),
 			'feed_id' => null,
 		];
 

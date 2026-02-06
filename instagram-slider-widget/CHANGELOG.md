@@ -1,3 +1,10 @@
+#####   Version 2.3.2 (2026-02-06)
+
+- Moved all PRO features to the free version
+- Removed personal Instagram account option since its no longer supported by Instagram API
+- Removed support box and simplified UI
+- Fixed issue where Instagram content by username was not fetching
+
 #####   Version 2.3.1 (2025-11-26)
 
 - Update author and remove Instagram personal account connections which is no longer supported by Meta

@@ -89,3 +89,6 @@ require_once WIG_COMPONENT_DIR . '/includes/functions.php';
 require_once WIG_COMPONENT_DIR . '/includes/class-instagram-feed.php';
 require_once WIG_COMPONENT_DIR . '/includes/class-instagram-profiles.php';
 require_once WIG_COMPONENT_DIR . '/includes/class-instagram-widget.php';
+require_once WIG_COMPONENT_DIR . '/includes/class-instagram-pro.php';
+
+new WIS_Instagram_Pro();

@@ -3,9 +3,7 @@
 
 
 $premium = "";
-if ( ! WIS_Plugin::app()->is_premium() ) {
-	$premium = " PREMIUM";
-}
+
 $demo_widgets[] = [
 	'title'                => 'Slider normal (for a sidebar)',
 	'search_for'           => '',

@@ -19,6 +19,16 @@ namespace WIS\Facebook\Includes\Api;
  * @package WIS\Facebook\Includes\Api
  */
 class WFB_Facebook_Post{
+	public $id;
+    public $message;
+	public $created_time;
+	public $shares_count;
+	public $likes_count;
+	public $comments_count;
+	public $full_picture;
+	public $shared_post;
+	public $picture;
+	public $attachments;
 
 	/**
      * @param $post

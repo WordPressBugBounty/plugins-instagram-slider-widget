@@ -15,10 +15,6 @@
 						<?php foreach ( $insta_widgets as $key => $insta_widget ) {
 							$shortcode    = "[jr_instagram id='" . esc_attr( $key ) . "']";
 							$wis_demo_pro = "";
-							if ( ! WIS_Plugin::app()->is_premium() && isset( $insta_widget['premium'] ) && $insta_widget['premium'] ) {
-								$shortcode    = '';
-								$wis_demo_pro = "wis_demo_pro";
-							}
 							if ( ! empty( $insta_widget['demo'] ) ) {
 								$demo_id = $insta_widget['demo'];
 								?>

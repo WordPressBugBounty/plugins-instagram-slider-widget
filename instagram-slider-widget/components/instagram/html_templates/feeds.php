@@ -40,9 +40,7 @@
 							</a>
 						</td>
 						<td class="wis-profile-shortcode">
-							<input id="jr_insta_shortcode" onclick="this.setSelectionRange(0, this.value.length)"
-							       type="text" class="form-input wis-shortcode-input"
-							       value="[jr_instagram id=&quot;<?php echo esc_attr($feed_id) ?>&quot;]" readonly="readonly">
+							<span id="jr_insta_shortcode" class="form-input wis-shortcode-input">[jr_instagram id=&quot;<?php echo esc_attr($feed_id) ?>&quot;]</span>
 						</td>
 						<td class="wis-profile-actions">
 							<a href="<?php echo esc_url($edit_link); ?>" class="btn btn-primary">

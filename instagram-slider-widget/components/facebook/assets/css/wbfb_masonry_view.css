@@ -109,6 +109,10 @@
     cursor: pointer !important;
 }
 
+.wbfb_masonry_post_attachment img {
+    width: 100%;
+}
+
 #wfb .wfb-icon, #wfb .wfb-reactions-count .wfb-like, #wfb-lightbox-wrapper .wfb-icon, #wfb-lightbox-wrapper .wfb-reactions-count .wfb-like {
     display: block;
     float: left;

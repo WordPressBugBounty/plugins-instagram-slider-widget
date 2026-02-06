@@ -1,7 +1,6 @@
 <?php
 /**
  * @var array $args
- * @var bool $is_premium
  * @var string $authorize_url
  * @var array $accounts
  */
@@ -9,20 +8,10 @@
 $social = $args['social'];
 ?>
 <div id="wis-add-account-button" class="">
-	<?php
-	if ( count( $accounts ) && ! $is_premium ) : ?>
-		<span class="wis-btn-facebook-account btn-instagram-account-disabled">
-			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
-		</span>
-		<span class="instagram-account-pro">
-			<?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?>
-		</span>
-	<?php else: ?>
-		<a class="wis-btn-facebook-account" target="_self" href="<?php echo esc_url( $authorize_url ); ?>" title="Add Account">
-			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
-		</a>
-		<span style="float: none; margin-top: 0;" class="spinner" id="wis-spinner"> </span>
-	<?php endif; ?>
+	<a class="wis-btn-facebook-account" target="_self" href="<?php echo esc_url( $authorize_url ); ?>" title="Add Account">
+		<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
+	</a>
+	<span style="float: none; margin-top: 0;" class="spinner" id="wis-spinner"> </span>
 </div>
 <?php
 if ( ! empty( $accounts ) ) :
@@ -34,7 +23,7 @@ if ( ! empty( $accounts ) ) :
 			<th class="wis-profile-picture"><?php echo __( 'Image', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-id"><?php echo __( 'ID', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-name"><?php echo __( 'Name', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-token"><?php echo __( 'Token', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-token"><?php echo __( 'Access Token', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-actions"><?php echo __( 'Action', 'instagram-slider-widget' ); ?></th>
 		</tr>
 		</thead>

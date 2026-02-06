@@ -10,7 +10,6 @@
  *
  * @var array $args
  * @var \YoutubeFeed\Api\Channel\YoutubeChannelItem[] $accounts
- * @var bool $is_premium
  * @var array $accounts
  */
 
@@ -24,7 +23,7 @@ $count_accounts = ! empty( $accounts ) ? count( $accounts ) : 0;
 		<div class="wyt-add-form">
 			<input type="text" name="wyt_api_key" id="wyt_api_key" class="" style="width: 550px;"
 			       value="<?php echo esc_attr( WIS_Plugin::app()->getOption( WYT_API_KEY_OPTION_NAME, '' ) ); ?>"
-			       placeholder="<?php _e( 'Youtube api key.', 'instagram-slider-widget' ) ?>">
+			       placeholder="<?php _e( 'YouTube API key', 'instagram-slider-widget' ) ?>">
 		</div>
 		<div class="wyt-add-form">
 			<input type="submit" class="wyt-btn-Youtube-account"
@@ -36,21 +35,11 @@ $count_accounts = ! empty( $accounts ) ? count( $accounts ) : 0;
 		</div>
 	</div>
 
-	<?php
-	if ( $count_accounts >= 1 && ! $is_premium ) : ?>
-		<div class="wyt-add-form">
-			<span class="instagram-account-pro"><?php echo sprintf( e__( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
-		</div>
-	<?php else: ?>
-		<div class="wis-youtube-form-row" style="margin-top: 15px;">
-			<a class="wis-btn-youtube-account" target="_self" href="#" title="Add Account">
-				<?php _e( 'Add channel', 'instagram-slider-widget' ) ?>
-			</a>
-		</div>
-		<div class="wyt-add-form">
-			<span class="instagram-account-pro"><?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?></span>
-		</div>
-	<?php endif; ?>
+	<div class="wis-youtube-form-row" style="margin-top: 15px;">
+		<a class="wis-btn-youtube-account" target="_self" href="#" title="Add Account">
+			<?php _e( 'Add channel', 'instagram-slider-widget' ) ?>
+		</a>
+	</div>
 
 </form>
 

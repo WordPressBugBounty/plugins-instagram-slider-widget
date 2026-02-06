@@ -50,7 +50,7 @@ $feed_id           = $args['instance']['id'] ?? '';
 								?>
                                 <label class="form-label"
                                        for="search"><?php _e( 'Account', 'instagram-slider-widget' ); ?></label>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=settings-wisw' ) ); ?>"><?php _e( 'Add account in settings', 'instagram-slider-widget' ); ?></a>
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=settings-wisw' ) ); ?>"><?php _e( 'Add Account in Settings', 'instagram-slider-widget' ); ?></a>
 								<?php
 							}
 							?>
@@ -58,7 +58,7 @@ $feed_id           = $args['instance']['id'] ?? '';
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="form-label form-inline"
-                                       for="refresh_hour"><?php _e( 'Check for new images every:', 'instagram-slider-widget' ); ?></label>
+                                       for="refresh_hour"><?php _e( 'Check for new images every: (select interval)', 'instagram-slider-widget' ); ?></label>
                                 <div class="input-group">
                                     <input class="form-input" type="number" min="1" max="200" id="refresh_hour"
                                            name="refresh_hour"
@@ -78,7 +78,7 @@ $feed_id           = $args['instance']['id'] ?? '';
                                        type="text" class="form-input"
                                        value="[cm_youtube_feed id=&quot;<?php echo esc_attr( $feed_id ); ?>&quot;]"
                                        readonly="readonly" style="border:none; color:black; font-family:monospace;">
-                                <div class="jr-description"><?php _e( 'Use this shortcode in any page or post to display images with this widget configuration!', 'instagram-slider-widget' ) ?></div>
+                                <div class="jr-description"><?php _e( 'Use this shortcode to display images with this widget configuration', 'instagram-slider-widget' ) ?></div>
                             </div>
 						<?php endif; ?>
                     </div>
@@ -104,7 +104,7 @@ $feed_id           = $args['instance']['id'] ?? '';
                                 <div id="wis-field-images_number" class="form-group">
                                     <div class="input-group">
                                         <label class="form-label form-inline"
-                                               for="images_number"><?php _e( 'Count of images to show:', 'instagram-slider-widget' ); ?>
+                                               for="images_number"><?php _e( 'Number of images to display:', 'instagram-slider-widget' ); ?>
                                         </label>
                                         <div class="input-group">
                                             <input class="form-input" type="number" min="1" max=""
@@ -113,14 +113,6 @@ $feed_id           = $args['instance']['id'] ?? '';
                                             <span class="input-group-addon"><?php _e( 'pcs', 'instagram-slider-widget' ); ?></span>
                                         </div>
                                     </div>
-                                    <div class="jr-description">
-										<?php if ( ! $this->plugin->is_premium() ) {
-											_e( 'Maximum 20 images in free version.', 'instagram-slider-widget' );
-											echo " " . sprintf( __( "More in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), $this->plugin->get_support()->get_pricing_url( true, "wis_widget_settings" ) );
-										}
-										?>
-                                    </div>
-
                                 </div>
                                 <div id="wis-field-words_in_caption" class="form-group">
                                     <div class="input-group">
@@ -237,11 +229,9 @@ $feed_id           = $args['instance']['id'] ?? '';
                     <div id="mob_tab_content_<?php echo esc_attr( $feed_id ) ?>" class="mob_settings"
                          style="display: none;">
                         <h3 style="width: 100%; text-align: center"><?php _e( 'Mobile settings', 'instagram-slider-widget' ); ?></h3>
-						<?php if ( defined( 'WISP_PLUGIN_ACTIVE' ) && $this->plugin->is_premium() ) :
-							echo apply_filters( 'wis/youtube/mob_settings', '', $this, $instance, $sliders, $options_linkto, $feed_id );
-						else: ?>
-                            <h3 style="width: 100%; text-align: center"><?php _e( 'Mobile settings available only in premium version', 'instagram-slider-widget' ); ?></h3>
-						<?php endif; ?>
+						<?php
+                        echo apply_filters( 'wis/youtube/mob_settings', '', $this, $instance, $sliders, $options_linkto, $feed_id );
+						?>
                     </div>
                 </div>
 

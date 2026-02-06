@@ -425,29 +425,6 @@
 	color: #000;
 }
 
-.purchase-premium
-{
-	float: right;
-	position: relative;
-	top: -11px;
-	left: 8px;
-	text-decoration: none;
-	font-weight: bold;
-	background: #fffaea;
-	padding: 0px;
-	border-radius: 4px;
-	outline: none;
-	margin-top: 4px;
-	box-shadow: 0 0 8px #fddf67;
-}
-
-.purchase-premium .fa
-{
-	position: relative;
-	margin-right: 3px;
-	margin-left: 3px;
-}
-
 /* 
 * Manual Trial Activation
 */

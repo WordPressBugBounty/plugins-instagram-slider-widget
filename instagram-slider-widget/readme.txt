@@ -1,114 +1,95 @@
-=== Social Slider Feed ===
+=== Social Slider Feed: Instagram, Facebook and YouTube Feeds ===
 Contributors: themeisle
-Tags: instagram, instagram feed, instagram gallery, instagram photos, Instagram widget
-Requires at least: 5.6
+Tags: instagram feed, facebook feed, youtube feed, instagram gallery, social feed
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display Instagram, Facebook and YouTube feeds in widgets, posts, pages, or anywhere else using shortcodes
+Display Instagram, Facebook and YouTube feeds in widgets, posts, pages, or anywhere else on your website.
 
 == Description ==
-= Latest update includes refreshed interface. No addons for each social network anymore! Instagram, Facebook, YouTube and TikTok feeds are available all in one plugin.   =
 
-== Important ==
-The plugin has moved to the new Instagram Basic Display API.
-To make your widgets work again, reconnect your instagram accounts in the plugin settings. [Read more about the changes](https://cm-wp.com/important-update-social-slider-widget)
+Social Slider Feed lets you easily display Instagram, Facebook, and YouTube feeds anywhere on your WordPress site. Create responsive sliders, grids, masonry layouts and more using widgets or shortcodes, with full control over layout, spacing, image sizes, and ordering.
+
+Designed for fast setup and maximum flexibility, Social Slider Feed helps you keep your website engaging by automatically showcasing your latest social content.
 
 ### Features ###
-* Easy setup. Just create a widget with the necessary settings and add it anywhere on your website using shortcodes
-* Display Images in Slider, Thumbnails, Masonry or Highlights.
-* Authorize several Instagram accounts and show multiple feeds simultaneously with no limitations.
-* Mobile version settings are separate, so you can set up different layout on different devices and it will look great.
-* Flexible layout settings. Customize the size, the number of images and columns, image spacing and much more!
-* Show thumbnails, medium or full-size images from your feeds
-* Link images to user profile, image URL, attachment URL, custom URL or none или показывайте из во всплывющем окне.
-* Sort images Randomly, Popularity, Date
-* Customize the display order by date, popularity or random
-* Show or hide the account title and icon.
-* For more info visit [cm-wp.com](https://cm-wp.com/instagram-slider-widget/)
 
-https://youtu.be/7EQirSL0xm4
+- Display Instagram, Facebook, and YouTube feeds anywhere using widgets or shortcodes
+- Support for multiple accounts and multiple feeds at the same time
+- Multiple layout options: slider, grid, masonry, thumbnails, and more
+- Fully responsive with separate layout settings for desktop and mobile
+- Show images and videos in a built-in lightbox without leaving your site
+- Display post captions
+- Sort posts by date, popularity, or randomly
+- Show or hide account name and social icons
+- Fast setup with intuitive settings and one-click account authorization
 
-### Benefits ###
-* Increase your visitors; engagement. Get more followers on your Instagram account
-* Time-saving. You no longer need to post fresh images and entries on the website. Just upload them on Instagram, and your website visitors will know about it instantly
-* A new way of posting news. Flexible settings for widget display templates give your content a seamless and attractive view on any website design
-* Keep up your website. Post news on Instagram more often, and Social Slider Feed will take care of the rest
-* Intuitive settings. It will only take 10 seconds to configure the widget and get the content on your website; no need to authorize on Instagram or handle tokens. And you can authorize your account in one click!
+### How It Works ###
 
-### PRO Version ###
-To maintain the free version and provide prompt, effective &amp; free support, we offer the Pro version. 
-In the Pro version, you can:
-* **authorize several accounts and display multiple feeds simultaneously;
-* **display how many likes and comments each post has;**
-* **create carousels of posts;**
-* **use Masonry or Highlight for feeds;**
-* **display captions for images and videos;**
-* **View the photos and videos from your feed in a beautiful pop-up lightbox which allows users to experience your content without leaving your site;**
-* **display description, comments of the video in Pop Up;**
-Learn more about the [Pro version](https://cm-wp.com/instagram-slider-widget) or watch the [demo](https://cm-wp.com/instagram-slider-widget/#demos).
+1. Connect your Instagram, Facebook, or YouTube account from the plugin settings
+2. Create a feed and customize its layout and display options
+3. Add it to your site using a widget or shortcode
 
-### Feedback and support ###
-Our goal is to create a simple yet powerful plugin – customized and multifunctional, with prompt and helpful support. For any difficulties or questions about the setup, open a ticket on the [support forum](https://cm-wp.com/support) and get support in no time.
+### Support
 
-### Why do you need it? ###
-* Increase your visitors&#39; engagement. Get more followers on your Instagram account.
-* Time-saving. You no longer need to post fresh images and entries on the website. Just upload them on Instagram, and your website visitors will know about it instantly.
-* A new way of posting news. Flexible settings for widget display templates give your content a seamless and attractive view on any website design.
-* Keep up your website. Post news on Instagram more often, and Social Slider Feed will take care of the rest.
-* Intuitive settings. It will only take 10 seconds to configure the widget and get the content on your website; no need to authorize on Instagram or handle tokens. And you can authorize your account in one click!
-* Great user support.
+We’re here to help. Feel free to open a new thread on the [Support Forum](https://wordpress.org/support/plugin/instagram-slider-widget/).
 
-= If you like this plugin. Rate it =
+### Useful Resources
 
-== Installation ==
-
-= Installation =
-1. Upload `instagram-slider-widget` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the \'Plugins\' menu in WordPress
-3. Go to Appearance > Widgets and drag \'Social Slider Feed\' to your sidebar
-4. Update the settings in the widget: Instagram Username, Images Layout, Number of Images to show, Check for new images hours
+- If you like this plugin, you’re sure to love [our other plugins](https://themeisle.com/wordpress-plugins/) as well.
+- Our blog is a great place to [learn more about WordPress](https://themeisle.com/blog/).
+- Get the most out of your website with our helpful [WordPress YouTube Tutorials](https://youtube.com/playlist?list=PLmRasCVwuvpSep2MOsIoE0ncO9JE3FcKP).
 
 == Frequently Asked Questions ==
 
-= Images from instagram are no longer displayed in the widget =
-If you use your account in the widget, go to the plugin settings and reconnect your instagram account.
-If you don't use an account in the widget, go to the plugin settings and connect your instagram account.
+= Images from Instagram are no longer displayed in the widget =
+Go to the plugin settings and reconnect your instagram account.
+Then open the widget settings and select the newly added account.
 
-= If you see a message 'Instagram requires authorization to view a user profile. Use autorized account in widget settings' =
-Go to the plugin settings and add an instagram account (click "Add account"), then go to the widget settings and select the added account.
+= If you see the message “Instagram requires authorization to view a user profile. Use an authorized account in the widget settings” =
+Go to the plugin settings and add an Instagram account by clicking Add account.
+Then open the widget settings and select the newly added account.
 
 = If you see a message 'No images found' =
-If you use your account in the widget, go to the plugin settings and reconnect your instagram account.
-If you don't use an account in the widget, go to the plugin settings and add an instagram account (click "Add account"), then go to the widget settings and select the added account.
+Go to the plugin settings and reconnect your instagram account.
 
-== Translations ==
-<ul>
-<li>English (default), always included</li>
-<li>Russian</li>
-<li>Dutch — big thanks to @webepc, @psmits1567</li>
-<li>Swedish — big thanks to @elbogen, @webbmasterpianise</li>
-<li>Portuguese (Brazil) — big thanks to @eberton-moraes</li>
-</ul>
-<p>We are very need for your help with <a href="https://translate.wordpress.org/projects/wp-plugins/instagram-slider-widget/" rel="nofollow ugc">translating the Social Slider Feed plugin</a> into your native language. We want to make it international and understandable for everyone. Please contact us via email inside the plugin, or create a topic on our <a href="https://wordpress.org/support/plugin/instagram-slider-widget">support forum</a> if you can help with the translations. In exchange for your help, we will give you better support and our premium plugins absolutely free!</p>
+= Does this plugin support multiple social networks at the same time? =
+Yes. You can create and display multiple Instagram, Facebook, and YouTube feeds on the same site, each with its own layout and settings.
 
+== Installation ==
+
+1. In your WordPress admin, go to **Plugins > Add New**
+2. In the Search field, type **"Social Slider Feed"**
+3. Under "Social Slider Feed" by Themeisle, click the **Install Now** link
+4. Once the process is complete, click the **Activate Plugin** link
 
 == Screenshots ==
-1. Authorize several accounts and display multiple feeds simultaneously
-2. Display Instagram feeds in widgets, posts, pages, or anywhere else using shortcodes
-3. Create carousels of posts
-4. No API Key Needed. Show Instagram feeds on your website without authorization. Just enter a username and see the result
-5. Normal slider
-6. Thumbnail
-7. Thumbnail without border
-8. Slick slider
-9. Masonry
-10. Highlight
+1. Social profile settings
+2. List of social feeds
+3. Instagram feed settings
+4. Facebook feed settings
+5. YouTube feed settings
+6. Normal slider layout
+7. Thumbnail layout
+8. Thumbnail without border layout
+9. Slick slider layout
+10. Masonry layout
+11. Highlight layout
 
 == Changelog ==
+
+#####   Version 2.3.2 (2026-02-06)
+
+- Moved all PRO features to the free version
+- Removed personal Instagram account option since its no longer supported by Instagram API
+- Removed support box and simplified UI
+- Fixed issue where Instagram content by username was not fetching
+
+
+
 
 #####   Version 2.3.1 (2025-11-26)
 

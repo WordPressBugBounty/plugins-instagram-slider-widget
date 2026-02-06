@@ -74,9 +74,6 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 
 			// Инициализация скриптов для бэкенда
 			$this->admin_scripts();
-
-			//Подключение файла проверки лицензии
-			require WIS_PLUGIN_DIR . '/admin/ajax/check-license.php';
 		} else {
 			$this->front_scripts();
 		}
@@ -124,7 +121,6 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 	private function register_pages() {
 		self::app()->registerPage( 'WIS_FeedsPage', WIS_PLUGIN_DIR . '/admin/pages/feeds.php' );
 		self::app()->registerPage( 'WIS_ProfilesPage', WIS_PLUGIN_DIR . '/admin/pages/profiles.php' );
-		self::app()->registerPage( 'WIS_LicensePage', WIS_PLUGIN_DIR . '/admin/pages/license.php' );
 		self::app()->registerPage( 'WIS_LogPage', WIS_PLUGIN_DIR . '/admin/pages/log.php' );
 		self::app()->registerPage( 'Manual', WIS_PLUGIN_DIR . '/admin/pages/manual.php' );
 
@@ -195,7 +191,7 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 			$account_nonce = json_encode( [ 'nonce' => wp_create_nonce( "addAccountByToken" ) ] );
 			$wis_nonce     = json_encode( [
 				'nonce'          => wp_create_nonce( 'wis_nonce' ),
-				'remove_account' => __( 'Are you sure want to delete this account?', 'instagram-slider-widget' ),
+				'remove_account' => __( 'Are you sure you want to delete this account?', 'instagram-slider-widget' ),
 			] );
 			wp_add_inline_script( 'jr-insta-admin-script', "var add_account_nonce = $account_nonce; var wis = $wis_nonce;" );
 			*/
@@ -205,21 +201,6 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 
 	public function enqueue_assets() {
 
-	}
-
-	/**
-	 * Метод проверяет активацию премиум плагина и наличие действующего лицензионного ключа
-	 *
-	 * @return bool
-	 */
-	public function is_premium() {
-
-		if ( $this->premium->is_active() && $this->premium->is_activate() //&& is_plugin_active( "{$this->premium->get_setting('slug')}/{$this->premium->get_setting('slug')}.php" )
-		) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**

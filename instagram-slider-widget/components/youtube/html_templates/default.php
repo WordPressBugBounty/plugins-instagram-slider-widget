@@ -29,7 +29,7 @@ $yt_link = "https://www.youtube.com/watch?v=";
 	<?php foreach ( $videos as $video ): ?>
 		<?php echo 'yt_link' == $args['yimages_link'] ? sprintf( '<a href="%s%s" target="_blank" style="text-decoration: none;">', $yt_link, $video->id->videoId ) : '' ?>
         <div class="wyoutube-video-container" data-remodal-target="<?php echo esc_attr( $video->id->videoId ) ?>"
-             style="margin-top: 10px; width: <?php echo $width - 2 ?>%; <?php echo 'ypopup' == $args['yimages_link'] ? 'cursor: pointer' : '' ?> ">
+             style="margin-top: 10px; width: <?php echo esc_attr( $width - 2 ) ?>%; <?php echo 'ypopup' == $args['yimages_link'] ? 'cursor: pointer' : '' ?> ">
             <img src="<?php echo esc_url( $video->snippet->thumbnails->medium->url ) ?>" alt="">
             <div class="wyoutuve-video-title ellipsis-2-lines">
 				<?php echo esc_html( $video->snippet->title ); ?>

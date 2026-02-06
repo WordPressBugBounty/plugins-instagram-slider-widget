@@ -173,6 +173,7 @@ abstract class WIS_Feed {
 	 * @return false|string
 	 */
 	protected function render_template( $template_name, $args ) {
+		$i              = 0;
 		$path           = '';
 		$path_component = $this->component_dir . "/html_templates/$template_name.php";
 		if ( file_exists( $path_component ) ) {

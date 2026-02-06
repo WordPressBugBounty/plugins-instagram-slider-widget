@@ -42,33 +42,35 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 		if ( isset( $_POST['account'] ) && ! empty( $_POST['account'] ) && isset( $_POST['_ajax_nonce'] ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 2 );
-			} else {
-				wp_verify_nonce( $_POST['_ajax_nonce'], 'addAccountByToken' );
-
-				$account      = json_decode( stripslashes( $_POST['account'] ), true );
-				$user_profile = [];
-				$user_profile = apply_filters( 'wis/account/profiles', $user_profile, true );
-
-				if ( ! WIS_Plugin::app()->is_premium() && $this->count_accounts() >= 1 ) {
-					wp_die( 'No premium' );
-				}
-
-				$user_profile[ $account['username'] ] = $account;
-				WIS_Plugin::app()->updateOption( 'account_profiles_new', $user_profile );
-
-				wp_die( 'Ok' );
 			}
+
+			// Security: Verify nonce properly
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'wig_nonce' ) ) {
+				wp_die( -1 );
+			}
+
+			$account      = json_decode( wp_unslash( $_POST['account'] ), true );
+			$user_profile = [];
+			$user_profile = apply_filters( 'wis/account/profiles', $user_profile, true );
+
+			$user_profile[ $account['username'] ] = $account;
+			WIS_Plugin::app()->updateOption( 'account_profiles_new', $user_profile );
+
+			wp_die( 'Ok' );
 		} elseif ( isset( $_POST['token'] ) && ! empty( $_POST['token'] ) && isset( $_POST['_ajax_nonce'] ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 2 );
-			} else {
-				wp_verify_nonce( $_POST['_ajax_nonce'], 'addAccountByToken' );
-
-				$token = $_POST['token'];
-				$this->update_account_profiles( $token );
-
-				wp_die( '1' );
 			}
+
+			// Security: Verify nonce properly
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ajax_nonce'] ) ), 'wig_nonce' ) ) {
+				wp_die( -1 );
+			}
+
+			$token = sanitize_text_field( wp_unslash( $_POST['token'] ) );
+			$this->update_account_profiles( $token );
+
+			wp_die( '1' );
 		}
 	}
 
@@ -173,10 +175,6 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 				$user_profile = [];
 				$user_profile = apply_filters( 'wis/account/profiles', $user_profile );
 
-				if ( ! WIS_Plugin::app()->is_premium() && $this->count_accounts() >= 1 ) {
-					return [];
-				}
-
 				$user_profile[ $user['username'] ] = $user;
 				WIS_Plugin::app()->updateOption( WIG_PROFILES_OPTION, $user_profile );
 
@@ -220,7 +218,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 		if ( isset( $_GET['tab'] ) && 'instagram' === $_GET['tab'] ) {
 			if ( isset( $_GET['type'] ) && 'business' === $_GET['type'] ) {
 				if ( isset( $_GET['access_token'] ) ) {
-					$token                  = $_GET['access_token'];
+					// Security: Sanitize access token from URL
+					$token                  = sanitize_text_field( wp_unslash( $_GET['access_token'] ) );
 					$result                 = $this->update_account_profiles( $token, true );
 					$_SERVER['REQUEST_URI'] = esc_url_raw( remove_query_arg( 'access_token' ) );
 					?>
@@ -229,7 +228,7 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 							Choose Account:
 						</div>
 						<div class="wis_modal_content">
-							<?php echo esc_html( $result[0] ) ?? ''; ?>
+							<?php echo wp_kses_post( $result[0] ? $result[0] : '' ); ?>
 						</div>
 					</div>
 					<div id="wis_modal_overlay" class="wis_modal_overlay"></div>
@@ -238,13 +237,14 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 				}
 			} else {
 				if ( isset( $_GET['access_token'] ) ) {
-					$token                  = $_GET['access_token'];
+					// Security: Sanitize access token from URL
+					$token                  = sanitize_text_field( wp_unslash( $_GET['access_token'] ) );
 					$result                 = $this->update_account_profiles( $token );
 					$_SERVER['REQUEST_URI'] = str_replace( '#_', '', esc_url_raw( remove_query_arg( 'access_token' ) ) );
 				}
 			}
 		} elseif ( isset( $_GET['token_error'] ) ) {
-			$token_error = wp_strip_all_tags( $_GET['token_error'] );
+			$token_error = wp_strip_all_tags( wp_unslash( $_GET['token_error'] ) );
 			$errors[]    = $token_error;
 			//$_SERVER['REQUEST_URI'] = str_replace( '#_', '', esc_url_raw( remove_query_arg( 'token_error' ) ) );
 		}
@@ -265,7 +265,6 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 		$accounts_business = WIS_Plugin::app()->getPopulateOption( WIG_BUSINESS_PROFILES_OPTION, [] );
 
 		$data   = [
-			'is_premium'              => WIS_Plugin::app()->is_premium(),
 			'authorize_url_instagram' => $authorize_url_instagram,
 			'authorize_url_business'  => $authorize_url_business,
 			'accounts'                => $accounts,

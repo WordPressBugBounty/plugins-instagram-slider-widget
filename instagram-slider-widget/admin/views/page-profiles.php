@@ -14,7 +14,7 @@ $socials = $socials ?? [];
                 <p><?php echo esc_html( $social['description'] ); ?></p>
             </div>
             <div class="wisw-social-content">
-				<?php echo $social['content']; ?>
+				<?php echo wp_kses_post( $social['content'] ); ?>
             </div>
         </div>
 	<?php endforeach; ?>

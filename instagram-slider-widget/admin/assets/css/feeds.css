@@ -313,3 +313,15 @@ input.form-input[type="number"] {
     box-shadow: none !important;
 }
 
+.wis-profile-shortcode {
+    text-align: start;
+    align-content: center;
+}
+
+.wis-profile-shortcode .form-input {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+}

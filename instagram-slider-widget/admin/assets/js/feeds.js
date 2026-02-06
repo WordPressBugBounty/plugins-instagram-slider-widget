@@ -270,20 +270,6 @@
             showSearchForSetting(search_for.val());
 
             switch (search_for.val()) {
-                case 'account':
-                    hideSelector(search_for, 'select[id$="images_link"] option[value="user_url"]');
-                    hideSelector(search_for, 'select[id$="images_link"] option[value="attachment"]');
-                    hideSelector(search_for, 'select[id$="description"] option[value="username"]');
-                    hideSelector(search_for, 'select[id$="orderby"] option[value="popular-ASC"]');
-                    hideSelector(search_for, 'select[id$="orderby"] option[value="popular-DESC"]');
-
-                    hideField(search_for, "blocked_users");
-                    hideField(search_for, "show_feed_header");
-                    hideField(search_for, "enable_stories");
-                    showField(search_for, "blocked_words");
-
-                    img_to_show.animate({opacity: 'show', height: 'show'}, 200);
-                    break;
                 case 'account_business':
                     hideSelector(search_for, 'select[id$="images_link"] option[value="user_url"]');
                     hideSelector(search_for, 'select[id$="images_link"] option[value="attachment"]');

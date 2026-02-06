@@ -1,7 +1,6 @@
 <?php
 /**
  * @var array $args
- * @var bool $is_premium
  * @var string $authorize_url_instagram
  * @var string $authorize_url_business
  * @var array $accounts
@@ -14,20 +13,10 @@ $count_accounts = count( $accounts ) + count( $accounts_business );
 ?>
 <div><?php echo implode( '', $errors ); ?></div>
 <div id="wis-add-account-button" class="">
-	<?php
-	if ( $count_accounts >= 1 && ! $is_premium ) : ?>
-		<span class="wis-btn-instagram-account-disabled btn-instagram-account-disabled">
-           <?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
-        </span>
-		<span class="instagram-account-pro">
-            <?php echo sprintf( __( "More accounts in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), WIS_Plugin::app()->get_support()->get_pricing_url( true, "wis_settings" ) ); ?>
-        </span>
-	<?php else: ?>
-		<a class="wis-btn-instagram-account" target="_self" href="#" title="Add Account">
-			<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
-		</a>
-		<span style="float: none; margin-top: 0;" class="spinner" id="wis-spinner"> </span>
-	<?php endif; ?>
+	<a class="wis-btn-instagram-account" target="_self" href="#" title="Add Account">
+		<?php _e( 'Add Account', 'instagram-slider-widget' ) ?>
+	</a>
+	<span style="float: none; margin-top: 0;" class="spinner" id="wis-spinner"> </span>
 </div>
 <!-- Personal accounts -->
 <?php
@@ -40,7 +29,7 @@ if ( count( $accounts ) ) :
 			<th class="wis-profile-picture"><?php echo __( 'Image', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-id"><?php echo __( 'ID', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-name"><?php echo __( 'User', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-token"><?php echo __( 'Token', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-token"><?php echo __( 'Access Token', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-actions"><?php echo __( 'Action', 'instagram-slider-widget' ); ?></th>
 		</tr>
 		</thead>
@@ -93,7 +82,7 @@ if ( count( $accounts_business ) ) :
 			<th class="wis-profile-picture"><?php echo __( 'Image', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-id"><?php echo __( 'ID', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-name"><?php echo __( 'User', 'instagram-slider-widget' ); ?></th>
-			<th class="wis-profile-token"><?php echo __( 'Token', 'instagram-slider-widget' ); ?></th>
+			<th class="wis-profile-token"><?php echo __( 'Access Token', 'instagram-slider-widget' ); ?></th>
 			<th class="wis-profile-action"><?php echo __( 'Action', 'instagram-slider-widget' ); ?></th>
 		</tr>
 		</thead>

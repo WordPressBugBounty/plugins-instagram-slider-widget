@@ -57,18 +57,18 @@ class WIS_Facebook_Feed extends WIS_Feed {
 	 */
 	protected function setDefaults() {
 		$this->templates = apply_filters( 'wis/facebook/sliders', [
-			'masonry' => 'Masonry',
+			'masonry' => __( 'Masonry', 'instagram-slider-widget' ),
 		] );
 
 		$this->linkto = apply_filters( 'wis/facebook/options/link_to', [
-			'fb_popup' => 'Popup',
-			'fb_link'  => 'Facebook link',
-			'fb_none'  => 'None',
+			'fb_popup' => __( 'Popup', 'instagram-slider-widget' ),
+			'fb_link'  => __( 'Facebook link', 'instagram-slider-widget' ),
+			'fb_none'  => __( 'None', 'instagram-slider-widget' ),
 		] );
 
 		$this->defaults = [
 			'id'                 => null,
-			'title'              => 'Facebook feed',
+			'title'              => __( 'Facebook feed', 'instagram-slider-widget' ),
 			'show_feed_header'   => 0,
 			'template'           => 'masonry',
 			'account'            => '',
@@ -238,13 +238,13 @@ class WIS_Facebook_Feed extends WIS_Feed {
 			usort( $account_posts, [ $this, $func ] );
 		}
 
-		$args['posts'] = $account_posts;
+		$args['posts'] = ! empty( $account_posts ) ? $account_posts : array();
 
 		if ( $args['show_feed_header'] ) {
 			$args['account'] = $account;
 		}
 
-		if ( 'fb_popup' == $args['fbimages_link'] && WIS_Plugin::app()->is_premium() ) {
+		if ( 'fb_popup' == $args['fbimages_link'] ) {
 			$this->popup_script_enqueue();
 			$args['account'] = $account;
 			$output         .= $this->render_template( 'popup', $args );

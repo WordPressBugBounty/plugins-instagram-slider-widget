@@ -13,6 +13,10 @@ namespace WIS\Facebook\Includes\Api;
  * @package WIS\Facebook\Includes\Api
  */
 class WFB_Post_Attachment{
+    public $media_type;
+    public $media;
+	public $type;
+	public $url;
 
     /**
      * @param $attachments
@@ -21,10 +25,10 @@ class WFB_Post_Attachment{
      */
     public function get_attachment_from_object($attachments)
     {
-        $this->media_type = $attachments->media_type;
-        $this->media = $attachments->media;
-        $this->type = $attachments->type;
-        $this->url = $attachments->url;
+        $this->media_type = isset( $attachments->media_type ) ? $attachments->media_type : '';
+        $this->media = isset( $attachments->media ) ? $attachments->media : '';
+        $this->type = isset( $attachments->type ) ? $attachments->type : '';
+        $this->url = isset( $attachments->url ) ? $attachments->url : '';
 
         return $this;
     }

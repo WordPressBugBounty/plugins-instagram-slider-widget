@@ -121,19 +121,19 @@ class WIS_ProfilesPage extends WIS_Page {
 
 		$wyt = json_encode( [
 			'nonce'          => wp_create_nonce( 'wyt_nonce' ),
-			'remove_account' => __( 'Are you sure want to delete this account?', 'instagram-slider-widget' ),
+			'remove_account' => __( 'Are you sure you want to delete this account?', 'instagram-slider-widget' ),
 		] );
 		wp_add_inline_script( 'wyoutube-admin-script', "var wyt = $wyt;" );
 
 		$wfb = json_encode( [
 			'nonce'          => wp_create_nonce( 'wfb_nonce' ),
-			'remove_account' => __( 'Are you sure want to delete this account?', 'instagram-slider-widget' ),
+			'remove_account' => __( 'Are you sure you want to delete this account?', 'instagram-slider-widget' ),
 		] );
 		wp_add_inline_script( 'wfacebook-admin-script', "var wfb = $wfb;" );
 
 		$wig = json_encode( [
 			'nonce'          => wp_create_nonce( 'wig_nonce' ),
-			'remove_account' => __( 'Are you sure want to delete this account?', 'instagram-slider-widget' ),
+			'remove_account' => __( 'Are you sure you want to delete this account?', 'instagram-slider-widget' ),
 		] );
 		wp_add_inline_script( 'winstagram-admin-script', "var wig = $wig;" );
 	}
@@ -185,8 +185,8 @@ class WIS_ProfilesPage extends WIS_Page {
 				'content'     => isset( $this->facebook ) ? $this->facebook->content() : '',
 			],
 			'youtube'   => [
-				'title'       => __( 'Youtube', 'instagram-slider-widget' ),
-				'description' => __( 'Manage Youtube accounts', 'instagram-slider-widget' ),
+				'title'       => __( 'YouTube', 'instagram-slider-widget' ),
+				'description' => __( 'Manage YouTube accounts', 'instagram-slider-widget' ),
 				'content'     => isset( $this->youtube ) ? $this->youtube->content() : '',
 			],
 		];

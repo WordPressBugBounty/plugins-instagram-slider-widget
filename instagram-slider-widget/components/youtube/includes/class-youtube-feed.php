@@ -56,17 +56,17 @@ class WIS_Youtube_Feed extends WIS_Feed {
 	 */
 	protected function setDefaults() {
 		$this->templates = apply_filters( 'wis/youtube/sliders', [
-			"default" => 'Default',
+			"default" => __( 'Default', 'instagram-slider-widget' ),
 		] );
 
 		$this->linkto = apply_filters( 'wis/youtube/options/link_to', [
-			"yt_link"    => 'Youtube link',
-			"custom_url" => 'Custom URL',
-			"none"       => 'None',
+			"yt_link"    => __( 'YouTube link', 'instagram-slider-widget' ),
+			"custom_url" => __( 'Custom URL', 'instagram-slider-widget' ),
+			"none"       => __( 'None', 'instagram-slider-widget' ),
 		] );
 
 		$this->defaults = [
-			'title'            => 'Youtube feed',
+			'title'            => __( 'YouTube feed', 'instagram-slider-widget' ),
 			'search'           => '',
 			'refresh_hour'     => 5,
 			'blocked_words'    => '',
@@ -200,8 +200,6 @@ class WIS_Youtube_Feed extends WIS_Feed {
 			$old_opts['cache_hours']   = $cache_hours;
 			$old_opts['images_number'] = $images_number;
 
-			$images_number = ! WIS_Plugin::app()->is_premium() && $images_number > 20 ? 20 : $images_number;
-
 			$response = $this->api->getVideos( $search['search'], $images_number, $search['request_by'] );
 			//$response = new \YoutubeFeed\Api\Video\YoutubeVideosResponse('{"kind":"youtube#searchListResponse","etag":"hXs_uL18ouAw3nGoc9-If1nP4fA","nextPageToken":"CAUQAA","regionCode":"RU","pageInfo":{"totalResults":102,"resultsPerPage":5},"items":[{"kind":"youtube#searchResult","etag":"TOnHNzr7OAV_KWMqm_GSriLU5NI","id":{"kind":"youtube#video","videoId":"S93c2zix5L4"},"snippet":{"publishedAt":"2019-08-28T08:54:23Z","channelId":"UCDLBW2M4KsUF7A7aHT8mxHw","title":"\u00ab\u0416\u0438\u0432\u043e\u0435\u00bb. \u041e\u0431\u0437\u043e\u0440 \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0433\u043e \u0426\u0438\u043d\u0438\u043a\u0430\u00bb","description":"https:\/\/www.patreon.com\/user?u=5206451 \u2014 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430 \u043d\u0430 \u041f\u0430\u0442\u0440\u0435\u043e\u043d\u0435 http:\/\/redcynic.com https:\/\/vk.com\/public_redcynic - \u0433\u0440\u0443\u043f\u043f\u0430 \u00ab\u0412 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0435\u00bb \u041d\u0435\u0442 \u043f\u0440\u0435\u0434\u0435\u043b\u0430 ...","thumbnails":{"default":{"url":"https:\/\/i.ytimg.com\/vi\/S93c2zix5L4\/default.jpg","width":120,"height":90},"medium":{"url":"https:\/\/i.ytimg.com\/vi\/S93c2zix5L4\/mqdefault.jpg","width":320,"height":180},"high":{"url":"https:\/\/i.ytimg.com\/vi\/S93c2zix5L4\/hqdefault.jpg","width":480,"height":360}},"channelTitle":"Red Cynic","liveBroadcastContent":"none","publishTime":"2019-08-28T08:54:23Z"}},{"kind":"youtube#searchResult","etag":"jvhpQC20dPda3rXtdKVDY0cB8co","id":{"kind":"youtube#video","videoId":"dW5O5sBUdpE"},"snippet":{"publishedAt":"2017-02-18T12:02:29Z","channelId":"UCDLBW2M4KsUF7A7aHT8mxHw","title":"\u00ab\u0427\u0443\u0436\u043e\u0439 \u043f\u0440\u043e\u0442\u0438\u0432 \u0425\u0438\u0449\u043d\u0438\u043a\u0430\u00bb. \u041e\u0431\u0437\u043e\u0440 \u00ab\u041a\u0440\u0430\u0441\u043d\u043e\u0433\u043e \u0426\u0438\u043d\u0438\u043a\u0430\u00bb","description":"https:\/\/www.patreon.com\/user?u=5206451 \u2014 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430 \u043d\u0430 \u041f\u0430\u0442\u0440\u0435\u043e\u043d\u0435 http:\/\/redcynic.com https:\/\/vk.com\/public_redcynic - \u0433\u0440\u0443\u043f\u043f\u0430 \u00ab\u0412 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0435\u00bb \u0421\u043a\u0440\u0430\u0448\u0438\u0432\u0430\u044f ...","thumbnails":{"default":{"url":"https:\/\/i.ytimg.com\/vi\/dW5O5sBUdpE\/default.jpg","width":120,"height":90},"medium":{"url":"https:\/\/i.ytimg.com\/vi\/dW5O5sBUdpE\/mqdefault.jpg","width":320,"height":180},"high":{"url":"https:\/\/i.ytimg.com\/vi\/dW5O5sBUdpE\/hqdefault.jpg","width":480,"height":360}},"channelTitle":"Red Cynic","liveBroadcastContent":"none","publishTime":"2017-02-18T12:02:29Z"}}]}');
 
@@ -305,8 +303,8 @@ class WIS_Youtube_Feed extends WIS_Feed {
 					] );
 				}
 
-				if ( 'ypopup' == $args['yimages_link'] && WIS_Plugin::app()->is_premium() ) {
-					$output .= apply_filters( 'wyt/pro/display', $args, $images_data );
+				if ( 'ypopup' == $args['yimages_link'] ) {
+					$output .= apply_filters( 'wyt/pro/display', $args, $images_data, $account_data );
 				}
 
 				$output .= $this->render_template( $args['template'], $template_args );

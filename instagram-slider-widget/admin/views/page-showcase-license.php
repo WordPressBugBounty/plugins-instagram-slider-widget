@@ -55,7 +55,7 @@
                                 </p>
 								<?php if ( $this->is_premium && $this->premium_has_subscription ): ?>
                                     <p class="activate-trial-hint">
-										<?php _e( 'You use a paid subscription for the plugin updates. In case you don’t want to receive paid updates, please, click <a data-action="unsubscribe" class="wis-control-btn" href="#">cancel subscription</a>', 'instagram-slider-widget' ); ?>
+										<?php _e( 'You have an active update subscription. To cancel your subscription, click <a data-action="unsubscribe" class="wis-control-btn" href="#">cancel subscription</a>', 'instagram-slider-widget' ); ?>
                                     </p>
 								<?php endif; ?>
 
@@ -124,7 +124,7 @@
                                         class="btn btn-default wis-control-btn shopifeed-control-btn"
                                         type="button"
                                         id="license-submit">
-									<?php _e( 'Submit Key', 'instagram-slider-widget' ); ?>
+									<?php _e( 'Activate License Key', 'instagram-slider-widget' ); ?>
                                 </button>
                             <div class="license-key-wrap">
                                 <input type="text" id="license-key" name="licensekey" value=""
@@ -132,7 +132,7 @@
                             </div>
 							<?php if ( $this->is_premium ): ?>
                                 <p style="margin-top: 10px;">
-									<?php printf( __( '<a href="%s" target="_blank" rel="noopener">Lean more</a> about the premium version and get the license key to activate it now!', 'instagram-slider-widget' ), esc_url( $this->plugin->get_support()->get_pricing_url( true, 'license_page' ) ) ); ?>
+									<?php printf( __( '<a href="%s" target="_blank" rel="noopener">Learn more</a> about the premium version and get the license key to activate it now!', 'instagram-slider-widget' ), esc_url( $this->plugin->get_support()->get_pricing_url( true, 'license_page' ) ) ); ?>
                                 </p>
 							<?php else: ?>
                                 <p style="margin-top: 10px;">

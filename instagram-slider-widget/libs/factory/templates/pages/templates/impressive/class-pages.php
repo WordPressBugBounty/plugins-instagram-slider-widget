@@ -25,7 +25,6 @@ if( !defined('ABSPATH') ) {
  * @method string getDonateWidget() - get widget content donate
  * @method string getSubscribeWidget()
  * @method string getBusinessSuggetionWidget()
- * @method string getSupportWidget
  */
 class PageBase extends \WBCR\Factory_Templates_135\Impressive {
 
@@ -130,13 +129,11 @@ class PageBase extends \WBCR\Factory_Templates_135\Impressive {
 			$this->styles->add(WCL_PLUGIN_URL . '/admin/assets/css/general.css');
 		}
 
-		if( !($this->plugin->has_premium() && $this->plugin->premium->is_active()) ) {
-			$this->scripts->add(FACTORY_TEMPLATES_135_URL . '/assets/js/clearfy-widgets.js', [
-				'jquery',
-				'wfactory-481-core-general',
-				'wbcr-factory-templates-135-global'
-			], 'wbcr-factory-templates-135-widgets');
-		}
+		$this->scripts->add(FACTORY_TEMPLATES_135_URL . '/assets/js/clearfy-widgets.js', [
+			'jquery',
+			'wfactory-481-core-general',
+			'wbcr-factory-templates-135-global'
+		], 'wbcr-factory-templates-135-widgets');
 
 		// Script for search form on plugin options
 		if( $this->show_search_options_form ) {
@@ -251,9 +248,8 @@ class PageBase extends \WBCR\Factory_Templates_135\Impressive {
 		if( $position == 'bottom' ) {
 			$widgets['info_widget'] = $this->getInfoWidget();
 			$widgets['rating_widget'] = $this->getRatingWidget();
-			$widgets['support_widget'] = $this->getSupportWidget();
 			//$widgets['donate_widget'] = $this->getDonateWidget();
-		} else if( $position == 'right' && !($this->plugin->has_premium() && $this->plugin->premium->is_activate()) ) {
+		} else if( $position == 'right' ) {
 			$widgets['business_suggetion'] = $this->getBusinessSuggetionWidget();
 			if( $this->plugin->getPluginInfoAttr('subscribe_widget') && !$this->plugin->getPopulateOption('factory_clearfy_user_subsribed') ) {
 				$widgets['subscribe'] = $this->getSubscribeWidget();
@@ -404,17 +400,14 @@ class PageBase extends \WBCR\Factory_Templates_135\Impressive {
 
 		?>
 		<div class="wbcr-factory-sidebar-widget">
-			<p>
-				<strong><?php _e('Do you want the plugin to improved and update?', 'wbcr_factory_templates_135'); ?></strong>
-			</p>
-			<p><?php _e('Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_templates_135'); ?></p>
-			<p><?php _e('And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_templates_135'); ?></p>
-			<p>
-				<i class="wbcr-factory-icon-5stars"></i>
-				<a href="<?php echo $page_url; ?>" title="Go rate us" target="_blank">
-					<strong><?php _e('Go rate us and push ideas', 'wbcr_factory_templates_135'); ?></strong>
+			<strong><?php esc_html_e( 'Leave a review:', 'instagram-slider-widget' ); ?></strong>
+			<?php esc_html_e( 'Liking the plugin? A quick review would mean a lot and helps us make it even better.', 'instagram-slider-widget' ); ?>
+			<span>
+				<i class="dashicons dashicons-star-filled"></i>
+				<a class="wbcr-leave-review-link" href="<?php echo $page_url; ?>" title="Go rate us" target="_blank">
+					<?php esc_html_e( 'Leave a Review', 'instagram-slider-widget' ); ?>
 				</a>
-			</p>
+			</span>
 		</div>
 		<?php
 	}
@@ -446,39 +439,6 @@ class PageBase extends \WBCR\Factory_Templates_135\Impressive {
 				        src="https://money.yandex.ru/embed/donate.xml?account=410011242846510&quickpay=donate&payment-type-choice=on&mobile-payment-type-choice=on&default-sum=300&targets=%D0%9D%D0%B0+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83+%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D0%B0+%D0%B8+%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D1%83+%D0%BD%D0%BE%D0%B2%D1%8B%D1%85+%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9.+&target-visibility=on&project-name=Webcraftic&project-site=&button-text=05&comment=on&hint=%D0%9A%D0%B0%D0%BA%D1%83%D1%8E+%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E+%D0%BD%D1%83%D0%B6%D0%BD%D0%BE+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+%D0%B2+%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%3F&mail=on&successURL="
 				        width="508" height="187"></iframe>
 			<?php endif; ?>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Создает html разметку виджета поддержки
-	 *
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  2.0.8
-	 */
-	public function showSupportWidget()
-	{
-		$free_support_url = $this->plugin->get_support()->get_contacts_url();
-		$hot_support_url = $this->plugin->get_support()->get_site_url() . '/other-questions-support';
-
-		?>
-		<div id="wbcr-clr-support-widget" class="wbcr-factory-sidebar-widget">
-			<p><strong><?php _e('Having Issues?', 'wbcr_factory_templates_135'); ?></strong></p>
-			<div class="wbcr-clr-support-widget-body">
-				<p>
-					<?php _e('We provide free support for this plugin. If you are pushed with a problem, just create a new ticket. We will definitely help you!', 'wbcr_factory_templates_135'); ?>
-				</p>
-				<ul>
-					<li><span class="dashicons dashicons-sos"></span>
-						<a href="<?php echo $free_support_url; ?>" target="_blank"
-						   rel="noopener"><?php _e('Get starting free support', 'wbcr_factory_templates_135'); ?></a>
-					</li>
-					<li style="margin-top: 15px;background: #fff4f1;padding: 10px;color: #a58074;">
-						<span class="dashicons dashicons-warning"></span>
-						<?php printf(__('If you find a php error or a vulnerability in plugin, you can <a href="%s" target="_blank" rel="noopener">create ticket</a> in hot support that we responded instantly.', 'wbcr_factory_templates_135'), $hot_support_url); ?>
-					</li>
-				</ul>
-			</div>
 		</div>
 		<?php
 	}

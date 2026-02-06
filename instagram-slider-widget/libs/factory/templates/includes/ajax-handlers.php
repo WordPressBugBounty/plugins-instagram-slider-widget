@@ -118,7 +118,7 @@ function wbcr_factory_templates_135_check_license($plugin_instance)
 				break;
 			case 'unsubscribe':
 				$plugin_instance->premium->cancel_paid_subscription();
-				$success_message = __('Subscription success cancelled', 'wbcr_factory_templates_135');
+				$success_message = __('Subscription successfully cancelled', 'wbcr_factory_templates_135');
 				break;
 		}
 	} catch( Exception $e ) {

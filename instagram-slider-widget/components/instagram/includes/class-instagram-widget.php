@@ -43,7 +43,7 @@ class WIG_Widget extends WP_Widget {
 		parent::__construct( 'jr_insta_slider', __( 'Social Slider - Instagram', 'instagram-slider-widget' ), [
 			'show_instance_in_rest' => true,
 			'classname'             => 'jr-insta-slider',
-			'description'           => __( 'A widget that displays a slider with instagram images ', 'instagram-slider-widget' ),
+			'description'           => __( 'A widget that displays a slider with Instagram images', 'instagram-slider-widget' ),
 		] );
 
 		$this->WIS   = WIS_Plugin::app();

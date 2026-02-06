@@ -95,7 +95,6 @@ class WIS_Youtube_Profiles extends WIS_Profiles {
 
 		$accounts = WIS_Plugin::app()->getPopulateOption( WYT_ACCOUNT_OPTION_NAME, [] );
 		$data     = [
-			'is_premium' => WIS_Plugin::app()->is_premium(),
 			'accounts'   => $accounts,
 			'social'     => $this->social,
 		];
@@ -116,6 +115,9 @@ class WIS_Youtube_Profiles extends WIS_Profiles {
 	}
 
 	public function delete_account( $name ) {
+		// Security: Verify nonce
+		check_admin_referer( 'wis_delete_profile', 'nonce' );
+
 		$accounts = WIS_Plugin::app()->getOption( $this->profiles_option_name, [] );
 		if ( isset( $accounts[ $name ] ) ) {
 			unset( $accounts[ $name ] );

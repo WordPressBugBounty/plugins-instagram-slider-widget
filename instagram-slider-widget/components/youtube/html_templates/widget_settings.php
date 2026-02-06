@@ -16,7 +16,7 @@ $instance       = $args['instance'];
 		<label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><strong><?php _e( 'Title:', 'instagram-slider-widget' ); ?></strong></label>
 		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
 		       name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
-		       value="<?php echo $instance['title']; ?>"/>
+		       value="<?php echo esc_attr( $instance['title'] ); ?>"/>
 	</p>
 	<p>
                 <span class="wyt-search-for-container">
@@ -28,7 +28,7 @@ $instance       = $args['instance'];
 	                            name="<?php echo esc_attr($this->get_field_name( 'search' )); ?>"><?php
 	                    foreach ( $accounts as $channelId => $account ) {
 		                    $selected = $instance['search'] == $channelId ? "selected='selected'" : "";
-		                    echo "<option value='" . $channelId . "' {$selected}>{$account->snippet->title}</option>";
+		                    echo "<option value='" . esc_attr( $channelId ) . "' " . esc_attr( $selected ) ." >" . esc_attr( $account->snippet->title ) . "</option>";
 	                    }
 	                    ?>
 	                    </select><?php
@@ -39,18 +39,11 @@ $instance       = $args['instance'];
                 </span>
 	</p>
 	<p id="img_to_show">
-		<label for="<?php echo esc_attr($this->get_field_id( 'images_number' )); ?>"><strong><?php _e( 'Count of images to show:', 'instagram-slider-widget' ); ?></strong>
+		<label for="<?php echo esc_attr($this->get_field_id( 'images_number' )); ?>"><strong><?php _e( 'Number of images to display:', 'instagram-slider-widget' ); ?></strong>
 			<input class="small-text" type="number" min="1" max=""
 			       id="<?php echo esc_attr($this->get_field_id( 'images_number' )); ?>"
 			       name="<?php echo esc_attr($this->get_field_name( 'images_number' )); ?>"
-			       value="<?php echo $instance['images_number']; ?>"/>
-			<span class="wyt-description">
-                        <?php if ( !$this->plugin->is_premium() ) {
-	                        _e( 'Maximum 20 images in free version.', 'instagram-slider-widget' );
-	                        echo " " . sprintf( __( "More in <a href='%s'>PRO version</a>", 'instagram-slider-widget' ), $this->plugin->get_support()->get_pricing_url( true, "wyt_widget_settings" ) );
-                        }
-                        ?>
-                    </span>
+			       value="<?php echo esc_attr( $instance['images_number'] ); ?>"/>
 		</label>
 	</p>
 	<p>
@@ -58,14 +51,14 @@ $instance       = $args['instance'];
 			<input class="small-text" type="number" min="1" max="200"
 			       id="<?php echo esc_attr($this->get_field_id( 'refresh_hour' )); ?>"
 			       name="<?php echo esc_attr($this->get_field_name( 'refresh_hour' )); ?>"
-			       value="<?php echo $instance['refresh_hour']; ?>"/>
+			       value="<?php echo esc_attr( $instance['refresh_hour'] ); ?>"/>
 			<span><?php _e( 'hours', 'instagram-slider-widget' ); ?></span>
 		</label>
 	</p>
 	<p class="show_feed_header">
 		<strong><?php _e( 'Show feed header:', 'instagram-slider-widget' ); ?></strong>
 		<label class="switch" for="<?php echo esc_attr($this->get_field_id( 'show_feed_header' )); ?>">
-			<input type="hidden" id="<?php echo $this->get_field_id( 'show_feed_header' );?>"
+			<input type="hidden" id="<?php echo esc_attr( $this->get_field_id( 'show_feed_header' ) );?>"
 			       name="<?php echo esc_attr($this->get_field_name( 'show_feed_header' )); ?>"  value="0">
 			<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'show_feed_header' )); ?>"
 			       name="<?php echo esc_attr($this->get_field_name( 'show_feed_header' )); ?>" type="checkbox"
@@ -81,7 +74,7 @@ $instance       = $args['instance'];
 				if ( count( $sliders ) ) {
 					foreach ( $sliders as $key => $slider ) {
 						$selected = ( $instance['template'] == $key ) ? "selected='selected'" : '';
-						echo "<option value='{$key}' {$selected}>{$slider}</option>\n";
+						echo "<option value='" . esc_attr( $key ) ."' " . esc_attr( $selected ) . ">" . esc_attr( $slider ) . "</option>\n";
 					}
 				}
 				?>
@@ -93,19 +86,19 @@ $instance       = $args['instance'];
 			<input class="small-text" id="<?php echo esc_attr($this->get_field_id( 'columns' )); ?>"
 			       type="number" min="1" max="10"
 			       name="<?php echo esc_attr($this->get_field_name( 'columns' )); ?>"
-			       value="<?php echo $instance['columns']; ?>"/>
+			       value="<?php echo esc_attr( $instance['columns'] ); ?>"/>
 			<span class='wyt-description'><?php _e( 'max is 10 ( only for thumbnails template )', 'instagram-slider-widget' ); ?></span>
 		</label>
 	</p>
     <p>
-        <label for="<?php echo $this->get_field_id('request_by'); ?>"><strong><?php _e('Request videos by:', 'instagram-slider-widget'); ?></strong>
-            <select class="widefat" name="<?php echo $this->get_field_name('request_by'); ?>"
-                    id="<?php echo $this->get_field_id('request_by'); ?>">
-                <option value="<?php echo YoutubeApi::orderByRelevance ?>" <?php selected($instance['request_by'], YoutubeApi::orderByRelevance, true); ?>><?php _e('Relevance', 'instagram-slider-widget'); ?></option>
-                <option value="<?php echo YoutubeApi::orderByDate ?>"      <?php selected($instance['request_by'], YoutubeApi::orderByDate, true); ?>>     <?php _e('Date', 'instagram-slider-widget'); ?></option>
-                <option value="<?php echo YoutubeApi::orderByRating ?>"    <?php selected($instance['request_by'], YoutubeApi::orderByRating, true); ?>>   <?php _e('Rating', 'instagram-slider-widget'); ?></option>
-                <option value="<?php echo YoutubeApi::orderByViewCount ?>" <?php selected($instance['request_by'], YoutubeApi::orderByViewCount, true); ?>><?php _e('View count', 'instagram-slider-widget'); ?></option>
-                <option value="<?php echo YoutubeApi::orderByUnspec ?>"    <?php selected($instance['request_by'], YoutubeApi::orderByUnspec, true); ?>>   <?php _e('Unspecified', 'instagram-slider-widget'); ?></option>
+        <label for="<?php echo esc_attr( $this->get_field_id('request_by') ); ?>"><strong><?php _e('Request videos by:', 'instagram-slider-widget'); ?></strong>
+            <select class="widefat" name="<?php echo esc_attr( $this->get_field_name('request_by' ) ); ?>"
+                    id="<?php echo esc_attr( $this->get_field_id('request_by') ); ?>">
+                <option value="<?php echo esc_attr( YoutubeApi::orderByRelevance ); ?>" <?php selected($instance['request_by'], YoutubeApi::orderByRelevance, true); ?>><?php _e('Relevance', 'instagram-slider-widget'); ?></option>
+                <option value="<?php echo esc_attr( YoutubeApi::orderByDate ); ?>"      <?php selected($instance['request_by'], YoutubeApi::orderByDate, true); ?>>     <?php _e('Date', 'instagram-slider-widget'); ?></option>
+                <option value="<?php echo esc_attr( YoutubeApi::orderByRating ); ?>"    <?php selected($instance['request_by'], YoutubeApi::orderByRating, true); ?>>   <?php _e('Rating', 'instagram-slider-widget'); ?></option>
+                <option value="<?php echo esc_attr( YoutubeApi::orderByViewCount ); ?>" <?php selected($instance['request_by'], YoutubeApi::orderByViewCount, true); ?>><?php _e('View count', 'instagram-slider-widget'); ?></option>
+                <option value="<?php echo esc_attr( YoutubeApi::orderByUnspec ); ?>" <?php selected($instance['request_by'], YoutubeApi::orderByUnspec, true); ?>>   <?php _e('Unspecified', 'instagram-slider-widget'); ?></option>
             </select>
         </label>
     </p>
@@ -129,25 +122,18 @@ $instance       = $args['instance'];
 				if ( count( $options_linkto ) ) {
 					foreach ( $options_linkto as $key => $option ) {
 						$selected = selected( $instance['yimages_link'], $key, false );
-						echo "<option value='{$key}' {$selected}>{$option}</option>\n";
+						echo "<option value='" . esc_attr( $key ) . "' " . esc_attr( $selected ) . ">" . esc_attr( $option ) . "</option>\n";
 					}
-				}
-				if (!$this->plugin->is_premium()) {
-					?>
-                    <optgroup label="Available in PRO">
-                        <option value='ypopup' disabled="disabled">Pop Up</option>
-                    </optgroup>
-					<?php
 				}
 				?>
 			</select>
 		</label>
 	</p>
-	<p class="<?php if ( 'custom_url' != $instance['yimages_link'] ) {echo 'hidden';} ?>">
+	<p class="<?php if ( 'custom_url' !== $instance['yimages_link'] ) {echo 'hidden';} ?>">
 		<label for="<?php echo esc_attr($this->get_field_id( 'custom_url' )); ?>"><?php _e( 'Custom link:', 'instagram-slider-widget' ); ?></label>
 		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'custom_url' )); ?>"
 		       name="<?php echo esc_attr($this->get_field_name( 'custom_url' )); ?>"
-		       value="<?php echo $instance['custom_url']; ?>"/>
+		       value="<?php echo esc_attr( $instance['custom_url'] ); ?>"/>
 		<span><?php _e( '* use this field only if the above option is set to <strong>Custom Link</strong>', 'instagram-slider-widget' ); ?></span>
 	</p>
 	<p>
@@ -155,7 +141,7 @@ $instance       = $args['instance'];
 			:</label>
 		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'blocked_words' )); ?>"
 		       name="<?php echo esc_attr($this->get_field_name( 'blocked_words' )); ?>"
-		       value="<?php echo $instance['blocked_words']; ?>"/>
+		       value="<?php echo esc_attr( $instance['blocked_words'] ); ?>"/>
 		<span class="wyt-description"><?php _e( 'Enter comma-separated words. If one of them occurs in the image description, the image will not be displayed', 'instagram-slider-widget' ); ?></span>
 	</p>
 
@@ -165,9 +151,9 @@ $instance       = $args['instance'];
 		<p>
 			<label for="jr_insta_shortcode"><?php _e( 'Shortcode of this Widget:', 'instagram-slider-widget' ); ?></label>
 			<input id="jr_insta_shortcode" onclick="this.setSelectionRange(0, this.value.length)" type="text"
-			       class="widefat" value="[cm_youtube_feed id=&quot;<?php echo $widget_id ?>&quot;]"
+			       class="widefat" value="[cm_youtube_feed id=&quot;<?php echo esc_attr( $widget_id ); ?>&quot;]"
 			       readonly="readonly" style="border:none; color:black; font-family:monospace;">
-			<span class="wyt-description"><?php _e( 'Use this shortcode in any page or post to display images with this widget configuration!', 'instagram-slider-widget' ) ?></span>
+			<span class="wyt-description"><?php _e( 'Use this shortcode to display images with this widget configuration', 'instagram-slider-widget' ) ?></span>
 		</p>
 	<?php endif; ?>
 </div>

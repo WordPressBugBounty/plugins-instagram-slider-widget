@@ -441,12 +441,20 @@
 }
 #WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-sidebar-widget {
   display: inline-block;
-  min-height: 230px;
   width: 100%;
   margin-top: 10px;
   background-color: #fff;
   padding: 20px 15px;
   vertical-align: top;
+}
+#WBCR .wbcr-factory-templates-135-impressive-lite-page-template i.dashicons {
+  font-size: 17px;
+}
+#WBCR .wbcr-factory-templates-135-impressive-lite-page-template i.dashicons.dashicons-star-filled {
+  color: #FF9529;
+}
+#WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-leave-review-link {
+  text-decoration: none;
 }
 #WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-sidebar-widget.wbcr-factory-hide {
   display: none;
@@ -530,7 +538,7 @@
   margin-top: 20px;
   text-align: center;
 }
-#WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-page-more_features .wbcr-factory-premium-button {
+#WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-page-more_features {
   display: inline-block;
   padding: 20px 60px;
   background-color: #FFC107;
@@ -540,7 +548,7 @@
   font-weight: bold;
   transition: background-color 0.3s, border-color 0.3s, color 0.3s, opacity 0.3s;
 }
-#WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-page-more_features .wbcr-factory-premium-button:hover {
+#WBCR .wbcr-factory-templates-135-impressive-lite-page-template .wbcr-factory-page-more_features {
   background-color: #ffce3a;
 }
 #WBCR .wbcr-factory-templates-135-impressive-lite-page-template #wbcr-factory-confirm-dialog {

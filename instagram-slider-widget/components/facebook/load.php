@@ -18,4 +18,6 @@ require_once WFB_COMPONENT_DIR . "/includes/Api/facebook-post-attachment.php";
 require_once WFB_COMPONENT_DIR . "/includes/class-facebook-feed.php";
 require_once WFB_COMPONENT_DIR . "/includes/class-facebook-profiles.php";
 require_once WFB_COMPONENT_DIR . "/includes/class-facebook-widget.php";
+require_once WFB_COMPONENT_DIR . "/includes/class-facebook-pro.php";
 
+new WIS_Facebook_Pro();

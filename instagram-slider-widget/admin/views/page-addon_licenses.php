@@ -53,7 +53,7 @@ if ( is_array( $data ) ) {
                     <a href="<?php echo esc_url( $component['settings_url'] ) ?>"
                        class="button button-primary settings-button"><?php _e( 'Settings', 'instagram-slider-widget' ); ?></a>
 				<?php else: ?>
-					<?php if ( 'premium' === $component['build'] && ! ( WIS_Plugin::app()->premium->is_activate() && WIS_Plugin::app()->premium->is_install_package() ) ): ?>
+					<?php if ( 'premium' === $component['build'] && WIS_Plugin::app()->premium->is_install_package() ): ?>
                         <a target="_blank" href="<?php echo esc_url( $component['url'] ) ?>"
                            class="button button-default read-more"><?php _e( 'Read more', 'instagram-slider-widget' ); ?></a>
 					<?php else: ?>
