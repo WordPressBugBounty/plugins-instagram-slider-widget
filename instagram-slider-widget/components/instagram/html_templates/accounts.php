@@ -150,10 +150,6 @@ if ( count( $accounts_business ) ) :
 	<div class="wis_modal_content">
 
 		<div class='wis-row-style'>
-			<a href="<?php echo esc_url($authorize_url_instagram); ?>" class='wis-btn-instagram-account'>Personal
-				account</a>
-		</div>
-		<div class='wis-row-style'>
 			<a href="<?php echo esc_url($authorize_url_business); ?>" class='wis-btn-facebook-account'>Business
 				account</a>
 		</div>

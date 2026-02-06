@@ -1,16 +1,16 @@
 <?php
-/*
-Plugin Name: Social Slider Feed
-Plugin URI: https://cm-wp.com/instagram-slider-widget
-Version: 2.2.9
-Description: Shows Instagram, Facebook and YouTube responsive feeds in widgets, posts, pages, or anywhere else using shortcodes
-Author: creativemotion
-Author URI: https://cm-wp.com/
-Requires PHP: 7.4
-Text Domain: instagram-slider-widget
-Domain Path: /languages
-License:     GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+/**
+* Plugin Name: Social Slider Feed
+* Plugin URI: https://cm-wp.com/instagram-slider-widget
+* Version: 2.3.1
+* Description: Shows Instagram, Facebook and YouTube responsive feeds in widgets, posts, pages, or anywhere else using shortcodes
+* Author: Themeisle
+* Author URI: https://themeisle.com
+* Requires PHP: 7.4
+* Text Domain: instagram-slider-widget
+* Domain Path: /languages
+* License:     GPL2
+* License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 // Exit if accessed directly
@@ -29,7 +29,7 @@ $plugin_info = [
 
 	// Служба поддержки
 	'support_details'    => [
-		'url'       => 'https://cm-wp.com/instagram-slider-widget', // Ссылка на сайт плагина
+		'url'       => 'https://wordpress.org/support/plugin/instagram-slider-widget/', // Ссылка на сайт плагина
 		'pages_map' => [
 			'features' => 'premium-features', // {site}/premium-features "страница возможности"
 			'pricing'  => 'pricing', // {site}/prices страница "цены"
@@ -75,8 +75,7 @@ $plugin_info = [
 	],
 
 	// PLUGIN SUBSCRIBE FORM
-	'subscribe_widget'   => true,
-	'subscribe_settings' => [ 'group_id' => '105407119' ],
+	'subscribe_widget'   => false,
 
 	'load_factory_modules' => [
 		[ 'libs/factory/bootstrap', 'factory_bootstrap_483', 'admin' ],
@@ -138,6 +137,8 @@ require_once WIS_PLUGIN_DIR . '/includes/class-plugin.php';
 require_once WIS_PLUGIN_DIR . '/includes/class-wis-plugin-temp.php';
 
 try {
+
+	require_once WIS_PLUGIN_DIR . '/vendor/autoload.php';
 	new WIS_Plugin( __FILE__, array_merge( $plugin_info, [
 		'plugin_version' => WIS_PLUGIN_VERSION,
 	] ) );

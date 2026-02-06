@@ -76,6 +76,7 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 
 			$connected_profiles = [];
 
+            update_option( 'instagram_slider_widget_logger_flag', 'yes' );
 			$url      = WFB_FACEBOOK_SELF_URL . "me/accounts";
 			$response = wp_remote_get( esc_url_raw( add_query_arg( $args, $url ) ) );
 			if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -117,7 +118,7 @@ class WIS_Facebook_Profiles extends WIS_Profiles {
 							Choose Account:
 						</div>
 						<div class="wis_modal_content">
-							<?php echo esc_html( $choose_account_html ); ?>
+							<?php echo ( $choose_account_html ); ?>
 						</div>
 					</div>
 					<div id="wis_modal_overlay" class="wis_modal_overlay"></div>

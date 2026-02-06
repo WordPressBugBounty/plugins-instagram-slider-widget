@@ -46,8 +46,8 @@ function get_app_ids()
 
     if (!$app_ids) {
         return array(
-            'instagram_client_id' => '1593670664717200',
-            'facebook_client_id' => '8542636415777224',
+            'instagram_client_id' => '1172683874187860',
+            'facebook_client_id' => '2302390870204694',
         );
     }
 

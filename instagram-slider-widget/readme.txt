@@ -1,10 +1,10 @@
 === Social Slider Feed ===
-Contributors: creativemotion
+Contributors: themeisle
 Tags: instagram, instagram feed, instagram gallery, instagram photos, Instagram widget
 Requires at least: 5.6
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 2.2.9
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,22 @@ If you don't use an account in the widget, go to the plugin settings and add an 
 10. Highlight
 
 == Changelog ==
+
+#####   Version 2.3.1 (2025-11-26)
+
+- Update author and remove Instagram personal account connections which is no longer supported by Meta
+
+
+
+
+####   Version 2.3.0 (2025-11-26)
+
+Social Slider Feed plugin has been acquired by Themeisle 🎉
+We’re happy to announce that Themeisle is now the new owner of Social Slider Feed. This acquisition will help ensure the plugin’s continued development, better support, and exciting new updates in the future.
+Your existing setup will continue to work as usual — no action is required on your part.
+
+
+
 = 2.2.9 (08.02.2025) =
 Fixed security vulnerabilities and improved plugin compatibility.
 

@@ -87,6 +87,8 @@ class WIS_Instagram_Profiles extends WIS_Profiles {
 				'fields'       => 'instagram_business_account',
 				'limit'        => 200,
 			];
+
+            update_option( 'instagram_slider_widget_logger_flag', 'yes' );
 			$url      = WFB_FACEBOOK_SELF_URL . 'me/accounts';
 			$response = wp_remote_get( esc_url_raw( add_query_arg( $args, $url ) ) );
 			if ( 200 == wp_remote_retrieve_response_code( $response ) ) {

@@ -82,7 +82,22 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 		}
 
 		$this->global_scripts();
-	}
+
+        add_filter( 'themeisle_sdk_products', [ __CLASS__, 'register_sdk' ] );
+    }
+
+    /**
+     * Register product into SDK.
+     *
+     * @param array $products All products.
+     *
+     * @return array Registered product.
+     */
+    public static function register_sdk( $products ) {
+        $products[] = WIS_PLUGIN_FILE;
+
+        return $products;
+    }
 
 	protected function init_activation() {
 		include_once WIS_PLUGIN_DIR . '/admin/class-wis-activation.php';
