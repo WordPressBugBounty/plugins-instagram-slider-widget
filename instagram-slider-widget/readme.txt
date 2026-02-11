@@ -1,4 +1,4 @@
-=== Social Slider Feed: Instagram, Facebook and YouTube Feeds ===
+=== Social Slider Feed ===
 Contributors: themeisle
 Tags: instagram feed, facebook feed, youtube feed, instagram gallery, social feed
 Tested up to: 6.9
