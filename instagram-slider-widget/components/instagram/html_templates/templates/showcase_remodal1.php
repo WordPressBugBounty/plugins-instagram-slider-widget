@@ -13,7 +13,7 @@ $mail = get_option( 'admin_email');
 
 <div class="isw-popups">
     <?php foreach($posts as $post):?>
-        <div class="remodal" data-remodal-id="<?= $post['id'] ?>">
+        <div class="remodal" data-remodal-id="<?php echo esc_attr( $post['id'] ); ?>">
             <div class="remodal-container">
                 <div class="remodal-md-9 white">
                     <div class="wis-remodal-block wis-remodal-img" >
@@ -47,7 +47,7 @@ $mail = get_option( 'admin_email');
                             ?>
                             <div class="wis-video-block" >
                                 <div class="wis-play-icon-div" style="">
-                                    <img class="wis-icon-play" src="<?= WIG_COMPONENT_URL . '/assets/icons/play.png'?>"/></div>
+                                    <img class="wis-icon-play" src="<?php echo esc_url( WIG_COMPONENT_URL . '/assets/icons/play.png' ); ?>"/></div>
                                 <div class="">
                                     <video class="wis-video remodal-media" width="100%" playsinline loop
                                            src="<?php echo esc_url($post['video']) ?>" style=""></video>
@@ -75,21 +75,21 @@ $mail = get_option( 'admin_email');
                             <div class="wis-inline"><span class="fa fa-comment">&nbsp;</span><?php echo esc_html($post['comments']) ?></div>
                         </div>
                         <div class="isw-popup-buttons">
-                            <div class="wis-inline wis-remodal-showcase-message" style="background-color: <?= $color ?>">
-                                <a  href="https://wa.me/<?= $phone ?>?text=<?=$message_template . $post['link']?>" target="_blank"
+                            <div class="wis-inline wis-remodal-showcase-message" style="background-color: <?php echo esc_attr( $color ); ?>">
+                                <a  href="<?php echo esc_url( "https://wa.me/{$phone}?text={$message_template}{$post['link']}" ); ?>" target="_blank"
                                 >
-                                    <img class="isw-center" style="height: 100%;" src="<?= WIG_COMPONENT_URL . "/assets/icons/whatsapp.svg";?>" alt="">
+                                    <img class="isw-center" style="height: 100%;" src="<?php echo esc_url( WIG_COMPONENT_URL . "/assets/icons/whatsapp.svg" ); ?>" alt="">
                                 </a>
                             </div>
-                            <div class="wis-inline wis-remodal-showcase-message" style="background-color: <?= $color ?>">
-                                <a  href="mailto:<?= $mail ?>?body=<?=$message_template . $post['link']?>" target="_blank"
+                            <div class="wis-inline wis-remodal-showcase-message" style="background-color: <?php echo esc_attr( $color ); ?>">
+                                <a  href="mailto:<?php echo esc_attr( $mail ); ?>?body=<?php echo esc_attr( $message_template . $post['link'] ); ?>" target="_blank"
                                 >
-                                    <img class="isw-center" style="margin-top: 25%" src="<?= WIG_COMPONENT_URL . "/assets/icons/mail.svg";?>" alt="">
+                                    <img class="isw-center" style="margin-top: 25%" src="<?php echo esc_url( WIG_COMPONENT_URL . "/assets/icons/mail.svg" ); ?>" alt="">
                                 </a>
                             </div>
                         </div>
                         <div class="isw-popup-post-link-container" style="text-align: center; text-decoration: none;">
-                            <a class="isw-popup-post-link" style="color: darkgrey !important; " href="<?=$post['link']?>" target="_blank"><?php esc_html_e( 'go to the post', 'instagram-slider-widget' ); ?></a>
+                            <a class="isw-popup-post-link" style="color: darkgrey !important; " href="<?php echo esc_url( $post['link'] ); ?>" target="_blank"><?php esc_html_e( 'go to the post', 'instagram-slider-widget' ); ?></a>
                         </div>
                     </div>
                 </div>

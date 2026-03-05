@@ -38,7 +38,7 @@ $profile_url      = "https://www.instagram.com/$username/";
                      position: relative;
                      background-size: cover;">
 			<?php if ( $link_to == 'popup' ) { ?>
-            <a data-remodal-target="<?= $id ?>" class="wis-popup-a wis-masonry-a">
+            <a data-remodal-target="<?php echo esc_attr( $id ); ?>" class="wis-popup-a wis-masonry-a">
 				<?php } else if ( $link_to == 'none' ) { ?>
 
 				<?php } else { ?>

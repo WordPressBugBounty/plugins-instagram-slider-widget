@@ -457,7 +457,7 @@ class WIS_Instagram_Pro {
 				$stories = $images_data['stories'];
 				unset( $images_data['stories'] );
 			}
-			$next_max_id = $images_data['next_max_id'];
+			$next_max_id = isset( $images_data['next_max_id'] ) ? $images_data['next_max_id'] : null;
 			unset($images_data['next_max_id']);
 
 			if ( is_array( $images_data ) && ! empty( $images_data ) ) {

@@ -28,23 +28,23 @@ if ( ! WIS_Feed::isMobile() ) {
     <div class="isw-showcase-wishlist-container">
         <div class="isw-showcase-wishlist-block">
             <a
-                    data-isw-phone="<?= $phone ?>"
-                    data-isw-color="<?= $color ?>"
-                    data-isw-wasvg="<?= $whatsapp_svg ?>"
-                    data-isw-mailsvg="<?= $mail_svg ?>"
-                    data-isw-email="<?= $mail ?>"
-                    class="isw-wishlist-a" id="show-wishlist" style="padding: 8px 15px !important;background-color: <?= $color ?>">
+                    data-isw-phone="<?php echo esc_attr( $phone ); ?>"
+                    data-isw-color="<?php echo esc_attr( $color ); ?>"
+                    data-isw-wasvg="<?php echo esc_attr( $whatsapp_svg ); ?>"
+                    data-isw-mailsvg="<?php echo esc_attr( $mail_svg ); ?>"
+                    data-isw-email="<?php echo esc_attr( $mail ); ?>"
+                    class="isw-wishlist-a" id="show-wishlist" style="padding: 8px 15px !important;background-color: <?php echo esc_attr( $color ); ?>">
                 <span class="dashicons dashicons-heart isw-heart" style="color: white;"></span>
                 <span class="isw-wishlist-text"><?php esc_html_e( 'WISHLIST', 'instagram-slider-widget' ); ?></span>
             </a>
         </div>
     </div>
 	<?php foreach ( $posts as $post ): ?>
-        <div class="isw-showcase-item" style="width: <?= 85 / $columns - 2.5 ?>%; height: <?= 900 / $columns + 150 * $columns / 3 ?>px;">
+        <div class="isw-showcase-item" style="width: <?php echo esc_attr( 85 / $columns - 2.5 ); ?>%; height: <?php echo esc_attr( 900 / $columns + 150 * $columns / 3 ); ?>px;">
             <div class="isw-showcase-item-image-container">
 
-                <a data-remodal-target="<?= $post['id'] ?>">
-                    <img class="isw-showcase-item-image" src="<?= $post['image'] ?>" alt="<?= $post['caption'] ?>">
+                <a data-remodal-target="<?php echo esc_attr( $post['id'] ); ?>">
+                    <img class="isw-showcase-item-image" src="<?php echo esc_url( $post['image'] ); ?>" alt="<?php echo esc_attr( $post['caption'] ); ?>">
 					<?php if ( $post['type'] == 'GraphVideo' && $args['enable_icons'] ) { ?>
                         <div class="">
                             <i class="fa fa-video-camera isw-pic_icon pull-right" style="color: white; font-size: 15px;"></i>
@@ -67,13 +67,13 @@ if ( ! WIS_Feed::isMobile() ) {
                     </span>
                 </div>
                 <div class="isw-inline-block isw-showcase-item-wishlist-like">
-                    <span data-isw-wish-id="<?= $post['id'] ?>"
-                          data-isw-wish-img="<?= $post['image'] ?>"
-                          data-isw-wish-capt="<?= mb_strlen( $post['caption'] ) > 100 ? sanitize_text_field( mb_substr( $post['caption'], 0, 100 ) . "..." ) : sanitize_text_field( $post['caption'] ) ?>"
-                          data-isw-wish-likes="<?= $post['likes'] ?>"
-                          data-isw-wish-comms="<?= $post['comments'] ?>"
-                          data-isw-wish-link="<?= $post['link'] ?>"
-                          class="dashicons dashicons-heart isw-wish-heart" style="vertical-align: middle;color: <?= $color ?>">
+                    <span data-isw-wish-id="<?php echo esc_attr( $post['id'] ); ?>"
+                          data-isw-wish-img="<?php echo esc_url( $post['image'] ); ?>"
+                          data-isw-wish-capt="<?php echo mb_strlen( $post['caption'] ) > 100 ? esc_attr( mb_substr( $post['caption'], 0, 100 ) . "..." ) : esc_attr( $post['caption'] ); ?>"
+                          data-isw-wish-likes="<?php echo esc_attr( $post['likes'] ); ?>"
+                          data-isw-wish-comms="<?php echo esc_attr( $post['comments'] ); ?>"
+                          data-isw-wish-link="<?php echo esc_url( $post['link'] ); ?>"
+                          class="dashicons dashicons-heart isw-wish-heart" style="vertical-align: middle;color: <?php echo esc_attr( $color ); ?>">
 
                     </span>
                     <script>
@@ -82,8 +82,8 @@ if ( ! WIS_Feed::isMobile() ) {
                             if (typeof cached !== 'undefined') {
                                 for (let i = 0; i < cached.length; i++) {
                                     let cached_item = cached[i];
-                                    if (cached_item.id == <?= $post['id'] ?>) {
-                                        $("span[data-isw-wish-id='<?= $post['id'] ?>']").addClass("isw-like-clicked");
+                                    if (cached_item.id == <?php echo esc_attr( $post['id'] ); ?>) {
+                                        $("span[data-isw-wish-id='<?php echo esc_attr( $post['id'] ); ?>']").addClass("isw-like-clicked");
                                     }
                                 }
                             }
@@ -93,28 +93,28 @@ if ( ! WIS_Feed::isMobile() ) {
             </div>
             <div class="isw-showcase-item-desc">
                 <p class="isw-showcase-item-desc-text">
-					<?= wp_trim_words( $post['caption'], $caption_words ); ?>
+					<?php echo esc_html( wp_trim_words( $post['caption'], $caption_words ) ); ?>
                 </p>
             </div>
             <div class="isw-showcase-item-buttons">
                 <div class="isw-inline-block isw-button isw-showcase-item-details">
-                    <a data-remodal-target="<?= $post['id'] ?>" class="wis-popup-a">
-                        <button class="isw-showcase-details-button" style="background-color: <?= $color ?>">
+                    <a data-remodal-target="<?php echo esc_attr( $post['id'] ); ?>" class="wis-popup-a">
+                        <button class="isw-showcase-details-button" style="background-color: <?php echo esc_attr( $color ); ?>">
                             <?php esc_html_e( 'Details', 'instagram-slider-widget' ); ?>
                         </button>
                     </a>
                 </div>
-                <div class="isw-inline-block isw-button isw-button-social isw-showcase-item-whatsapp" style="background-color: <?= $color ?>">
-                    <a href="https://wa.me/<?= $phone ?>?text=<?= $message_template . $post['link'] ?>" target="_blank"
+                <div class="isw-inline-block isw-button isw-button-social isw-showcase-item-whatsapp" style="background-color: <?php echo esc_attr( $color ); ?>">
+                    <a href="<?php echo esc_url( "https://wa.me/$phone?text=" . urlencode( $message_template . $post['link'] ) ); ?>" target="_blank"
                     >
-                        <img class="isw-center" style="height: 100%;" src="<?= $whatsapp_svg ?>" alt="">
+                        <img class="isw-center" style="height: 100%;" src="<?php echo esc_url( $whatsapp_svg ); ?>" alt="">
                     </a>
                 </div>
-                <div class="isw-inline-block isw-button isw-button-social" style="background-color: <?= $color ?>">
-                    <a href="mailto:<?= $mail ?>?body=<?= $message_template . $post['link'] ?>" target="_blank"
+                <div class="isw-inline-block isw-button isw-button-social" style="background-color: <?php echo esc_attr( $color ); ?>">
+                       <a href="<?php echo esc_url( 'mailto:' . $mail . '?body=' . rawurlencode( $message_template . $post['link'] ) ); ?>" target="_blank"
                     >
                         <div class="isw-mail-container">
-                            <img class="isw-center isw-mail-ico" src="<?= $mail_svg ?>" alt="">
+                            <img class="isw-center isw-mail-ico" src="<?php echo esc_url( $mail_svg ); ?>" alt="">
                         </div>
                     </a>
                 </div>

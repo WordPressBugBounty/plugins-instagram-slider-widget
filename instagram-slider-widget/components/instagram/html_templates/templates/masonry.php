@@ -32,7 +32,7 @@ $profile_url = "https://www.instagram.com/$username/";
 <div class="wis-item">
     <div class="wis-img">
 	    <?php if ($link_to == 'popup') {?>
-        <a data-remodal-target="<?= $id ?>" class="wis-popup-a wis-masonry-a">
+        <a data-remodal-target="<?php echo esc_attr( $id ); ?>" class="wis-popup-a wis-masonry-a">
 		    <?php } else if($link_to == 'none') {?>
 
 			    <?php } else {?>
@@ -47,7 +47,7 @@ $profile_url = "https://www.instagram.com/$username/";
 
                 <div class="wis-masonry-neg"
                      style="background-color: black; width: 100%; height: 100%; position: absolute; z-index: 1;"></div>
-                <img alt="<?= $caption ? $caption : '' ?>" src="<?php echo esc_url($image_url) ?>" style="width: <?=$width?>px !important;" width="<?php echo esc_attr($width) ?>"/>
+                <img alt="<?php echo esc_attr( $caption ? $caption : '' ); ?>" src="<?php echo esc_url($image_url) ?>" style="<?php echo esc_attr( "width: {$width}px !important;" ); ?>" width="<?php echo esc_attr($width) ?>"/>
                 <div class="post-date">
 	                <?php if ($timestamp) : ?>
                         <span class="fa fa-clock">&nbsp;</span><?php echo date_i18n( 'j M', $timestamp )?>

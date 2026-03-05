@@ -17,30 +17,30 @@ $followers       = ! $account->statistics->hiddenSubscriberCount ?
 <div class="wyt-remodals">
 <?php foreach ($videos as $video): ?>
     <?php $post_link = "https://youtube.com/?watch=" . $video->id->videoId?>
-    <div class="remodal wyt-remodal" data-remodal-id="<?= $video->id->videoId ?>">
+    <div class="remodal wyt-remodal" data-remodal-id="<?php echo esc_attr( $video->id->videoId ); ?>">
         <div class="wyt-video-block">
             <div class="remodal-wyt-video-container">
                 <iframe class="remodal-wyt-video-iframe"
                         style="width: 100%;"
                         frameborder="0"
-                        src="<?= "https://www.youtube.com/embed/" . $video->id->videoId . "?enablejsapi=1&version=3&playerapiid=ytplayer"?>">
+                        src="<?php echo esc_url( "https://www.youtube.com/embed/" . $video->id->videoId . "?enablejsapi=1&version=3&playerapiid=ytplayer" ); ?>">
                 </iframe>
             </div>
 
             <div class="remodal-wyt-video-info">
 
                 <div class="remodal-wyt-video-title">
-                    <?= $video->snippet->title ?>
+                    <?php echo esc_html( $video->snippet->title ); ?>
                 </div>
 
                 <div class="remodal-wyt-video-specs">
-                    <?= sprintf('%s %s', $video->statistics->viewCount , __('views', 'yft')) ?> •
-                    <?= strftime('%d %b %Y',strtotime($video->snippet->publishedAt)) ?>
+                    <?php echo sprintf('%s %s', esc_html( $video->statistics->viewCount ), __('views', 'yft')); ?> •
+                    <?php echo esc_html( wp_date( 'd M Y', strtotime( $video->snippet->publishedAt ) ) ); ?>
                 </div>
 
                 <div class="remodal-wyt-video-stats" >
-                    <i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;<?= $video->statistics->likeCount ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="fas fa-thumbs-down"></i>&nbsp;&nbsp;&nbsp;<?= $video->statistics->dislikeCount ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;<?php echo esc_html( $video->statistics->likeCount ); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-thumbs-down"></i>&nbsp;&nbsp;&nbsp;<?php echo esc_html( $video->statistics->dislikeCount ); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="" style="display: inline-block">
                         <p class="remodal-wyt-share-buttons" style="display: none">
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_html($post_link) ?>" target="_blank"><span
@@ -54,14 +54,14 @@ $followers       = ! $account->statistics->hiddenSubscriberCount ?
                             <a href="https://pinterest.com/pin/create/button/?url=<?php echo esc_html($post_link) ?>"
                                target="_blank"><span class="fa fa-pinterest-square shr-btn"></span></a>
                         </p>
-                        <div class="remodal-wyt-share"><i class="fas fa-share"></i>&nbsp;&nbsp;&nbsp;<?= __('share', 'yft') ?></div>
+                        <div class="remodal-wyt-share"><i class="fas fa-share"></i>&nbsp;&nbsp;&nbsp;<?php echo __('share', 'yft'); ?></div>
                     </div>
 
                 </div>
 
                 <hr>
 
-                <a href="<?= "https://youtube.com/channel/" . $account->snippet->channelId ?>" target="_blank" style="text-decoration: none; cursor: pointer; color: black">
+                <a href="<?php echo esc_url( "https://youtube.com/channel/" . $account->snippet->channelId ); ?>" target="_blank" style="text-decoration: none; cursor: pointer; color: black">
                     <div class="remodal-wyt-channel-container">
                         <div class="" style="display: flex; align-items: center; width: 70%">
                             <img class="" style="border-radius: 50%;" src="<?php echo esc_url( $account->snippet->thumbnails->default->url ) ?>"
@@ -79,19 +79,19 @@ $followers       = ! $account->statistics->hiddenSubscriberCount ?
                     </div>
                 </a>
 
-                <div class="remodal-wyt-video-desc desc-ellipsis-5-lines" id="desc_<?= $video->id->videoId ?>">
-                    <?= $video->snippet->description ?>
+                <div class="remodal-wyt-video-desc desc-ellipsis-5-lines" id="<?php echo esc_attr( "desc_" . $video->id->videoId ); ?>">
+                    <?php echo esc_html( $video->snippet->description ); ?>
                 </div>
 
-                <div class="wyt-show-more" data-desc-id="<?= $video->id->videoId ?>">
-                    <?= __('...', 'yft') ?>
+                <div class="wyt-show-more" data-desc-id="<?php echo esc_attr( $video->id->videoId ); ?>">
+                    <?php echo __('...', 'yft'); ?>
                 </div>
             </div>
         </div>
 
             <div class="wyt-comments-block">
                 <div class="" style="margin: 5% 0">
-                    <?= __('Comments', 'yft') ?>
+                    <?php echo __('Comments', 'yft'); ?>
                 </div>
             <?php foreach ($video->comments as $comment): ?>
                     <div class="wyt-comment-block" style="">
@@ -109,7 +109,7 @@ $followers       = ! $account->statistics->hiddenSubscriberCount ?
                             </div>
                         </div>
                         <div class="wyt-comment-stats" style="text-align: left; margin-top: 3%">
-                            <i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;<?= $comment->likeCount ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;<?php echo esc_html( $comment->likeCount ); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <i class="fas fa-thumbs-down"></i>&nbsp;&nbsp;
                         </div>
                     </div>

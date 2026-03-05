@@ -37,7 +37,7 @@ if($keep_ratio) {
 ?>
 <div class="slick-slide slick-div" style="<?php echo $padding ? 'padding:5px;' : '' ?>">
     <?php if ($link_to == 'popup') {?>
-        <a data-remodal-target="<?= $id ?>" class="wis-popup-a wis-masonry-a">
+        <a data-remodal-target="<?php echo esc_attr( $id ); ?>" class="wis-popup-a wis-masonry-a">
     <?php } else if($link_to == 'none') {?>
 
     <?php } else {?>
@@ -45,7 +45,7 @@ if($keep_ratio) {
     <?php } ?>
     <div class="img" style="
             background: url('<?php echo esc_url($image_url) ?>') no-repeat center center;
-            <?=$picture_size?>
+            <?php echo esc_attr( $picture_size ); ?>
             background-size: cover;
             padding: 10px;
             position: relative;
@@ -68,7 +68,7 @@ if($keep_ratio) {
         <?php if ($type == 'GraphSidecar' && $args['enable_icons'] ) { ?>
             <i class="fa fa-clone image-icon"></i>
         <?php } ?>
-        <img src="<?php echo esc_url($image_url) ?>" alt="<?= $caption ? $caption : '' ?>" style="display: none;">
+        <img src="<?php echo esc_url($image_url) ?>" alt="<?php echo esc_attr( $caption ? $caption : '' ); ?>" style="display: none;">
     </div>
 	        <?php if($link_to != 'none'):?></a><?php endif; ?>
     <?php if ($link_to == 'popup'){

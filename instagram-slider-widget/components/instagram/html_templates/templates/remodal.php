@@ -3,7 +3,7 @@
 ?>
 
 
-<div class="remodal test-paert" data-remodal-id="<?= $id ?>">
+<div class="remodal test-paert" data-remodal-id="<?php echo esc_attr( $id ); ?>">
 <div class="remodal-container">
     <div class="remodal-md-9 white">
         <div class="wis-remodal-block wis-remodal-img" >

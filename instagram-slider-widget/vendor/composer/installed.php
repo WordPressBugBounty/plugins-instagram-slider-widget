@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'codeinwp/instagram-slider-widget',
-        'pretty_version' => 'v2.3.2',
-        'version' => '2.3.2.0',
-        'reference' => 'c7243da85fe67e1d905c3c2a123fc324a25e0806',
+        'pretty_version' => 'v2.3.3',
+        'version' => '2.3.3.0',
+        'reference' => '6095f62b9f70211702a97d55cbb333b9f20ec56b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'codeinwp/instagram-slider-widget' => array(
-            'pretty_version' => 'v2.3.2',
-            'version' => '2.3.2.0',
-            'reference' => 'c7243da85fe67e1d905c3c2a123fc324a25e0806',
+            'pretty_version' => 'v2.3.3',
+            'version' => '2.3.3.0',
+            'reference' => '6095f62b9f70211702a97d55cbb333b9f20ec56b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

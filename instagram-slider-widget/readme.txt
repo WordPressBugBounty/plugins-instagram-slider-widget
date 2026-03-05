@@ -3,7 +3,7 @@ Contributors: themeisle
 Tags: instagram feed, facebook feed, youtube feed, instagram gallery, social feed
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,13 @@ Yes. You can create and display multiple Instagram, Facebook, and YouTube feeds 
 11. Highlight layout
 
 == Changelog ==
+
+#####   Version 2.3.3 (2026-03-05)
+
+- Enhanced security
+
+
+
 
 #####   Version 2.3.2 (2026-02-06)
 

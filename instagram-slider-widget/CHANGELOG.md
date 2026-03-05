@@ -1,3 +1,7 @@
+#####   Version 2.3.3 (2026-03-05)
+
+- Enhanced security
+
 #####   Version 2.3.2 (2026-02-06)
 
 - Moved all PRO features to the free version

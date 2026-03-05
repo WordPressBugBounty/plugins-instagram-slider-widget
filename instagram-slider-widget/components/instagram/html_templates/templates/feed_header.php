@@ -32,7 +32,7 @@ $profile_url = "https://www.instagram.com/$username/";
                     </div>
                 </a>
             <div class="wis-header-info">
-                <a href="<?= $profile_url ?>" target="_blank" style="text-decoration: none; color: black; border: 0 !important;">
+                <a href="<?php echo esc_url( $profile_url ); ?>" target="_blank" style="text-decoration: none; color: black; border: 0 !important;">
                     <p class="wis-header-info-username"><?php echo esc_html($username) ?></p>
                 </a>
                 <p style="margin-top: 0; font-size: 11px">
