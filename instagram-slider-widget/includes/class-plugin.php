@@ -81,6 +81,7 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 		$this->global_scripts();
 
         add_filter( 'themeisle_sdk_products', [ __CLASS__, 'register_sdk' ] );
+		add_filter( 'themeisle_sdk_blackfriday_data', [ $this, 'add_black_friday_data' ] );
     }
 
     /**
@@ -153,6 +154,7 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 		}, 30 );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'mark_internal_page' ] );
 		add_action( 'admin_notices', [ $this, 'new_api_admin_notice' ] );
 		add_action( 'admin_notices', [ $this, 'check_token_admin_notice' ] );
 	}
@@ -197,6 +199,34 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 			*/
 		}
 
+	}
+
+	/**
+	 * Mark internal plugin pages for the Themeisle SDK (e.g. announcements, notices).
+	 *
+	 * @param string $hook The current admin page hook suffix.
+	 */
+	public function mark_internal_page( $hook ) {
+		$is_internal = false;
+		if ( strpos( $hook, 'wis_logger-wisw' ) !== false ) {
+			do_action( 'themeisle_internal_page', WIS_PRODUCT_SLUG, 'logger' );
+			$is_internal = true;
+		} elseif ( strpos( $hook, 'feeds-wisw' ) !== false ) {
+			do_action( 'themeisle_internal_page', WIS_PRODUCT_SLUG, 'feeds' );
+			$is_internal = true;
+		} elseif ( strpos( $hook, 'settings-wisw' ) !== false ) {
+			do_action( 'themeisle_internal_page', WIS_PRODUCT_SLUG, 'settings' );
+			$is_internal = true;
+		}
+		if ( $is_internal ) {
+			wp_enqueue_script(
+				'wis-tsdk-banner',
+				WIS_PLUGIN_URL . '/admin/assets/js/tsdk-banner.js',
+				[],
+				WIS_PLUGIN_VERSION,
+				true
+			);
+		}
 	}
 
 	public function enqueue_assets() {
@@ -267,5 +297,28 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 					<p><b>Social Slider Feed:</b><br>You need to reconnect this accounts in the <a href="' . admin_url( 'admin.php?page=settings-wisw&tab=instagram' ) . '">plugin settings</a>' . $text . '</p>
 				  </div>';
 		}
+	}
+
+	public function add_black_friday_data( $configs ) {
+		$config = $configs['default'];
+
+		if ( defined( 'ROP_LITE_VERSION' ) || defined( 'ROP_PRO_VERSION' ) ) {
+			return $configs;
+		}
+
+		// translators: 1. Number of free licenses, 2. The price of the product.
+		$config['message']             = sprintf( __( 'You’re using Social Slider Feed, and the team behind it is celebrating Black Friday by giving away %1$s licences of Revive Social Pro worth %2$s. Automatically share your WordPress content to X, Facebook, LinkedIn, and more with scheduling and analytics. Claim yours before they run out.', 'instagram-slider-widget' ), 100, '$99' );
+		$config['cta_label'] = __( 'Get Revive Social free', 'instagram-slider-widget' );
+		$config['plugin_meta_message'] = __( 'Black Friday Sale - Get Revive Social free', 'instagram-slider-widget' );
+		$config['sale_url'] = add_query_arg(
+			array(
+				'utm_term' => 'free',
+			),
+			tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/rs-claim-bf', 'bfcm', 'social-slider' ) )
+		);
+
+		$configs[ WIS_PRODUCT_SLUG ] = $config;
+
+		return $configs;
 	}
 }

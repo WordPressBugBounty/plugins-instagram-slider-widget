@@ -1,3 +1,7 @@
+#####   Version 2.3.4 (2026-04-09)
+
+- Updated dependencies
+
 #####   Version 2.3.3 (2026-03-05)
 
 - Enhanced security

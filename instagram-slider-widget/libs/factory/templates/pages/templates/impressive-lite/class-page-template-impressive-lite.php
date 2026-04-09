@@ -255,6 +255,7 @@ if ( ! class_exists( 'WBCR\Factory_Templates_135\ImpressiveLite' ) ) {
 								<?php //$this->showPageSubMenu()
 								?>
                                 <div class="wbcr-factory-content">
+                                    <div id="tsdk_banner" class="jr-insta-banner"></div>
                                     <form method="post" class="form-horizontal">
 										<?php
 										if ( $this->type == 'options' ) {
@@ -307,6 +308,7 @@ if ( ! class_exists( 'WBCR\Factory_Templates_135\ImpressiveLite' ) ) {
 								<?php //$this->showPageSubMenu();
 								?>
                                 <div class="wbcr-factory-content" style="min-height:<?php echo $min_height ?>px">
+                                    <div id="tsdk_banner" class="jr-insta-banner"></div>
 									<?php $this->printAllNotices(); ?>
 									<?php if ( empty( $content ) ): ?>
 										<?php $this->showPageContent() ?>

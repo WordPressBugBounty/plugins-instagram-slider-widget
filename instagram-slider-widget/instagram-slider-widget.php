@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Social Slider Feed
 * Plugin URI: https://cm-wp.com/instagram-slider-widget
-* Version: 2.3.3
+* Version: 2.3.4
 * Description: Shows Instagram, Facebook and YouTube responsive feeds in widgets, posts, pages, or anywhere else using shortcodes
 * Author: Themeisle
 * Author URI: https://themeisle.com
@@ -95,6 +95,7 @@ define( 'WIS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WIS_PLUGIN_SLUG', dirname( plugin_basename( __FILE__ ) ) );
 define( 'WIS_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'WIS_PLUGIN_DIR', dirname( __FILE__ ) );
+define( 'WIS_PRODUCT_SLUG', basename( dirname( __FILE__ ) ) );
 
 define( 'WIS_COMPONENTS_URL', WIS_PLUGIN_URL . '/components' );
 define( 'WIS_COMPONENTS_DIR', WIS_PLUGIN_DIR . '/components' );
