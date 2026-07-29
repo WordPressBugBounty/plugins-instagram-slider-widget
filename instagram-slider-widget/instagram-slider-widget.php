@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Social Slider Feed
 * Plugin URI: https://cm-wp.com/instagram-slider-widget
-* Version: 2.3.4
+* Version: 2.3.5
 * Description: Shows Instagram, Facebook and YouTube responsive feeds in widgets, posts, pages, or anywhere else using shortcodes
 * Author: Themeisle
 * Author URI: https://themeisle.com
@@ -11,6 +11,8 @@
 * Domain Path: /languages
 * License:     GPL2
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+* WordPress Available: yes
+* Requires License: no
 */
 
 // Exit if accessed directly
@@ -49,14 +51,6 @@ $plugin_info = [
 		],
 	],
 
-	// Настройки рекламы от CreativeMotion
-	'render_adverts'     => true,
-	'adverts_settings'   => [
-		'dashboard_widget' => true,
-		'right_sidebar'    => true,
-		'notice'           => true,
-	],
-
 	// PLUGIN SUBSCRIBE FORM
 	'subscribe_widget'   => false,
 
@@ -64,7 +58,6 @@ $plugin_info = [
 		[ 'libs/factory/bootstrap', 'factory_bootstrap_483', 'admin' ],
 		[ 'libs/factory/forms', 'factory_forms_481', 'admin' ],
 		[ 'libs/factory/pages', 'factory_pages_481', 'admin' ],
-		[ 'libs/factory/adverts', 'factory_adverts_160', 'admin' ],
 		[ 'libs/factory/templates', 'factory_templates_135', 'admin' ],
 		[ 'libs/factory/logger', 'factory_logger_150', 'all' ],
 	],

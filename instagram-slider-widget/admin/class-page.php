@@ -65,8 +65,6 @@ class WIS_Page extends ImpressiveLite {
 	 */
 	public $menu_tab_title;
 
-	public $show_right_sidebar;
-
 	/**
 	 * @see self::app()
 	 * @var self
@@ -112,14 +110,6 @@ class WIS_Page extends ImpressiveLite {
 
 		$this->styles->add( WIS_PLUGIN_URL . '/admin/assets/css/admin-style.css', [], WIS_PLUGIN_VERSION );
 		$this->scripts->add( WIS_PLUGIN_URL . '/admin/assets/js/admin-script.js', [ 'jquery' ], WIS_PLUGIN_VERSION );
-	}
-
-	protected function isShowRightSidebar() {
-		return $this->show_right_sidebar;
-	}
-
-	public function showRightSidebar() {
-		$this->plugin->get_adverts_manager()->render_placement( 'right_sidebar' );
 	}
 
 	/**

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'codeinwp/instagram-slider-widget',
-        'pretty_version' => 'v2.3.4',
-        'version' => '2.3.4.0',
-        'reference' => '868d5acc707bdabfb9bd75e4db68a4e2c167a0e8',
+        'pretty_version' => 'v2.3.5',
+        'version' => '2.3.5.0',
+        'reference' => '6d7905597db32861fd5b9ff414f1c56b0ffbfd21',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'codeinwp/instagram-slider-widget' => array(
-            'pretty_version' => 'v2.3.4',
-            'version' => '2.3.4.0',
-            'reference' => '868d5acc707bdabfb9bd75e4db68a4e2c167a0e8',
+            'pretty_version' => 'v2.3.5',
+            'version' => '2.3.5.0',
+            'reference' => '6d7905597db32861fd5b9ff414f1c56b0ffbfd21',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'codeinwp/themeisle-sdk' => array(
-            'pretty_version' => '3.3.51',
-            'version' => '3.3.51.0',
-            'reference' => 'bb2a8414b0418b18c68c9ff1df3d7fb10467928d',
+            'pretty_version' => '3.3.58',
+            'version' => '3.3.58.0',
+            'reference' => 'd6807c0b7308e323bd77cced667dee3f2d5e6a82',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeinwp/themeisle-sdk',
             'aliases' => array(),

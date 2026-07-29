@@ -46,11 +46,6 @@ class WIS_FeedsPage extends WIS_Page {
 	public $show_page_title = true;
 
 	/**
-	 * @var bool
-	 */
-	public $show_right_sidebar = true;
-
-	/**
 	 * @var int
 	 */
 	public $page_menu_position = 15;
