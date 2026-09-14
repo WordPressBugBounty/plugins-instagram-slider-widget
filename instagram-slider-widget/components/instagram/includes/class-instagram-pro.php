@@ -383,6 +383,10 @@ class WIS_Instagram_Pro {
 
 			$images_data = $wisw->feed_query( $search_for, $refresh_hour, $images_number );
 
+			if ( ! is_array( $images_data ) ) {
+				return is_string( $images_data ) ? esc_html( $images_data ) : '';
+			}
+
 			if ( isset( $images_data['error'] ) ) {
 				return $images_data['error'];
 			}
@@ -447,6 +451,10 @@ class WIS_Instagram_Pro {
 			}
 
 			$images_data = $wisw->feed_query( $search_for, $refresh_hour, $images_number );
+
+			if ( ! is_array( $images_data ) ) {
+				return is_string( $images_data ) ? esc_html( $images_data ) : '';
+			}
 
 			if ( isset( $images_data['error'] ) ) {
 				return $images_data['error'];
@@ -842,13 +850,11 @@ class WIS_Instagram_Pro {
 			$orderby = explode( '-', $orderby );
 		}
 
-		if ( $orderby[0] == 'date' ) {
-			$func = 'sort_timestamp_' . $orderby[1];
-		} else {
-			$func = $is_business ? 'sort_popularity_' . $orderby[1] : 'sort_timestamp_' . $orderby[1];
-		}
-
-		usort( $images_data, [ $this, $func ] );
+		$key = ( $orderby[0] ?? '' ) === 'date' || ! $is_business ? 'timestamp' : 'popularity';
+		$direction = strtoupper( $orderby[1] ?? '' ) === 'DESC' ? -1 : 1;
+		usort( $images_data, function ( $a, $b ) use ( $key, $direction ) {
+			return ( ( $a[ $key ] ?? 0 ) <=> ( $b[ $key ] ?? 0 ) ) * $direction;
+		} );
 
 		return $images_data;
 	}

@@ -687,6 +687,10 @@ class WIS_Instagram_Feed extends WIS_Feed {
 		$images_data = $this->feed_query( $search_for, $refresh_hour, $images_number );
 		//WIS_Plugin::app()->logger->info( "Feed images: " . json_encode( $images_data ) );
 
+		if ( ! is_array( $images_data ) ) {
+			return is_string( $images_data ) ? esc_html( $images_data ) : '';
+		}
+
 		if ( isset( $images_data['error'] ) ) {
 			return $images_data['error'];
 		}

@@ -1,9 +1,9 @@
 === Social Slider Feed – Social Media Feed & Gallery Widgets ===
 Contributors: themeisle
 Tags: instagram feed, facebook feed, youtube gallery, social widget, slider
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,16 @@ Yes. You can create and display multiple Instagram, Facebook, and YouTube feeds 
 11. Highlight layout
 
 == Changelog ==
+
+#####   Version 2.3.6 (2026-09-14)
+
+- Fixed Instagram feeds that failed when sorted by date in ascending order.
+- Fixed Instagram feeds crashing when saved feed data is unavailable.
+- Fixed Instagram feeds crashing when unavailable feed data was sorted.
+- Updated dependencies
+
+
+
 
 #####   Version 2.3.5 (2026-07-29)
 

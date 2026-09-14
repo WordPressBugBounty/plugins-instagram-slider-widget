@@ -1,3 +1,10 @@
+#####   Version 2.3.6 (2026-09-14)
+
+- Fixed Instagram feeds that failed when sorted by date in ascending order.
+- Fixed Instagram feeds crashing when saved feed data is unavailable.
+- Fixed Instagram feeds crashing when unavailable feed data was sorted.
+- Updated dependencies
+
 #####   Version 2.3.5 (2026-07-29)
 
 - Updated dependencies
