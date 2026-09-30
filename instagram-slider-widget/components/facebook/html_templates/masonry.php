@@ -1,3 +1,8 @@
+<?php
+/** @var WIS\Facebook\Includes\Api\FacebookAccount $account */
+$account = $args['account'];
+$i       = 1;
+?>
 <div class='wbfb_masonry_container'>
 	<?php
 	foreach ( $args['posts'] as $post ) :

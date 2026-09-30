@@ -1,3 +1,14 @@
+#####   Version 2.3.7 (2026-09-30)
+
+- Added AI agent support: let AI assistants read and change your Social Slider Feed settings and feeds.
+- Fixed YouTube feeds showing videos with blocked words at the start of titles
+- Fixed Facebook, YouTube, and affected Instagram feeds not appearing on phones and tablets.
+- Fixed Facebook Masonry headers to show the Page name, avatar, and link.
+- Fixed Facebook feeds to sort posts by date or popularity.
+- Fixed Instagram feeds crashing when accounts have fewer posts than the image limit.
+- Fixed YouTube videos to link to the selected custom URL.
+- Updated dependencies
+
 #####   Version 2.3.6 (2026-09-14)
 
 - Fixed Instagram feeds that failed when sorted by date in ascending order.

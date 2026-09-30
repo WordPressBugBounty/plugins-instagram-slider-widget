@@ -27,7 +27,11 @@ $yt_link = "https://www.youtube.com/watch?v=";
 
 <div class='wyoutube-videos-container'>
 	<?php foreach ( $videos as $video ): ?>
-		<?php echo 'yt_link' == $args['yimages_link'] ? sprintf( '<a href="%s%s" target="_blank" style="text-decoration: none;">', $yt_link, $video->id->videoId ) : '' ?>
+		<?php
+		$links = [ 'yt_link' => $yt_link . $video->id->videoId, 'custom_url' => $args['custom_url'] ];
+		$link  = esc_url( $links[ $args['yimages_link'] ] ?? '' );
+		?>
+		<?php echo $link ? sprintf( '<a href="%s" target="_blank" style="text-decoration: none;">', $link ) : '' ?>
         <div class="wyoutube-video-container" data-remodal-target="<?php echo esc_attr( $video->id->videoId ) ?>"
              style="margin-top: 10px; width: <?php echo esc_attr( $width - 2 ) ?>%; <?php echo 'ypopup' == $args['yimages_link'] ? 'cursor: pointer' : '' ?> ">
             <img src="<?php echo esc_url( $video->snippet->thumbnails->medium->url ) ?>" alt="">
@@ -43,6 +47,6 @@ $yt_link = "https://www.youtube.com/watch?v=";
                 </div>
             </div>
         </div>
-		<?php echo 'yt_link' == $args['yimages_link'] ? "</a>" : '' ?>
+		<?php echo $link ? '</a>' : '' ?>
 	<?php endforeach; ?>
 </div>

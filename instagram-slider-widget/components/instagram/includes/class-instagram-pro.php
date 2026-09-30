@@ -71,9 +71,13 @@ class WIS_Instagram_Pro {
 		while ( count( $results ) > 0 && count( $results ) < $count ) {
 
 			if ( $is_business ) {
-				$url = isset( $media['paging']['next'] ) ? $media['paging']['next'] : [];
+				$url = isset( $media['paging']['next'] ) ? $media['paging']['next'] : '';
 			} else {
-				$url = isset( $media['media']['paging']['next'] ) ? $media['media']['paging']['next'] : [];
+				$url = isset( $media['media']['paging']['next'] ) ? $media['media']['paging']['next'] : '';
+			}
+
+			if ( '' === $url ) {
+				break;
 			}
 
 			$response = wp_remote_get( $url );

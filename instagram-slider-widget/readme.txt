@@ -3,7 +3,7 @@ Contributors: themeisle
 Tags: instagram feed, facebook feed, youtube gallery, social widget, slider
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.3.6
+Stable tag: 2.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,20 @@ Yes. You can create and display multiple Instagram, Facebook, and YouTube feeds 
 11. Highlight layout
 
 == Changelog ==
+
+#####   Version 2.3.7 (2026-09-30)
+
+- Added AI agent support: let AI assistants read and change your Social Slider Feed settings and feeds.
+- Fixed YouTube feeds showing videos with blocked words at the start of titles
+- Fixed Facebook, YouTube, and affected Instagram feeds not appearing on phones and tablets.
+- Fixed Facebook Masonry headers to show the Page name, avatar, and link.
+- Fixed Facebook feeds to sort posts by date or popularity.
+- Fixed Instagram feeds crashing when accounts have fewer posts than the image limit.
+- Fixed YouTube videos to link to the selected custom URL.
+- Updated dependencies
+
+
+
 
 #####   Version 2.3.6 (2026-09-14)
 

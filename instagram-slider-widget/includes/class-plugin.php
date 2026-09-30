@@ -82,6 +82,7 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 
         add_filter( 'themeisle_sdk_products', [ __CLASS__, 'register_sdk' ] );
 		add_filter( 'themeisle_sdk_blackfriday_data', [ $this, 'add_black_friday_data' ] );
+		add_filter( 'instagram_slider_widget_ai_connect_metadata', [ $this, 'add_ai_connect_metadata' ] );
     }
 
     /**
@@ -297,6 +298,28 @@ class WIS_Plugin extends \Wbcr_Factory481_Plugin {
 					<p><b>Social Slider Feed:</b><br>You need to reconnect this accounts in the <a href="' . admin_url( 'admin.php?page=settings-wisw&tab=instagram' ) . '">plugin settings</a>' . $text . '</p>
 				  </div>';
 		}
+	}
+
+	/**
+	 * Opt in to the SDK's "Connect your AI agent" module.
+	 *
+	 * @return array
+	 */
+	public function add_ai_connect_metadata() {
+		return [
+			'name'         => 'Social Slider Feed',
+			'notice_cases' => [
+				__( 'create a social feed', 'instagram-slider-widget' ),
+				__( 'change a feed layout', 'instagram-slider-widget' ),
+				__( 'refresh a feed with the latest posts', 'instagram-slider-widget' ),
+			],
+			'prompts'      => [
+				__( 'Create an Instagram feed from my connected account with 12 images in a slider and add it to my homepage below the intro.', 'instagram-slider-widget' ),
+				__( 'Switch my Instagram feed to the grid layout with 3 columns.', 'instagram-slider-widget' ),
+				__( 'Refresh my YouTube feed so it shows the latest videos.', 'instagram-slider-widget' ),
+			],
+			'ability_prefix'    => 'social-feed',
+		];
 	}
 
 	public function add_black_friday_data( $configs ) {

@@ -258,29 +258,31 @@ class WIS_Facebook_Feed extends WIS_Feed {
 	/**
 	 * Sort Function for timestamp Ascending
 	 */
-	public function sort_timestamp_ASC( $a, $b ) {
-		return $a->snippet->publishedAt > $b->snippet->publishedAt;
+	public function sort_timestamp_ASC( $a, $b ): int {
+		return strtotime( $a->created_time ) <=> strtotime( $b->created_time );
 	}
 
 	/**
 	 * Sort Function for timestamp Descending
 	 */
-	public function sort_timestamp_DESC( $a, $b ) {
-		return $a->snippet->publishedAt < $b->snippet->publishedAt;
+	public function sort_timestamp_DESC( $a, $b ): int {
+		return strtotime( $b->created_time ) <=> strtotime( $a->created_time );
 	}
 
 	/**
 	 * Sort Function for popularity Ascending
+	 *
+	 * Posts with equal likes sort newest first. PHP 7.4 usort() is not stable, so it can mix them.
 	 */
-	public function sort_popularity_ASC( $a, $b ) {
-		return $a->statistics->viewCount > $b->statistics->viewCount;
+	public function sort_popularity_ASC( $a, $b ): int {
+		return ( $a->likes_count <=> $b->likes_count ) ?: $this->sort_timestamp_DESC( $a, $b );
 	}
 
 	/**
 	 * Sort Function for popularity Descending
 	 */
-	public function sort_popularity_DESC( $a, $b ) {
-		return $a->statistics->viewCount < $b->statistics->viewCount;
+	public function sort_popularity_DESC( $a, $b ): int {
+		return ( $b->likes_count <=> $a->likes_count ) ?: $this->sort_timestamp_DESC( $a, $b );
 	}
 
 }

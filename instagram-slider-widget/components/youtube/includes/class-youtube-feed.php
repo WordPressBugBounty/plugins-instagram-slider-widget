@@ -363,16 +363,12 @@ class WIS_Youtube_Feed extends WIS_Feed {
 	 * @param $blocked_words string
 	 */
 	private function filter_response_by_words( &$response, $blocked_words = '' ) {
-		if ( empty( $blocked_words ) ) {
-			return;
-		} else {
-			$blocked_words = explode( ',', $blocked_words );
-		}
+		$blocked_words = array_filter( array_map( 'trim', explode( ',', (string) $blocked_words ) ), 'strlen' );
 		foreach ( $response->items as $key => $video ) {
 			foreach ( $blocked_words as $blocked_word ) {
-				$title = $video->snippet->title;
-				if ( stripos( $title, $blocked_word ) ) {
+				if ( false !== stripos( $video->snippet->title, $blocked_word ) ) {
 					unset( $response->items[ $key ] );
+					break;
 				}
 			}
 		}

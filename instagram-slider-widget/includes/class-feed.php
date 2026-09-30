@@ -33,6 +33,13 @@ abstract class WIS_Feed {
 	protected $is_mobile = false;
 
 	/**
+	 * Force the next feed query to bypass the cache.
+	 *
+	 * @var bool
+	 */
+	public $force_refresh = false;
+
+	/**
 	 * WIS_Feed constructor.
 	 *
 	 * @param array $feed
@@ -98,12 +105,14 @@ abstract class WIS_Feed {
 	/**
 	 * Get feed option (mobile or desktop)
 	 *
+	 * Options without a mobile version (account, search, ...) use the desktop value on mobile.
+	 *
 	 * @param $name
 	 *
 	 * @return mixed|null
 	 */
 	public function get( $name ) {
-		return $this->is_mobile ? $this->__get( "m_{$name}" ) : $this->__get( $name );
+		return $this->is_mobile && array_key_exists( "m_{$name}", $this->instance ) ? $this->__get( "m_{$name}" ) : $this->__get( $name );
 	}
 
 	/**
@@ -132,6 +141,10 @@ abstract class WIS_Feed {
 	public function trigger_refresh_data( $instaData, $old_args, $new_args ) {
 
 		$trigger = 0;
+
+		if ( $this->force_refresh ) {
+			return true;
+		}
 
 		if ( defined( 'WIS_PLUGIN_DEV' ) && WIS_PLUGIN_DEV ) {
 			return true;
