@@ -56,11 +56,14 @@
 .wfb-meta li {
     float: left;
     width: auto;
-    display: block;
+    display: flex;
+    align-items: center;
+    /* Keep the height previously set by the inline SVG and its baseline space. */
+    min-height: 20px;
     list-style-type: none !important;
     margin: 0 10px 0 0 !important;
     padding: 0 !important;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 16px !important;
     background: none !important;
 }
@@ -127,9 +130,15 @@
     margin-left: 5px;
 }
 
-.wfb-icon, .wfb-icon svg {
-    width: 16px;
-    height: 16px;
+/* masonry.php nests the count inside .wfb-icon, popup.php does not. */
+.wfb-icon {
+    display: flex;
+    align-items: center;
+}
+
+.wfb-icon svg {
+    width: 1em;
+    height: 1em;
     transition: all 0.1s ease;
 }
 

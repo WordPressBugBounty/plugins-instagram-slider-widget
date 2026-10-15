@@ -1,3 +1,12 @@
+#####   Version 2.3.8 (2026-10-15)
+
+- Fixed Instagram word filters to handle commas and spaces across all templates.
+- Fixed the Masonry layout to use the configured spacing between posts.
+- Fixed missing like, share, and comment icons in Facebook feed cards and popups.
+- Fixed feeds crashing when Instagram returns a post without an image URL.
+- Fixed YouTube title word limits and removed the unused Facebook caption limit.
+- Updated dependencies
+
 #####   Version 2.3.7 (2026-09-30)
 
 - Added AI agent support: let AI assistants read and change your Social Slider Feed settings and feeds.

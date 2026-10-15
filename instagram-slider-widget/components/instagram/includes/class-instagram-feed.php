@@ -811,6 +811,21 @@ class WIS_Instagram_Feed extends WIS_Feed {
 	}
 
 	/**
+	 * Get image size, skipping empty URLs.
+	 *
+	 * @param mixed $url Media URL from the API.
+	 *
+	 * @return array{0: int, 1: int, 2: int, 3: string, mime: string, channels?: int, bits?: int}|false
+	 */
+	private function get_image_size( $url ) {
+		if ( ! is_string( $url ) || '' === $url ) {
+			return false;
+		}
+
+		return getimagesize( $url );
+	}
+
+	/**
 	 * Get data from instagram by username
 	 *
 	 * @param string $username
@@ -975,7 +990,7 @@ class WIS_Instagram_Feed extends WIS_Feed {
 				foreach ( $media['children']['data'] as $v ) {
 					$type                            = 'images';
 					$t['standard_resolution']['url'] = $v['media_url'];
-					$size                            = getimagesize( $v['media_url'] );
+					$size                            = $this->get_image_size( $v['media_url'] );
 					if ( is_array( $size ) ) {
 						$t['standard_resolution']['height'] = $size[1];
 						$t['standard_resolution']['width']  = $size[0];
@@ -998,9 +1013,9 @@ class WIS_Instagram_Feed extends WIS_Feed {
 		$m['url']       = $media['media_url'];
 
 		if ( 'VIDEO' == $media['media_type'] ) {
-			$size = getimagesize( $media['thumbnail_url'] );
+			$size = $this->get_image_size( $media['thumbnail_url'] );
 		} else {
-			$size = getimagesize( $media['media_url'] );
+			$size = $this->get_image_size( $media['media_url'] );
 		}
 		if ( is_array( $size ) ) {
 			$m['height'] = $size[1];
@@ -1039,7 +1054,7 @@ class WIS_Instagram_Feed extends WIS_Feed {
 				foreach ( $media['children']['data'] as $v ) {
 					$type                            = 'images';
 					$t['standard_resolution']['url'] = $v['media_url'];
-					$size                            = getimagesize( $v['media_url'] );
+					$size                            = $this->get_image_size( $v['media_url'] );
 					if ( is_array( $size ) ) {
 						$t['standard_resolution']['height'] = $size[1];
 						$t['standard_resolution']['width']  = $size[0];
@@ -1064,9 +1079,9 @@ class WIS_Instagram_Feed extends WIS_Feed {
 		$m['likes']     = $media['like_count'];
 
 		if ( 'VIDEO' == $media['media_type'] ) {
-			$size = getimagesize( $media['thumbnail_url'] );
+			$size = $this->get_image_size( $media['thumbnail_url'] );
 		} else {
-			$size = getimagesize( $media['media_url'] );
+			$size = $this->get_image_size( $media['media_url'] );
 		}
 		if ( is_array( $size ) ) {
 			$m['height'] = $size[1];
@@ -1132,9 +1147,9 @@ class WIS_Instagram_Feed extends WIS_Feed {
 			$m['sizes']['full']      = $media_url;
 
 			if ( 'VIDEO' == $media['media_type'] ) {
-				$size = getimagesize( $value['thumbnail_url'] );
+				$size = $this->get_image_size( $value['thumbnail_url'] );
 			} else {
-				$size = getimagesize( $media_url );
+				$size = $this->get_image_size( $media_url );
 			}
 			if ( is_array( $size ) ) {
 				$m['height'] = $size[1];
@@ -1194,7 +1209,7 @@ class WIS_Instagram_Feed extends WIS_Feed {
 				foreach ( $media['children']['data'] as $v ) {
 					$type                            = 'images';
 					$t['standard_resolution']['url'] = $v['media_url'];
-					$size                            = getimagesize( $v['media_url'] );
+					$size                            = $this->get_image_size( $v['media_url'] );
 					if ( is_array( $size ) ) {
 						$t['standard_resolution']['height'] = $size[1];
 						$t['standard_resolution']['width']  = $size[0];
@@ -1225,9 +1240,9 @@ class WIS_Instagram_Feed extends WIS_Feed {
 		$m['sizes']['full']      = $media_url;
 
 		if ( 'VIDEO' == $media['media_type'] ) {
-			$size = getimagesize( isset( $media['thumbnail_url'] ) ? $media['thumbnail_url'] : '' );
+			$size = $this->get_image_size( isset( $media['thumbnail_url'] ) ? $media['thumbnail_url'] : '' );
 		} else {
-			$size = getimagesize( $media_url );
+			$size = $this->get_image_size( $media_url );
 		}
 		if ( is_array( $size ) ) {
 			$m['height'] = $size[1];
@@ -1253,15 +1268,24 @@ class WIS_Instagram_Feed extends WIS_Feed {
 		if ( empty( $words ) || empty( $text ) ) {
 			return false;
 		}
-		$words_array = explode( ',', $words );
-		foreach ( $words_array as $word ) {
-			$pos = stripos( $text, trim( $word ) );
-			if ( $pos !== false ) {
+		foreach ( $this->parse_words( $words ) as $word ) {
+			if ( stripos( $text, $word ) !== false ) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Split a comma-separated word list, trim each word and drop empty entries.
+	 *
+	 * @param int|string $words
+	 *
+	 * @return array<int, non-empty-string>
+	 */
+	private function parse_words( $words ): array {
+		return array_filter( array_map( 'trim', explode( ',', (string) $words ) ), 'strlen' );
 	}
 
 	/**
@@ -1273,14 +1297,14 @@ class WIS_Instagram_Feed extends WIS_Feed {
 	 * @return bool
 	 */
 	public function is_allowed_by_word( $words, $text ) {
-		if ( empty( $words ) ) {
+		$words_array = $this->parse_words( $words );
+		if ( ! $words_array ) {
 			return true;
 		}
 		if ( empty( $text ) ) {
 			return false;
 		}
 
-		$words_array = explode( ',', $words );
 		foreach ( $words_array as $word ) {
 			if ( strripos( $text, $word ) !== false ) {
 				return true;

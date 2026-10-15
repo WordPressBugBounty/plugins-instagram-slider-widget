@@ -3,7 +3,7 @@ Contributors: themeisle
 Tags: instagram feed, facebook feed, youtube gallery, social widget, slider
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.3.7
+Stable tag: 2.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,18 @@ Yes. You can create and display multiple Instagram, Facebook, and YouTube feeds 
 11. Highlight layout
 
 == Changelog ==
+
+#####   Version 2.3.8 (2026-10-15)
+
+- Fixed Instagram word filters to handle commas and spaces across all templates.
+- Fixed the Masonry layout to use the configured spacing between posts.
+- Fixed missing like, share, and comment icons in Facebook feed cards and popups.
+- Fixed feeds crashing when Instagram returns a post without an image URL.
+- Fixed YouTube title word limits and removed the unused Facebook caption limit.
+- Updated dependencies
+
+
+
 
 #####   Version 2.3.7 (2026-09-30)
 

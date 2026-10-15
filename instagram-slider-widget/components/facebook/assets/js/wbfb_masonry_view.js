@@ -1,10 +1,12 @@
 jQuery(document).ready(function($) {
-    var $container = $('.wbfb_masonry_container');
+    $('.wbfb_masonry_container').each(function() {
+        var $container = $(this);
 
-    $container.imagesLoaded(function() {
-        $container.masonry({
-            gutter: Number(5),
-            itemSelector: '.wbfb_masonry_post'
+        $container.imagesLoaded(function() {
+            $container.masonry({
+                gutter: Number($container.data('gutter')) || 0,
+                itemSelector: '.wbfb_masonry_post'
+            });
         });
     });
 });

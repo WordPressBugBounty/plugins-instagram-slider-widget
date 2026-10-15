@@ -36,7 +36,7 @@ $yt_link = "https://www.youtube.com/watch?v=";
              style="margin-top: 10px; width: <?php echo esc_attr( $width - 2 ) ?>%; <?php echo 'ypopup' == $args['yimages_link'] ? 'cursor: pointer' : '' ?> ">
             <img src="<?php echo esc_url( $video->snippet->thumbnails->medium->url ) ?>" alt="">
             <div class="wyoutuve-video-title ellipsis-2-lines">
-				<?php echo esc_html( $video->snippet->title ); ?>
+				<?php echo esc_html( '' === (string) $args['title_words'] ? $video->snippet->title : wp_trim_words( $video->snippet->title, $args['title_words'] ) ); ?>
             </div>
             <div class="woutube-video-specs">
                 <div class="wyoutube-video-watches">

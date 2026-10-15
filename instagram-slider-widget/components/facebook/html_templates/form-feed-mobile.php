@@ -28,18 +28,6 @@ $search_for = $instance['search_for'] ?? '';
 				</div>
 			</div>
 		</div>
-		<div id="wis-field-words_in_caption" class="form-group">
-			<div class="input-group">
-				<label class="form-label form-inline" for="m_title_words">
-					<?php esc_html_e( 'Number of words in caption:', 'instagram-slider-widget' ); ?>
-				</label>
-				<div class="input-group">
-					<input class="form-input" type="number" min="0" max="" id="m_title_words" name="m_title_words"
-					       value="<?php echo esc_attr( $instance['m_title_words'] ); ?>"/>
-					<span class="input-group-addon"><?php esc_html_e( 'pcs', 'instagram-slider-widget' ); ?></span>
-				</div>
-			</div>
-		</div>
 		<div id="wis-field-orderby" class="form-group">
 			<label class="form-label" for="m_orderby"><?php esc_html_e( 'Order by', 'instagram-slider-widget' ); ?></label>
 			<select class="form-select" name="m_orderby" id="m_orderby">

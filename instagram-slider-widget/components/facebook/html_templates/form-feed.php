@@ -120,19 +120,6 @@ $feed_id           = $args['instance']['id'] ?? '';
 								</div>
 
 							</div>
-							<div id="wis-field-words_in_caption" class="form-group">
-								<div class="input-group">
-									<label class="form-label form-inline" for="title_words">
-										<?php _e( 'Number of words in caption:', 'instagram-slider-widget' ); ?>
-									</label>
-									<div class="input-group">
-										<input class="form-input" type="number" min="0" max="" id="title_words"
-										       name="title_words"
-										       value="<?php echo esc_attr( $instance['title_words'] ); ?>"/>
-										<span class="input-group-addon"><?php _e( 'pcs', 'instagram-slider-widget' ); ?></span>
-									</div>
-								</div>
-							</div>
 							<div id="wis-field-orderby" class="form-group">
 								<label class="form-label"
 								       for="orderby"><?php _e( 'Order by', 'instagram-slider-widget' ); ?></label>

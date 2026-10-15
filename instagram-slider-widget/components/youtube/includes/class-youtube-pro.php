@@ -26,7 +26,7 @@ class WIS_Youtube_Pro {
 			add_filter( 'wis/youtube/options/link_to', array( $this, 'youtube_links' ), 10, 1 );
 			add_filter( 'wis/youtube/mob_settings', [ $this, 'settings_youtube' ], 10, 6 );
         } else {
-			add_filter( 'wyt/pro/display', array( $this, 'display_popup' ), 10, 2 );
+			add_filter( 'wyt/pro/display', array( $this, 'display_popup' ), 10, 3 );
 		}
     }
 

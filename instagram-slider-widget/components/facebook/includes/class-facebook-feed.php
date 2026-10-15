@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @property int refresh_hour
  * @property int images_number
  * @property int|string enable_stories
- * @property int title_words
  * @property string orderby
  * @property string fbimages_link
  * @property string blocked_words
@@ -29,7 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @property int m_refresh_hour
  * @property int m_images_number
  * @property int|string m_enable_stories
- * @property int m_title_words
  * @property string m_orderby
  * @property string m_fbimages_link
  * @property string m_blocked_words
@@ -75,7 +73,6 @@ class WIS_Facebook_Feed extends WIS_Feed {
 			'refresh_hour'       => 5,
 			'images_number'      => 20,
 			'enable_stories'     => 0,
-			'title_words'        => 5,
 			'orderby'            => 'rand',
 			'fbimages_link'      => 'post_page',
 			'blocked_words'      => '',
@@ -83,7 +80,6 @@ class WIS_Facebook_Feed extends WIS_Feed {
 			'masonry_post_width' => 200,
 
 			'm_images_number'      => 20,
-			'm_title_words'        => 5,
 			'm_orderby'            => 'rand',
 			'm_fbimages_link'      => 'post_page',
 			'm_show_feed_header'   => 0,

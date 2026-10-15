@@ -235,6 +235,7 @@ class WIS_Instagram_Pro {
 			$search                         = 'account_business';
 			$search_for['account_business'] = $account_business;
 			$search_for['blocked_words']    = $blocked_words;
+			$search_for['allowed_words']    = $allowed_words;
 		} else {
 			$search                 = 'user';
 			$search_for['username'] = $username;
@@ -271,7 +272,6 @@ class WIS_Instagram_Pro {
 			wp_enqueue_script( 'masonry' );
 			wp_enqueue_script( 'wis-premium-imagesloaded', WIG_COMPONENT_URL . '/assets/js/libs/imagesloaded.pkgd.min.js', [], $plugin_version, true );
 			wp_enqueue_script( 'wis-masonry-view', WIG_COMPONENT_URL . '/assets/js/masonry_view.js', array( 'jquery' ), $plugin_version );
-			wp_add_inline_script( 'wis-masonry-view', "var gutter = $gutter;" );
 			wp_enqueue_style( 'wis-masonry-view-css', WIG_COMPONENT_URL . '/assets/css/masonry-view.css' );
 			wp_enqueue_style( 'wis-show-more-button-css', WIG_COMPONENT_URL . '/assets/css/show_more_button.css' );
 			wp_enqueue_script( 'wis-show-more-button-js', WIG_COMPONENT_URL . '/assets/js/show_more_button.js', array( 'jquery' ), $plugin_version, true );
@@ -282,7 +282,7 @@ class WIS_Instagram_Pro {
 			] );
 			wp_add_inline_script( 'wis-show-more-button-js', "var ajaxurl = $ajaxurl;" );
 
-			$main_div = "<div class='masonry_container'>";
+			$main_div = "<div class='masonry_container' data-gutter='" . absint( $gutter ) . "'>";
 		} else if ( $template == 'masonry_lite' ) {
 			wp_enqueue_style( 'wis-masonry-view-css', WIG_COMPONENT_URL . '/assets/css/masonry-lite-view.css' );
 			$ajaxurl = json_encode( [
@@ -550,8 +550,8 @@ class WIS_Instagram_Pro {
 					$template_args['masonry_image_width']    = $masonry_image_width;
 					$template_args['masonry_lite_cols']      = $masonry_lite_cols;
 					$template_args['masonry_lite_gap']       = $masonry_lite_gap;
-					$template_args['width']                  = $image_data['width'];
-					$template_args['height']                 = $image_data['height'];
+					$template_args['width']                  = isset( $image_data['width'] ) ? $image_data['width'] : '';
+					$template_args['height']                 = isset( $image_data['height'] ) ? $image_data['height'] : '';
 					$template_args['sidecar_media']          = isset( $image_data['sidecar_media'] ) ? $image_data['sidecar_media'] : [];
 					$template_args['video']                  = isset( $image_data['video'] ) ? $image_data['video'] : '';
 					$template_args['post_link']              = $image_data['link'];
