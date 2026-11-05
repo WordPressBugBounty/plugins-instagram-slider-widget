@@ -338,6 +338,20 @@ if( !class_exists('Wbcr_FactoryPages481_AdminPage') ) {
 				$this->menu_post_type = null;
 			}
 
+			// if this page for a custom menu page
+			if( $this->menu_post_type ) {
+				$this->menu_target = 'edit.php?post_type=' . $this->menu_post_type;
+
+				if( empty($this->capabilitiy) ) {
+					$this->capabilitiy = 'edit_' . $this->menu_post_type;
+				}
+			}
+
+			// sets default capabilities
+			if( empty($this->capabilitiy) ) {
+				$this->capabilitiy = 'manage_options';
+			}
+
 			// makes redirect to the page
 			$controller = $this->request->get('fy_page', null, true);
 
@@ -345,6 +359,10 @@ if( !class_exists('Wbcr_FactoryPages481_AdminPage') ) {
 				$plugin = $this->request->get('fy_plugin', null, true);
 
 				if( $this->plugin->getPluginName() == $plugin ) {
+
+					if( !current_user_can($this->capabilitiy) ) {
+						wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'instagram-slider-widget'), '', 403);
+					}
 
 					$action = $this->request->get('fy_action', 'index', true);
 					$is_ajax = $this->request->get('fy_ajax', false);
@@ -382,20 +400,6 @@ if( !class_exists('Wbcr_FactoryPages481_AdminPage') ) {
 				}
 			}
 
-			// if this page for a custom menu page
-			if( $this->menu_post_type ) {
-				$this->menu_target = 'edit.php?post_type=' . $this->menu_post_type;
-
-				if( empty($this->capabilitiy) ) {
-					$this->capabilitiy = 'edit_' . $this->menu_post_type;
-				}
-			}
-
-			// sets default capabilities
-			if( empty($this->capabilitiy) ) {
-				$this->capabilitiy = 'manage_options';
-			}
-
 			// submenu
 			if( $this->menu_target ) {
 				add_submenu_page($this->menu_target, $this->getPageTitle(), $this->getMenuTitle(), $this->capabilitiy, $result_id, [
@@ -421,7 +425,7 @@ if( !class_exists('Wbcr_FactoryPages481_AdminPage') ) {
 			}
 
 			// executes an action
-			if( $this->current() ) {
+			if( $this->current() && current_user_can($this->capabilitiy) ) {
 				ob_start();
 				$action = $this->request->get('action', 'index', true);
 				$this->executeByName($action);

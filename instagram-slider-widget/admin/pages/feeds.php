@@ -92,6 +92,10 @@ class WIS_FeedsPage extends WIS_Page {
 		//$this->plugin->logger->info( 'fsdfsd' );
 
 		if ( isset( $_GET['action'] ) && isset( $_GET['social'] ) ) {
+			if ( ! current_user_can( $this->capabilitiy ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'instagram-slider-widget' ), '', 403 );
+			}
+
 			$social = sanitize_text_field( $_GET['social'] );
 
 			switch ( sanitize_text_field( $_GET['action'] ) ) {
@@ -220,6 +224,13 @@ class WIS_FeedsPage extends WIS_Page {
 			unset( $_POST['wis-feed-save-action'] );
 
 			check_admin_referer( 'wis_edit_feed', 'csrf_check' );
+
+			// Printed as bare numbers in the slider scripts.
+			foreach ( [ 'slidespeed', 'm_slidespeed' ] as $speed_key ) {
+				if ( isset( $_POST[ $speed_key ] ) ) {
+					$_POST[ $speed_key ] = absint( $_POST[ $speed_key ] );
+				}
+			}
 
 			$feed = $this->getSocialClass( $social, $_POST );
 

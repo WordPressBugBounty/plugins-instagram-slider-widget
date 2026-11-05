@@ -1,3 +1,8 @@
+#####   Version 2.3.9 (2026-11-05)
+
+- Enhanced security
+- Updated dependencies
+
 #####   Version 2.3.8 (2026-10-15)
 
 - Fixed Instagram word filters to handle commas and spaces across all templates.

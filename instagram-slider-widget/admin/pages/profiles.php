@@ -151,6 +151,10 @@ class WIS_ProfilesPage extends WIS_Page {
 
 	public function showPageContent() {
 		if ( isset( $_GET['action'] ) && isset( $_GET['social'] ) ) {
+			if ( ! current_user_can( $this->capabilitiy ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'instagram-slider-widget' ), '', 403 );
+			}
+
 			$social = sanitize_text_field( $_GET['social'] );
 
 			switch ( sanitize_text_field( $_GET['action'] ) ) {

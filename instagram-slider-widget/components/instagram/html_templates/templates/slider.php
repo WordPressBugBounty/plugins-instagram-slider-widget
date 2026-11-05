@@ -64,7 +64,7 @@ $control_nav   = ( 'numberless' === $args['controls'] ) ? 'true' : 'false';
     jQuery(document).ready(function ($) {
         $('.instaslider-nr-<?php echo esc_js( $feed_id ); ?>').pllexislider({
             animation: '<?php echo esc_js( $args['animation'] ); ?>',
-            slideshowSpeed: <?php echo esc_js( $args['slidespeed'] ); ?>,
+            slideshowSpeed: <?php echo absint( $args['slidespeed'] ); ?>,
             directionNav: <?php echo esc_js( $direction_nav ); ?>,
             controlNav: <?php echo esc_js( $control_nav ); ?>,
             prevText: '',
